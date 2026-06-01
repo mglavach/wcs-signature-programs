@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(git init *)",
-      "Bash(git -C \"c:\\\\Users\\\\mglavach\\\\OneDrive - Westminster Christian School\\\\Signature Programs\\\\Signature-Programs\" add .)"
+      "Bash(git -C \"c:\\\\Users\\\\mglavach\\\\OneDrive - Westminster Christian School\\\\Signature Programs\\\\Signature-Programs\" add .)",
+      "Bash(git -C \"c:\\\\Users\\\\mglavach\\\\OneDrive - Westminster Christian School\\\\Signature Programs\\\\Signature-Programs\" commit -m \"update index\")",
+      "Bash(git -C \"c:\\\\Users\\\\mglavach\\\\OneDrive - Westminster Christian School\\\\Signature Programs\\\\Signature-Programs\" push)",
+      "WebFetch(domain:mglavach.github.io)",
+      "Bash(curl -s \"https://mglavach.github.io/hub-guidelines/\")",
+      "Bash(git -c core.safecrlf=false add .)",
+      "PowerShell($env:HOME = $env:USERPROFILE; git add .)"
     ]
   }
 }
