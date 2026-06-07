@@ -8,7 +8,9 @@
       "WebFetch(domain:mglavach.github.io)",
       "Bash(curl -s \"https://mglavach.github.io/hub-guidelines/\")",
       "Bash(git -c core.safecrlf=false add .)",
-      "PowerShell($env:HOME = $env:USERPROFILE; git add .)"
+      "PowerShell($env:HOME = $env:USERPROFILE; git add .)",
+      "PowerShell($env:HOME = $env:USERPROFILE; git commit -m \"Update index\")",
+      "PowerShell($env:HOME = $env:USERPROFILE; git push)"
     ]
   }
 }

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($env:HOME; $env:USERPROFILE; $env:HOMEDRIVE; $env:HOMEPATH)",
+      "PowerShell($env:HOME)",
+      "PowerShell($env:USERPROFILE)",
+      "PowerShell($env:HOMEDRIVE)",
+      "PowerShell($env:HOMEPATH)",
+      "PowerShell($env:HOME = \"C:\\\\Users\\\\mglavach\"; Set-Location \"c:\\\\Users\\\\mglavach\\\\OneDrive - Westminster Christian School\\\\Signature Programs\\\\Signature-Programs\"; git add .; git status)"
+    ]
+  }
+}
