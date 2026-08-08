@@ -133,6 +133,23 @@
       margin-bottom: 14px;
       align-self: flex-start;
     }
+    .card .badge-coming-soon {
+      display: inline-block;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: #eaf0ea;
+      color: #2C5234;
+      border: 1px solid #2C5234;
+      border-radius: 3px;
+      padding: 3px 9px;
+      margin-bottom: 14px;
+      align-self: flex-start;
+    }
+    .card.coming-soon {
+      opacity: 0.85;
+      border-top-color: #2C5234;
+      background: #f4f7f4;
+    }
 
     /* ── Card meta table ── */
     .card-meta {
@@ -225,6 +242,76 @@
       color: #fff;
     }
 
+    /* ── Download button ── */
+    .download-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #2C5234;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 22px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      z-index: 999;
+      transition: background 0.15s;
+    }
+    .download-btn:hover { background: #B9975B; }
+
+    /* ── Print / PDF styles ── */
+    @media print {
+      .download-btn { display: none; }
+
+      body {
+        font-size: 9.5pt;
+        background: #fff;
+        color: #000;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .hero {
+        padding: 28px 16px 24px;
+      }
+      .hero img { height: 60px; }
+
+      .section {
+        padding: 24px 16px;
+        max-width: 100%;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .card {
+        break-inside: avoid;
+        padding: 16px 14px;
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+
+      .category { break-inside: avoid; margin-bottom: 28px; }
+
+      .team-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .team-avatar { width: 80px; height: 80px; }
+
+      .contact { padding: 20px 16px; }
+
+      a { color: inherit !important; text-decoration: none !important; }
+    }
+
     /* ── Contact footer ── */
     .contact {
       background: #2C5234;
@@ -242,6 +329,8 @@
   </style>
 </head>
 <body>
+
+  <button class="download-btn" onclick="window.print()">⬇ Download PDF</button>
 
   <!-- Header -->
   <div class="hero">
@@ -449,6 +538,13 @@
           </div>
         </div>
 
+        <div class="card coming-soon">
+          <span class="badge-coming-soon">Coming Soon</span>
+          <h3>Minecraft Student Ambassador Program</h3>
+          <p>
+            The Minecraft Student Ambassador (MSA) program is Microsoft's premier student leadership and training initiative for K-12 students passionate about Minecraft. MSAs support peers and teachers by offering demonstrations, trainings, small-group leadership, and one-on-one mentoring. Students develop 21st-century skills including leadership, communication, and problem-solving while helping educators confidently integrate Minecraft Education into the classroom. It bridges the gap between tech-savvy students and their teachers, fostering a collaborative and supportive learning environment.
+          </p>
+        </div>
 
       </div>
     </div>
@@ -486,6 +582,25 @@
             <span class="mk">Program Time</span><span class="mv">After School</span>
             <span class="mk">Grades</span><span class="mv">3rd–5th</span>
             <span class="mk">Faculty</span><span class="mv"><a href="mailto:pwinters@wcsmiami.org">Ms. Winters</a></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="badge">Writing Warrior Lab</span>
+          <h3>Crash Course</h3>
+          <p>
+            A two-week grammar and writing intensive for students in grades 2–5, focused on
+            correcting common grammatical errors, building complete sentences, organizing
+            ideas effectively, and selecting the right words to write with clarity and
+            confidence.
+          </p>
+          <div class="card-meta">
+            <span class="mk">Session</span><span class="mv">Quarterly (Q1 &amp; Q2)</span>
+            <span class="mk">Program Time</span><span class="mv">Mon–Thu, 3:00–4:00 PM (Thu 2:00–3:00 PM)</span>
+            <span class="mk">Grades</span><span class="mv">2nd–5th</span>
+            <span class="mk">Cost</span><span class="mv">$250 per quarter</span>
+            <span class="mk">Faculty</span><span class="mv"><a href="mailto:mchilders@wcsmiami.org">Mrs. Childers</a> &amp; <a href="mailto:msimril@wcsmiami.org">Mrs. Simril</a></span>
+            <span class="mk">More Info</span><span class="mv"><a href="https://www.wcsmiami.org/page/news-detail?pk=1427308" target="_blank" rel="noopener">View Details</a></span>
           </div>
         </div>
 
