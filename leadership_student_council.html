@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Council — Program Reference</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11pt;
+      background: #f9f7f4;
+      color: #222;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: #2C5234;
+      color: #fff;
+      text-align: center;
+      padding: 40px 24px 32px;
+    }
+    .hero h1 {
+      font-weight: normal;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.75;
+      color: #c8dac2;
+    }
+    .hero .back-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #B9975B;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      font-size: 12px;
+      text-transform: uppercase;
+      border: 1px solid #B9975B;
+      border-radius: 3px;
+      padding: 6px 14px;
+    }
+    .hero .back-link:hover { background: #B9975B; color: #2C5234; }
+
+    /* ── Accent bar ── */
+    .accent-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #B9975B, #d4b07a, #B9975B);
+    }
+
+    /* ── Nav ── */
+    .subnav {
+      background: #fff;
+      border-bottom: 1px solid #e6e2da;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .subnav ul {
+      list-style: none;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      justify-content: center;
+    }
+    .subnav a {
+      color: #2C5234;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .subnav a:hover { color: #B9975B; }
+
+    /* ── Section wrapper ── */
+    .section {
+      padding: 44px 24px;
+      max-width: 980px;
+      margin: 0 auto;
+      scroll-margin-top: 56px;
+    }
+    .section-title {
+      color: #2C5234;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+      border-left: 4px solid #B9975B;
+      padding-left: 12px;
+      margin-bottom: 12px;
+    }
+    .section-intro {
+      color: #555;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+    .alt-bg { background: #fff; }
+
+    /* ── Stat callout ── */
+    .stat-callout {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-top: 20px;
+      background: #f0ede8;
+      border: 1px solid #B9975B;
+      border-radius: 6px;
+      padding: 10px 18px;
+    }
+    .stat-callout .stat-num { color: #2C5234; font-size: 20px; font-weight: 700; }
+    .stat-callout .stat-label { color: #555; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ── Register CTA ── */
+    .apply-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: #B9975B;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 11px;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 10px 22px;
+      transition: background 0.15s;
+    }
+    .apply-btn:hover { background: #2C5234; }
+    .apply-note {
+      display: block;
+      margin-top: 10px;
+      color: #7a1f1f;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
+
+    /* ── Placeholder box ── */
+    .placeholder-box {
+      margin-top: 20px;
+      border: 1px dashed #B9975B;
+      border-radius: 6px;
+      padding: 18px 20px;
+      background: #fcfbf9;
+      color: #999;
+      font-style: italic;
+      font-size: 10.5px;
+      line-height: 1.7;
+    }
+
+    /* ── Timeline warning ── */
+    .timeline-warning {
+      margin-top: 16px;
+      color: #7a1f1f;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Officer cards ── */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .role-card {
+      background: #fff;
+      border-radius: 6px;
+      border-top: 5px solid #2C5234;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .role-card h3 {
+      color: #2C5234;
+      margin-bottom: 8px;
+      line-height: 1.3;
+      font-size: 14px;
+    }
+    .role-card p {
+      line-height: 1.65;
+      color: #444;
+      font-size: 10.5px;
+    }
+
+    /* ── Election timeline ── */
+    .timeline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      counter-reset: none;
+    }
+    .timeline-step {
+      flex: 1 1 170px;
+      position: relative;
+      background: #fff;
+      border: 1px solid #B9975B;
+      border-radius: 6px;
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .timeline-step::after {
+      content: '→';
+      position: absolute;
+      right: -22px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #B9975B;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .timeline-step:last-child::after { content: ''; }
+    .timeline-step h4 {
+      color: #2C5234;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+    }
+    .timeline-step .step-date {
+      display: block;
+      color: #999;
+      font-size: 9.5px;
+      font-style: italic;
+      letter-spacing: 0.03em;
+    }
+    .timeline-note {
+      margin-top: 14px;
+      color: #999;
+      font-size: 10px;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* ── Download button ── */
+    .download-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #2C5234;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 22px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      z-index: 999;
+      transition: background 0.15s;
+    }
+    .download-btn:hover { background: #B9975B; }
+
+    @media print {
+      .download-btn, .subnav, .hero .back-link { display: none; }
+      body { font-size: 9.5pt; background: #fff; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section { padding: 20px 16px; max-width: 100%; }
+      .role-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; border-top: 4px solid #2C5234; }
+      .timeline-step { break-inside: avoid; box-shadow: none; }
+    }
+
+    /* ── Contact footer ── */
+    .contact { background: #2C5234; color: #fff; text-align: center; padding: 28px 24px; }
+    .contact p { line-height: 1.75; }
+    .contact a { color: #B9975B; text-decoration: none; font-weight: bold; }
+    .contact a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <button class="download-btn" onclick="window.print()">⬇ Download PDF</button>
+
+  <!-- Header -->
+  <div class="hero">
+    <h1>Student Council</h1>
+    <p>Program reference for the Elementary Campus Student Council — grades 3–5 — covering eligibility, representative duties, officers, advisors, and the election timeline.</p>
+    <a class="back-link" href="index.html">← Back to Signature Programs</a>
+  </div>
+  <div class="accent-bar"></div>
+
+  <nav class="subnav">
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#who-can-run">Who Can Run</a></li>
+      <li><a href="#responsibilities">Responsibilities</a></li>
+      <li><a href="#officers">Officers</a></li>
+      <li><a href="#advisors">Advisors</a></li>
+      <li><a href="#teacher-responsibilities">Teacher Responsibilities</a></li>
+      <li><a href="#timeline">Election Timeline</a></li>
+    </ul>
+  </nav>
+
+  <!-- Overview -->
+  <div class="section" id="overview">
+    <h2 class="section-title">Program Overview</h2>
+    <p class="section-intro">
+      Our Student Council gives students in grades 3–5 a real voice in school life. Elected representatives attend
+      weekly meetings, share classmates' ideas, and help lead service projects throughout the year.
+    </p>
+  </div>
+
+  <!-- Who Can Run -->
+  <div class="section alt-bg" id="who-can-run">
+    <h2 class="section-title">Who Can Run</h2>
+    <p class="section-intro">
+      Any student in good academic and behavioral standing may apply. Candidates submit an application with their
+      teacher's confirmation, campaign for one week, and are elected by their classmates.
+    </p>
+    <a class="apply-btn" href="https://forms.cloud.microsoft/r/rFKbwCdz6W" target="_blank" rel="noopener">Interest Form — 26–27 School Year</a>
+    <span class="apply-note">Due Thursday, September 10 by 3:30 p.m. — no forms accepted via email or after this date/time.</span>
+  </div>
+
+  <!-- What Representatives Do -->
+  <div class="section" id="responsibilities">
+    <h2 class="section-title">What Representatives Do</h2>
+    <p class="section-intro">
+      Representatives attend weekly lunch meetings, report back to their class, and help plan and carry out school
+      service projects and activities.
+    </p>
+    <div class="stat-callout">
+      <span class="stat-num">2</span>
+      <span class="stat-label">Representatives elected per class,<br />grades 3–5</span>
+    </div>
+  </div>
+
+  <!-- Officers -->
+  <div class="section alt-bg" id="officers">
+    <h2 class="section-title">Officers</h2>
+    <p class="section-intro">
+      Elected representatives vote among themselves for four officer positions, who lead meetings and oversee
+      Student Council responsibilities.
+    </p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>President</h3>
+        <p>Presides over weekly meetings and represents the Council to the school community.</p>
+      </div>
+      <div class="role-card">
+        <h3>Vice President</h3>
+        <p>Supports the President and steps in to lead meetings when needed.</p>
+      </div>
+      <div class="role-card">
+        <h3>Treasurer</h3>
+        <p>Helps track funds and materials for Council projects and activities.</p>
+      </div>
+      <div class="role-card">
+        <h3>Chaplain</h3>
+        <p>Leads devotions and prayer at Council meetings.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Advisors -->
+  <div class="section" id="advisors">
+    <h2 class="section-title">Advisors</h2>
+    <p class="section-intro">
+      Faculty advisors guide the program, mentor student leaders, and help ensure every meeting and project runs
+      smoothly.
+    </p>
+    <div class="role-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 260px));">
+      <div class="role-card">
+        <h3>Mrs. Glavach</h3>
+        <p><a href="mailto:mglavach@wcsmiami.org" style="color:#2C5234; font-weight:600;">mglavach@wcsmiami.org</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teacher Responsibilities -->
+  <div class="section alt-bg" id="teacher-responsibilities">
+    <h2 class="section-title">Teacher Responsibilities</h2>
+    <div class="placeholder-box">
+      [Add teacher responsibilities here — e.g., confirming candidate eligibility, distributing and collecting
+      interest forms, supervising campaign speeches, and running classroom elections.]
+    </div>
+  </div>
+
+  <!-- Election Timeline -->
+  <div class="section" id="timeline">
+    <h2 class="section-title">Election Timeline</h2>
+    <p class="section-intro">26–27 school year election process, grades 3–5.</p>
+    <div class="timeline">
+      <div class="timeline-step">
+        <h4>Form Due</h4>
+        <span class="step-date">Thu, Sep 10 — by 3:30 p.m.</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Guidelines &amp; Poster Board</h4>
+        <span class="step-date">Thu, Sep 17</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Campaigning Begins</h4>
+        <span class="step-date">Mon, Sep 21</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Speeches Due</h4>
+        <span class="step-date">Mon, Sep 21 — to homeroom teacher</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Election Day</h4>
+        <span class="step-date">Wed, Sep 23</span>
+      </div>
+    </div>
+    <p class="timeline-warning">No interest forms will be accepted via email or after the September 10 deadline.</p>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact">
+    <p>
+      Questions? Contact <strong>Mrs. Glavach</strong> at
+      <a href="mailto:mglavach@wcsmiami.org">mglavach@wcsmiami.org</a>
+    </p>
+  </div>
+
+</body>
+</html>
