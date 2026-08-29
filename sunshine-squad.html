@@ -159,6 +159,7 @@
       color: #444;
       font-size: 10.5px;
     }
+    .role-card p + p { margin-top: 8px; }
 
     /* ── Calendar ── */
     .calendar-wrap {
@@ -220,7 +221,7 @@
       padding-bottom: 6px;
     }
     .cal-day {
-      min-height: 68px;
+      min-height: 150px;
       border: 1px solid #e6e2da;
       border-radius: 5px;
       padding: 5px 6px;
@@ -261,6 +262,18 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+    .cal-day .cal-names {
+      margin-top: 3px;
+      list-style: none;
+    }
+    .cal-day .cal-names li {
+      font-size: 8.5px;
+      line-height: 1.45;
+      color: #333;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .calendar-legend {
       margin-top: 16px;
@@ -306,8 +319,9 @@
     .day-detail li::before { content: '• '; color: #B9975B; font-weight: 700; }
 
     @media (max-width: 640px) {
-      .cal-day { min-height: 50px; font-size: 8.5px; }
-      .cal-day .cal-event, .cal-day .cal-note { font-size: 7px; }
+      .cal-day { min-height: 120px; font-size: 8.5px; padding: 4px; }
+      .cal-day .cal-event, .cal-day .cal-note { font-size: 6.5px; }
+      .cal-day .cal-names li { font-size: 7px; line-height: 1.35; }
     }
 
     /* ── Download button ── */
@@ -363,6 +377,7 @@
     <ul>
       <li><a href="#overview">Overview</a></li>
       <li><a href="#responsibilities">Responsibilities</a></li>
+      <li><a href="#code-of-conduct">Code of Conduct</a></li>
       <li><a href="#calendar">Calendar</a></li>
       <li><a href="#advisor">Advisor</a></li>
     </ul>
@@ -394,13 +409,40 @@
     </div>
   </div>
 
+  <!-- Code of Conduct -->
+  <div class="section" id="code-of-conduct">
+    <h2 class="section-title">Code of Conduct</h2>
+    <p class="section-intro">As a member of the Sunshine Squad, I promise to:</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>Attitude &amp; Character</h3>
+        <p><strong>Be Kind</strong> – Treat every student and adult with respect, patience, and kindness.</p>
+        <p><strong>Be Positive</strong> – Greet others with a smile and share joy each morning.</p>
+        <p><strong>Be a Role Model</strong> – Show younger students how Warriors should act in words and actions.</p>
+      </div>
+      <div class="role-card">
+        <h3>Responsibility &amp; Commitment</h3>
+        <p><strong>Be On Time</strong> – Arrive by 7:15 AM sharp on my assigned day.</p>
+        <p><strong>Be Ready for Class</strong> – Leave PK at the first bell and be in my homeroom by 7:55 AM.</p>
+        <p><strong>Be Dependable</strong> – If I can't make my day, I will let Mrs. Glavach know ahead of time.</p>
+      </div>
+      <div class="role-card">
+        <h3>Leadership in Action</h3>
+        <p><strong>Be Engaged</strong> – Play with and include all students, not just my friends.</p>
+        <p><strong>Be Responsible</strong> – Help set up and clean up games and toys.</p>
+        <p><strong>Be Flexible</strong> – Listen to Morning Care teachers and follow directions quickly.</p>
+        <p><strong>Be a Peacemaker</strong> – Help solve small problems kindly, and ask an adult for help if needed.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Calendar -->
-  <div class="section" id="calendar">
+  <div class="section alt-bg" id="calendar">
     <h2 class="section-title">Duty Calendar</h2>
     <p class="section-intro">
       Sunshine Squad duty runs September 1, 2026 – May 20, 2027, 7:30 a.m., names alphabetized. The recurring weekly
       plan honors each student's requested frequency and schedules nine students on every school day; closures from
-      the school calendar are shown in red. Click any date to see who's on duty.
+      the school calendar are shown in red.
     </p>
 
     <div class="calendar-wrap">
@@ -428,7 +470,7 @@
     </div>
 
     <div class="calendar-legend">
-      <span><span class="dot" style="background:#2C5234;"></span>Duty day — click for roster</span>
+      <span><span class="dot" style="background:#2C5234;"></span>Duty day</span>
       <span><span class="dot" style="background:#7a1f1f;"></span>No School</span>
       <span><span class="dot" style="background:#B9975B;"></span>Early dismissal / quarter cutoff</span>
     </div>
@@ -574,16 +616,20 @@
           ev.textContent = 'NO SCHOOL';
           cell.appendChild(ev);
         } else if (roster) {
-          const ev = document.createElement('span');
-          ev.className = 'cal-event';
-          ev.textContent = `${roster.length} students`;
-          cell.appendChild(ev);
           if (note) {
             const n = document.createElement('span');
             n.className = 'cal-note';
             n.textContent = note.split(' — ')[0];
             cell.appendChild(n);
           }
+          const list = document.createElement('ul');
+          list.className = 'cal-names';
+          roster.forEach(name => {
+            const li = document.createElement('li');
+            li.textContent = name;
+            list.appendChild(li);
+          });
+          cell.appendChild(list);
         }
 
         if (roster || closure) {
