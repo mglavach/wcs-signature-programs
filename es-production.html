@@ -332,10 +332,7 @@
   <div class="section alt-bg" id="schedule">
     <h2 class="section-title">2026-27 Schedule</h2>
     <p class="section-intro">
-      Each session runs for 5 Tuesdays, covering the full 2026-27 school year through Session 7 (May 18, 2027).
-      Sessions 1 and 2 are the original sign-up rosters (12 and 11 students). Starting with Session 3, students are
-      mixed into three equal groups of 9 so every Tuesday needs exactly 1 Switcher, 2 Audio, 4 Video Cam, and
-      2 Photography, rotating week to week so no one is stuck with the same job all session. Use the arrows to
+      Each session runs for 5 Tuesdays, covering the full 2026-27 school year through Session 7 (May 18, 2027). Use the arrows to
       browse each session.
     </p>
 
@@ -536,6 +533,36 @@
     });
 
     renderSession();
+
+    // ── Eyebrow nav: smooth scroll, and ask the parent page to scroll when embedded ──
+    document.querySelectorAll('.subnav a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const target = document.getElementById(link.getAttribute('href').slice(1));
+        if (!target) return;
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 56;
+        if (window.parent !== window) {
+          window.parent.postMessage({ source: 'es-production', type: 'scrollTo', top }, '*');
+        } else {
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ── Auto-resize when embedded in an iframe (e.g. on the Blackbaud site) ──
+    (function () {
+      function sendHeight() {
+        if (window.parent === window) return; // not embedded
+        const height = document.documentElement.scrollHeight;
+        window.parent.postMessage({ source: 'es-production', height: height }, '*');
+      }
+      if (window.ResizeObserver) {
+        new ResizeObserver(sendHeight).observe(document.documentElement);
+      }
+      window.addEventListener('load', sendHeight);
+      window.addEventListener('resize', sendHeight);
+      setTimeout(sendHeight, 500);
+    })();
   </script>
 
 </body>
