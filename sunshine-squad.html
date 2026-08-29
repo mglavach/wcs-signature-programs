@@ -105,6 +105,19 @@
     }
     .alt-bg { background: #fff; }
 
+    .overview-flex {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .overview-logo {
+      width: 190px;
+      max-width: 100%;
+      height: auto;
+      flex-shrink: 0;
+    }
+
     /* ── Stat callout ── */
     .stat-callout {
       display: inline-flex;
@@ -446,11 +459,16 @@
 
   <!-- Overview -->
   <div class="section" id="overview">
-    <h2 class="section-title">Program Overview</h2>
-    <p class="section-intro">
-      Sunshine Squad gives 4th grade students at the Elementary Campus the chance to serve before school, brightening
-      the school community through encouragement, kindness, and small acts of service.
-    </p>
+    <div class="overview-flex">
+      <img src="sunshine-squad-logo.png" alt="WCS Sunshine Squad logo" class="overview-logo" />
+      <div>
+        <h2 class="section-title">Program Overview</h2>
+        <p class="section-intro">
+          Sunshine Squad gives 4th grade students at the Elementary Campus the chance to serve before school, brightening
+          the school community through encouragement, kindness, and small acts of service.
+        </p>
+      </div>
+    </div>
   </div>
 
   <!-- Responsibilities -->
