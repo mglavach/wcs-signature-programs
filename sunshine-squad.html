@@ -798,6 +798,21 @@
 
     renderCalendar();
     renderStudentPills();
+
+    // ── Auto-resize when embedded in an iframe (e.g. on the Blackbaud site) ──
+    (function () {
+      function sendHeight() {
+        if (window.parent === window) return; // not embedded
+        const height = document.documentElement.scrollHeight;
+        window.parent.postMessage({ source: 'sunshine-squad', height: height }, '*');
+      }
+      if (window.ResizeObserver) {
+        new ResizeObserver(sendHeight).observe(document.documentElement);
+      }
+      window.addEventListener('load', sendHeight);
+      window.addEventListener('resize', sendHeight);
+      setTimeout(sendHeight, 500);
+    })();
   </script>
 
 </body>
