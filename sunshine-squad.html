@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunshine Squad — Program Reference</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11pt;
+      background: #f9f7f4;
+      color: #222;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: #2C5234;
+      color: #fff;
+      text-align: center;
+      padding: 40px 24px 32px;
+    }
+    .hero h1 {
+      font-weight: normal;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.75;
+      color: #c8dac2;
+    }
+    .hero .back-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #B9975B;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      font-size: 12px;
+      text-transform: uppercase;
+      border: 1px solid #B9975B;
+      border-radius: 3px;
+      padding: 6px 14px;
+    }
+    .hero .back-link:hover { background: #B9975B; color: #2C5234; }
+
+    /* ── Accent bar ── */
+    .accent-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #B9975B, #d4b07a, #B9975B);
+    }
+
+    /* ── Nav ── */
+    .subnav {
+      background: #fff;
+      border-bottom: 1px solid #e6e2da;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .subnav ul {
+      list-style: none;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      justify-content: center;
+    }
+    .subnav a {
+      color: #2C5234;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .subnav a:hover { color: #B9975B; }
+
+    /* ── Section wrapper ── */
+    .section {
+      padding: 44px 24px;
+      max-width: 980px;
+      margin: 0 auto;
+      scroll-margin-top: 56px;
+    }
+    .section-title {
+      color: #2C5234;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+      border-left: 4px solid #B9975B;
+      padding-left: 12px;
+      margin-bottom: 12px;
+    }
+    .section-intro {
+      color: #555;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+    .alt-bg { background: #fff; }
+
+    /* ── Stat callout ── */
+    .stat-callout {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-top: 20px;
+      background: #f0ede8;
+      border: 1px solid #B9975B;
+      border-radius: 6px;
+      padding: 10px 18px;
+    }
+    .stat-callout .stat-num { color: #2C5234; font-size: 20px; font-weight: 700; }
+    .stat-callout .stat-label { color: #555; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ── Placeholder box ── */
+    .placeholder-box {
+      margin-top: 20px;
+      border: 1px dashed #B9975B;
+      border-radius: 6px;
+      padding: 18px 20px;
+      background: #fcfbf9;
+      color: #999;
+      font-style: italic;
+      font-size: 10.5px;
+      line-height: 1.7;
+    }
+
+    /* ── Role cards ── */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .role-card {
+      background: #fff;
+      border-radius: 6px;
+      border-top: 5px solid #2C5234;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .role-card h3 {
+      color: #2C5234;
+      margin-bottom: 8px;
+      line-height: 1.3;
+      font-size: 14px;
+    }
+    .role-card p {
+      line-height: 1.65;
+      color: #444;
+      font-size: 10.5px;
+    }
+
+    /* ── Calendar ── */
+    .calendar-wrap {
+      margin-top: 24px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      padding: 20px 20px 24px;
+    }
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .calendar-header h3 {
+      color: #2C5234;
+      font-size: 15px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .cal-nav {
+      display: flex;
+      gap: 8px;
+    }
+    .cal-nav button {
+      font-family: 'Montserrat', sans-serif;
+      background: #2C5234;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .cal-nav button:hover { background: #B9975B; }
+    .cal-nav button.today-btn {
+      width: auto;
+      padding: 0 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .cal-dow {
+      text-align: center;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #999;
+      padding-bottom: 6px;
+    }
+    .cal-day {
+      min-height: 68px;
+      border: 1px solid #e6e2da;
+      border-radius: 5px;
+      padding: 5px 6px;
+      font-size: 10px;
+      color: #333;
+      background: #fcfbf9;
+      position: relative;
+    }
+    .cal-day.empty { background: transparent; border: none; }
+    .cal-day.today { border: 2px solid #B9975B; }
+    .cal-day.has-duty { cursor: pointer; }
+    .cal-day.has-duty:hover { border-color: #2C5234; box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
+    .cal-day.selected { background: #eef3ec; border-color: #2C5234; }
+    .cal-day.closed { background: #fbeceb; }
+    .cal-day .cal-date-num { font-weight: 700; color: #2C5234; }
+    .cal-day.closed .cal-date-num { color: #7a1f1f; }
+    .cal-day .cal-event {
+      display: block;
+      margin-top: 3px;
+      background: #2C5234;
+      color: #fff;
+      border-radius: 3px;
+      padding: 2px 5px;
+      font-size: 8.5px;
+      line-height: 1.3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .cal-day .cal-event.closed-tag { background: #7a1f1f; }
+    .cal-day .cal-note {
+      display: block;
+      margin-top: 2px;
+      color: #B9975B;
+      font-size: 8px;
+      font-weight: 700;
+      line-height: 1.3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .calendar-legend {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 10px;
+      color: #555;
+    }
+    .calendar-legend span.dot {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
+      background: #2C5234;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .day-detail {
+      margin-top: 18px;
+      background: #f6f4f0;
+      border-left: 4px solid #2C5234;
+      border-radius: 4px;
+      padding: 14px 18px;
+      font-size: 11px;
+      color: #444;
+      line-height: 1.7;
+    }
+    .day-detail.closed { border-left-color: #7a1f1f; }
+    .day-detail h4 {
+      color: #2C5234;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .day-detail.closed h4 { color: #7a1f1f; }
+    .day-detail ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 4px 12px;
+      margin-top: 6px;
+    }
+    .day-detail li::before { content: '• '; color: #B9975B; font-weight: 700; }
+
+    @media (max-width: 640px) {
+      .cal-day { min-height: 50px; font-size: 8.5px; }
+      .cal-day .cal-event, .cal-day .cal-note { font-size: 7px; }
+    }
+
+    /* ── Quarter cutoff table ── */
+    .cutoff-table-wrap { margin-top: 20px; overflow-x: auto; }
+    .cutoff-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      font-size: 10.5px;
+    }
+    .cutoff-table th {
+      background: #2C5234;
+      color: #fff;
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 9.5px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .cutoff-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e6e2da;
+      color: #444;
+    }
+    .cutoff-table tr:last-child td { border-bottom: none; }
+    .cutoff-table tr:nth-child(even) td { background: #f9f7f4; }
+
+    /* ── Download button ── */
+    .download-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #2C5234;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 22px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      z-index: 999;
+      transition: background 0.15s;
+    }
+    .download-btn:hover { background: #B9975B; }
+
+    @media print {
+      .download-btn, .subnav, .hero .back-link, .cal-nav { display: none; }
+      body { font-size: 9.5pt; background: #fff; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section { padding: 20px 16px; max-width: 100%; }
+      .role-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; border-top: 4px solid #2C5234; }
+      .calendar-wrap { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+      .cutoff-table { box-shadow: none; border: 1px solid #ccc; }
+    }
+
+    /* ── Contact footer ── */
+    .contact { background: #2C5234; color: #fff; text-align: center; padding: 28px 24px; }
+    .contact p { line-height: 1.75; }
+    .contact a { color: #B9975B; text-decoration: none; font-weight: bold; }
+    .contact a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <button class="download-btn" onclick="window.print()">⬇ Download PDF</button>
+
+  <!-- Header -->
+  <div class="hero">
+    <h1>Sunshine Squad</h1>
+    <p>Program reference for Sunshine Squad — 4th grade — covering the role, responsibilities, advisor, and the 2026–27 duty calendar.</p>
+    <a class="back-link" href="index.html">← Back to Signature Programs</a>
+  </div>
+  <div class="accent-bar"></div>
+
+  <nav class="subnav">
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#responsibilities">Responsibilities</a></li>
+      <li><a href="#calendar">Calendar</a></li>
+      <li><a href="#quarter-cutoffs">Quarter Cutoffs</a></li>
+      <li><a href="#advisor">Advisor</a></li>
+    </ul>
+  </nav>
+
+  <!-- Overview -->
+  <div class="section" id="overview">
+    <h2 class="section-title">Program Overview</h2>
+    <p class="section-intro">
+      Sunshine Squad gives 4th grade students at the Elementary Campus the chance to serve before school, brightening
+      the school community through encouragement, kindness, and small acts of service.
+    </p>
+    <div class="stat-callout">
+      <span class="stat-num">4th</span>
+      <span class="stat-label">Grade level, before school<br />year-long program</span>
+    </div>
+  </div>
+
+  <!-- Responsibilities -->
+  <div class="section alt-bg" id="responsibilities">
+    <h2 class="section-title">Responsibilities</h2>
+    <p class="section-intro">
+      Sunshine Squad members report at 7:30 a.m. on their scheduled duty days and sign in with Mrs. Glavach before
+      the school day begins.
+    </p>
+    <div class="placeholder-box">
+      [Add additional Sunshine Squad responsibilities here — e.g., greeting students and families at drop-off,
+      delivering encouragement notes, assisting teachers with morning tasks, and helping with school spirit activities.]
+    </div>
+  </div>
+
+  <!-- Calendar -->
+  <div class="section" id="calendar">
+    <h2 class="section-title">Duty Calendar</h2>
+    <p class="section-intro">
+      Sunshine Squad duty runs September 1, 2026 – May 20, 2027, 7:30 a.m., names alphabetized. The recurring weekly
+      plan honors each student's requested frequency and schedules nine students on every school day; closures from
+      the school calendar are shown in red. Click any date to see who's on duty.
+    </p>
+
+    <div class="calendar-wrap">
+      <div class="calendar-header">
+        <div class="cal-nav">
+          <button id="cal-prev" aria-label="Previous month">‹</button>
+          <button id="cal-today" class="today-btn">Today</button>
+          <button id="cal-next" aria-label="Next month">›</button>
+        </div>
+        <h3 id="cal-month-label"></h3>
+        <div style="width:78px;"></div>
+      </div>
+      <div class="calendar-grid" id="cal-dow-row">
+        <div class="cal-dow">Sun</div>
+        <div class="cal-dow">Mon</div>
+        <div class="cal-dow">Tue</div>
+        <div class="cal-dow">Wed</div>
+        <div class="cal-dow">Thu</div>
+        <div class="cal-dow">Fri</div>
+        <div class="cal-dow">Sat</div>
+      </div>
+      <div class="calendar-grid" id="cal-grid"></div>
+
+      <div class="day-detail" id="day-detail">Select a date above to see the Sunshine Squad roster for that day.</div>
+    </div>
+
+    <div class="calendar-legend">
+      <span><span class="dot" style="background:#2C5234;"></span>Duty day — click for roster</span>
+      <span><span class="dot" style="background:#7a1f1f;"></span>No School</span>
+      <span><span class="dot" style="background:#B9975B;"></span>Early dismissal / quarter cutoff</span>
+    </div>
+  </div>
+
+  <!-- Quarter Cutoffs -->
+  <div class="section alt-bg" id="quarter-cutoffs">
+    <h2 class="section-title">Quarter Cutoffs</h2>
+    <p class="section-intro">Grades are calculated on these dates each quarter.</p>
+    <div class="cutoff-table-wrap">
+      <table class="cutoff-table">
+        <thead>
+          <tr><th>Quarter</th><th>Cutoff Date</th><th>School Status</th><th>Calendar Note</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Q1</td><td>Oct 9, 2026</td><td>No school</td><td>Faculty In-Service Day; grades calculated</td></tr>
+          <tr><td>Q2</td><td>Dec 18, 2026</td><td>School day</td><td>Early dismissal; grades calculated</td></tr>
+          <tr><td>Q3</td><td>Mar 12, 2027</td><td>No school</td><td>Faculty In-Service Day; grades calculated</td></tr>
+          <tr><td>Q4</td><td>May 20, 2027</td><td>School day</td><td>Early dismissal; last day of school; grades calculated</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Advisor -->
+  <div class="section" id="advisor">
+    <h2 class="section-title">Advisor</h2>
+    <p class="section-intro">
+      A faculty advisor guides the program and supports students as they carry out their Sunshine Squad duties.
+    </p>
+    <div class="role-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 260px));">
+      <div class="role-card">
+        <h3>Mrs. Glavach</h3>
+        <p><a href="mailto:mglavach@wcsmiami.org" style="color:#2C5234; font-weight:600;">mglavach@wcsmiami.org</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact">
+    <p>
+      Questions? Contact <strong>Mrs. Glavach</strong> at
+      <a href="mailto:mglavach@wcsmiami.org">mglavach@wcsmiami.org</a>
+    </p>
+  </div>
+
+  <script>
+    // ── Sunshine Squad 2026-27 duty schedule ────────────────────────────
+    // Recurring weekly plan (verified against the full-year roster): each
+    // weekday lists the students scheduled that day, keyed by Date.getDay()
+    // (1 = Monday ... 5 = Friday). Individual weekly frequency (e.g. Alaïa
+    // Aguayo's 2 days/week) is already baked into which days she appears.
+    const WEEKLY_TEMPLATE = {
+      1: ['Adelaide C.','Charlie W.','Cillian K.','Gianny M.','Jack B.','Lexie B.','Sabrina B.','Shaylin S.','Sienna R.'],
+      2: ['Adelaide C.','Blaire S.','Charles F.','Charlie W.','Cillian K.','Jose Elijah C.','Lexie B.','Mary R.','Shaylin S.'],
+      3: ['Alaïa A.','Cillian K.','Jack B.','Lexie B.','Mary R.','Ramsey A.','Sabrina B.','Sabrina S.','Shaylin S.'],
+      4: ['Adelaide C.','Blaire S.','Charles F.','Cillian K.','Gianny M.','Jack B.','Lexie B.','Ramsey A.','Shaylin S.'],
+      5: ['Alaïa A.','Blaire S.','Cillian K.','Jose Elijah C.','Lexie B.','Mary R.','Sabrina B.','Shaylin S.','Sienna R.'],
+    };
+
+    // Dates school is fully closed (from the official school calendar).
+    const CLOSURES = {
+      '2026-09-07': 'Labor Day',
+      '2026-10-09': 'Faculty In-Service Day — Q1 cutoff',
+      '2026-11-11': 'Veterans Day',
+      '2026-11-23': 'Thanksgiving Break',
+      '2026-11-24': 'Thanksgiving Break',
+      '2026-11-25': 'Thanksgiving Break',
+      '2026-11-26': 'Thanksgiving Break',
+      '2026-11-27': 'Thanksgiving Break',
+      '2026-12-21': 'Christmas Break',
+      '2026-12-22': 'Christmas Break',
+      '2026-12-23': 'Christmas Break',
+      '2026-12-24': 'Christmas Break',
+      '2026-12-25': 'Christmas Break',
+      '2026-12-28': 'Christmas Break',
+      '2026-12-29': 'Christmas Break',
+      '2026-12-30': 'Christmas Break',
+      '2026-12-31': 'Christmas Break',
+      '2027-01-01': 'Christmas Break',
+      '2027-01-04': 'Christmas Break',
+      '2027-01-18': 'Martin Luther King Jr. Day',
+      '2027-02-12': 'Faculty In-Service Day',
+      '2027-02-15': 'Winter Break',
+      '2027-02-16': 'Winter Break',
+      '2027-03-12': 'Faculty In-Service Day — Q3 cutoff',
+      '2027-03-22': 'Spring Break',
+      '2027-03-23': 'Spring Break',
+      '2027-03-24': 'Spring Break',
+      '2027-03-25': 'Spring Break',
+      '2027-03-26': 'Spring Break',
+      '2027-03-29': 'Spring Break',
+    };
+
+    // School days with a calendar note, but not closed.
+    const NOTES = {
+      '2026-11-20': 'Early dismissal',
+      '2026-12-18': 'Early dismissal — Q2 cutoff',
+      '2027-05-20': 'Early dismissal — Last day of school — Q4 cutoff',
+    };
+
+    const PROGRAM_START = new Date(2026, 8, 1);
+    const PROGRAM_END = new Date(2027, 4, 20);
+
+    const MONTH_NAMES = ['January','February','March','April','May','June',
+      'July','August','September','October','November','December'];
+    const DOW_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+    let viewYear = 2026;
+    let viewMonth = 8; // September 2026
+    let selectedKey = null;
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function keyFor(y, m, d) { return `${y}-${pad(m + 1)}-${pad(d)}`; }
+
+    function renderCalendar() {
+      const grid = document.getElementById('cal-grid');
+      const label = document.getElementById('cal-month-label');
+      label.textContent = `${MONTH_NAMES[viewMonth]} ${viewYear}`;
+      grid.innerHTML = '';
+
+      const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+      const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+      const today = new Date();
+      const isCurrentMonth = today.getFullYear() === viewYear && today.getMonth() === viewMonth;
+
+      for (let i = 0; i < firstDay; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-day empty';
+        grid.appendChild(cell);
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(viewYear, viewMonth, d);
+        const key = keyFor(viewYear, viewMonth, d);
+        const dow = date.getDay();
+        const inRange = date >= PROGRAM_START && date <= PROGRAM_END;
+        const closure = CLOSURES[key];
+        const note = NOTES[key];
+        const roster = (inRange && !closure && WEEKLY_TEMPLATE[dow]) ? WEEKLY_TEMPLATE[dow] : null;
+
+        const cell = document.createElement('div');
+        cell.className = 'cal-day';
+        if (isCurrentMonth && today.getDate() === d) cell.classList.add('today');
+        if (closure) cell.classList.add('closed');
+        if (roster || closure) cell.classList.add('has-duty');
+        if (key === selectedKey) cell.classList.add('selected');
+        cell.dataset.key = key;
+
+        const dateNum = document.createElement('span');
+        dateNum.className = 'cal-date-num';
+        dateNum.textContent = d;
+        cell.appendChild(dateNum);
+
+        if (closure) {
+          const ev = document.createElement('span');
+          ev.className = 'cal-event closed-tag';
+          ev.textContent = 'NO SCHOOL';
+          cell.appendChild(ev);
+        } else if (roster) {
+          const ev = document.createElement('span');
+          ev.className = 'cal-event';
+          ev.textContent = `${roster.length} students`;
+          cell.appendChild(ev);
+          if (note) {
+            const n = document.createElement('span');
+            n.className = 'cal-note';
+            n.textContent = note.split(' — ')[0];
+            cell.appendChild(n);
+          }
+        }
+
+        if (roster || closure) {
+          cell.addEventListener('click', () => {
+            selectedKey = key;
+            renderCalendar();
+            showDayDetail(date, key, roster, closure, note);
+          });
+        }
+
+        grid.appendChild(cell);
+      }
+    }
+
+    function showDayDetail(date, key, roster, closure, note) {
+      const panel = document.getElementById('day-detail');
+      const dateLabel = `${DOW_NAMES[date.getDay()]}, ${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+
+      if (closure) {
+        panel.classList.add('closed');
+        panel.innerHTML = `<h4>${dateLabel}</h4>No School — ${closure.split(' — ')[0]}`;
+      } else if (roster) {
+        panel.classList.remove('closed');
+        const noteHtml = note ? `<div style="margin-top:6px; color:#B9975B; font-weight:700;">${note}</div>` : '';
+        panel.innerHTML = `<h4>${dateLabel} — ${roster.length} students on duty</h4>` +
+          `<ul>${roster.map(name => `<li>${name}</li>`).join('')}</ul>` + noteHtml;
+      }
+    }
+
+    document.getElementById('cal-prev').addEventListener('click', () => {
+      viewMonth--;
+      if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      renderCalendar();
+    });
+    document.getElementById('cal-next').addEventListener('click', () => {
+      viewMonth++;
+      if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      renderCalendar();
+    });
+    document.getElementById('cal-today').addEventListener('click', () => {
+      const today = new Date();
+      viewYear = today.getFullYear();
+      viewMonth = today.getMonth();
+      renderCalendar();
+    });
+
+    renderCalendar();
+  </script>
+
+</body>
+</html>
