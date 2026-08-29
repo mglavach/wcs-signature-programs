@@ -310,34 +310,6 @@
       .cal-day .cal-event, .cal-day .cal-note { font-size: 7px; }
     }
 
-    /* ── Quarter cutoff table ── */
-    .cutoff-table-wrap { margin-top: 20px; overflow-x: auto; }
-    .cutoff-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      font-size: 10.5px;
-    }
-    .cutoff-table th {
-      background: #2C5234;
-      color: #fff;
-      text-align: left;
-      padding: 10px 14px;
-      font-size: 9.5px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .cutoff-table td {
-      padding: 10px 14px;
-      border-bottom: 1px solid #e6e2da;
-      color: #444;
-    }
-    .cutoff-table tr:last-child td { border-bottom: none; }
-    .cutoff-table tr:nth-child(even) td { background: #f9f7f4; }
-
     /* ── Download button ── */
     .download-btn {
       position: fixed;
@@ -366,7 +338,6 @@
       .section { padding: 20px 16px; max-width: 100%; }
       .role-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; border-top: 4px solid #2C5234; }
       .calendar-wrap { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
-      .cutoff-table { box-shadow: none; border: 1px solid #ccc; }
     }
 
     /* ── Contact footer ── */
@@ -393,7 +364,6 @@
       <li><a href="#overview">Overview</a></li>
       <li><a href="#responsibilities">Responsibilities</a></li>
       <li><a href="#calendar">Calendar</a></li>
-      <li><a href="#quarter-cutoffs">Quarter Cutoffs</a></li>
       <li><a href="#advisor">Advisor</a></li>
     </ul>
   </nav>
@@ -461,25 +431,6 @@
       <span><span class="dot" style="background:#2C5234;"></span>Duty day — click for roster</span>
       <span><span class="dot" style="background:#7a1f1f;"></span>No School</span>
       <span><span class="dot" style="background:#B9975B;"></span>Early dismissal / quarter cutoff</span>
-    </div>
-  </div>
-
-  <!-- Quarter Cutoffs -->
-  <div class="section alt-bg" id="quarter-cutoffs">
-    <h2 class="section-title">Quarter Cutoffs</h2>
-    <p class="section-intro">Grades are calculated on these dates each quarter.</p>
-    <div class="cutoff-table-wrap">
-      <table class="cutoff-table">
-        <thead>
-          <tr><th>Quarter</th><th>Cutoff Date</th><th>School Status</th><th>Calendar Note</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Q1</td><td>Oct 9, 2026</td><td>No school</td><td>Faculty In-Service Day; grades calculated</td></tr>
-          <tr><td>Q2</td><td>Dec 18, 2026</td><td>School day</td><td>Early dismissal; grades calculated</td></tr>
-          <tr><td>Q3</td><td>Mar 12, 2027</td><td>No school</td><td>Faculty In-Service Day; grades calculated</td></tr>
-          <tr><td>Q4</td><td>May 20, 2027</td><td>School day</td><td>Early dismissal; last day of school; grades calculated</td></tr>
-        </tbody>
-      </table>
     </div>
   </div>
 
