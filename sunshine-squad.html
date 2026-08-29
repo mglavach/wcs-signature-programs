@@ -208,12 +208,12 @@
     }
     .calendar-grid {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 6px;
     }
     .cal-dow {
       text-align: center;
-      font-size: 9.5px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -221,32 +221,29 @@
       padding-bottom: 6px;
     }
     .cal-day {
-      min-height: 150px;
+      min-height: 195px;
       border: 1px solid #e6e2da;
       border-radius: 5px;
-      padding: 5px 6px;
-      font-size: 10px;
+      padding: 6px 8px;
+      font-size: 12px;
       color: #333;
       background: #fcfbf9;
       position: relative;
     }
     .cal-day.empty { background: transparent; border: none; }
     .cal-day.today { border: 2px solid #B9975B; }
-    .cal-day.has-duty { cursor: pointer; }
-    .cal-day.has-duty:hover { border-color: #2C5234; box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
-    .cal-day.selected { background: #eef3ec; border-color: #2C5234; }
     .cal-day.closed { background: #fbeceb; }
-    .cal-day .cal-date-num { font-weight: 700; color: #2C5234; }
+    .cal-day .cal-date-num { font-weight: 700; color: #2C5234; font-size: 13px; }
     .cal-day.closed .cal-date-num { color: #7a1f1f; }
     .cal-day .cal-event {
       display: block;
-      margin-top: 3px;
+      margin-top: 4px;
       background: #2C5234;
       color: #fff;
       border-radius: 3px;
-      padding: 2px 5px;
-      font-size: 8.5px;
-      line-height: 1.3;
+      padding: 3px 6px;
+      font-size: 10.5px;
+      line-height: 1.35;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -254,22 +251,22 @@
     .cal-day .cal-event.closed-tag { background: #7a1f1f; }
     .cal-day .cal-note {
       display: block;
-      margin-top: 2px;
+      margin-top: 3px;
       color: #B9975B;
-      font-size: 8px;
+      font-size: 9.5px;
       font-weight: 700;
-      line-height: 1.3;
+      line-height: 1.35;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
     .cal-day .cal-names {
-      margin-top: 3px;
+      margin-top: 4px;
       list-style: none;
     }
     .cal-day .cal-names li {
-      font-size: 8.5px;
-      line-height: 1.45;
+      font-size: 10.5px;
+      line-height: 1.5;
       color: #333;
       white-space: nowrap;
       overflow: hidden;
@@ -318,81 +315,48 @@
       margin-right: 6px;
       vertical-align: middle;
     }
-    .day-detail {
-      margin-top: 18px;
-      background: #f6f4f0;
-      border-left: 4px solid #2C5234;
-      border-radius: 4px;
-      padding: 14px 18px;
-      font-size: 11px;
-      color: #444;
-      line-height: 1.7;
-    }
-    .day-detail.closed { border-left-color: #7a1f1f; }
-    .day-detail h4 {
-      color: #2C5234;
-      font-size: 12px;
-      margin-bottom: 6px;
-    }
-    .day-detail.closed h4 { color: #7a1f1f; }
-    .day-detail ul {
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 4px 12px;
-      margin-top: 6px;
-    }
-    .day-detail li::before { content: '• '; color: #B9975B; font-weight: 700; }
-
     @media (max-width: 640px) {
-      .cal-day { min-height: 120px; font-size: 8.5px; padding: 4px; }
-      .cal-day .cal-event, .cal-day .cal-note { font-size: 6.5px; }
-      .cal-day .cal-names li { font-size: 7px; line-height: 1.35; }
+      .cal-day { min-height: 165px; font-size: 10px; padding: 5px; }
+      .cal-day .cal-event, .cal-day .cal-note { font-size: 8px; }
+      .cal-day .cal-names li { font-size: 9px; line-height: 1.4; }
     }
 
     /* ── Download button ── */
+    .calendar-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 12px;
+    }
     .download-btn {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
       background: #2C5234;
       color: #fff;
       border: none;
       border-radius: 6px;
-      padding: 12px 22px;
+      padding: 10px 20px;
       font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
-      z-index: 999;
       transition: background 0.15s;
     }
     .download-btn:hover { background: #B9975B; }
 
     @media print {
-      .download-btn, .subnav, .hero .back-link, .cal-nav { display: none; }
+      .download-btn, .calendar-actions, .subnav, .hero .back-link, .cal-nav { display: none; }
       body { font-size: 9.5pt; background: #fff; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .accent-bar, .contact, .popup-overlay { display: none !important; }
+      .accent-bar, .popup-overlay { display: none !important; }
       .section:not(#calendar) { display: none !important; }
       #calendar .section-title,
       #calendar .section-intro,
       .student-list-title,
       .student-pills,
-      .calendar-legend,
-      .day-detail { display: none !important; }
+      .calendar-legend { display: none !important; }
       .section { padding: 20px 16px; max-width: 100%; }
       .role-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; border-top: 4px solid #2C5234; }
       .calendar-wrap { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
     }
-
-    /* ── Contact footer ── */
-    .contact { background: #2C5234; color: #fff; text-align: center; padding: 28px 24px; }
-    .contact p { line-height: 1.75; }
-    .contact a { color: #B9975B; text-decoration: none; font-weight: bold; }
-    .contact a:hover { text-decoration: underline; }
 
     /* ── Student popup ── */
     .popup-overlay {
@@ -443,8 +407,6 @@
   </style>
 </head>
 <body>
-
-  <button class="download-btn" onclick="window.print()">⬇ Download Calendar</button>
 
   <div class="accent-bar"></div>
 
@@ -521,17 +483,17 @@
         <div style="width:78px;"></div>
       </div>
       <div class="calendar-grid" id="cal-dow-row">
-        <div class="cal-dow">Sun</div>
         <div class="cal-dow">Mon</div>
         <div class="cal-dow">Tue</div>
         <div class="cal-dow">Wed</div>
         <div class="cal-dow">Thu</div>
         <div class="cal-dow">Fri</div>
-        <div class="cal-dow">Sat</div>
       </div>
       <div class="calendar-grid" id="cal-grid"></div>
 
-      <div class="day-detail" id="day-detail">Select a date above to see the Sunshine Squad roster for that day.</div>
+      <div class="calendar-actions">
+        <button class="download-btn" onclick="window.print()">⬇ Download Calendar</button>
+      </div>
     </div>
 
     <div class="calendar-legend">
@@ -565,14 +527,6 @@
       <button class="popup-close" id="student-popup-close" aria-label="Close">✕</button>
       <div id="student-popup-content"></div>
     </div>
-  </div>
-
-  <!-- Contact -->
-  <div class="contact">
-    <p>
-      Questions? Contact <strong>Mrs. Glavach</strong> at
-      <a href="mailto:mglavach@wcsmiami.org">mglavach@wcsmiami.org</a>
-    </p>
   </div>
 
   <script>
@@ -649,7 +603,6 @@
 
     let viewYear = 2026;
     let viewMonth = 8; // September 2026
-    let selectedKey = null;
 
     function pad(n) { return String(n).padStart(2, '0'); }
     function keyFor(y, m, d) { return `${y}-${pad(m + 1)}-${pad(d)}`; }
@@ -665,7 +618,9 @@
       const today = new Date();
       const isCurrentMonth = today.getFullYear() === viewYear && today.getMonth() === viewMonth;
 
-      for (let i = 0; i < firstDay; i++) {
+      // Mon-Fri grid only — leading blanks fill up to the month's first weekday.
+      const leadingBlanks = (firstDay >= 1 && firstDay <= 5) ? firstDay - 1 : 0;
+      for (let i = 0; i < leadingBlanks; i++) {
         const cell = document.createElement('div');
         cell.className = 'cal-day empty';
         grid.appendChild(cell);
@@ -673,8 +628,10 @@
 
       for (let d = 1; d <= daysInMonth; d++) {
         const date = new Date(viewYear, viewMonth, d);
-        const key = keyFor(viewYear, viewMonth, d);
         const dow = date.getDay();
+        if (dow === 0 || dow === 6) continue; // Mon-Fri only
+
+        const key = keyFor(viewYear, viewMonth, d);
         const inRange = date >= PROGRAM_START && date <= PROGRAM_END;
         const closure = CLOSURES[key];
         const note = NOTES[key];
@@ -684,9 +641,6 @@
         cell.className = 'cal-day';
         if (isCurrentMonth && today.getDate() === d) cell.classList.add('today');
         if (closure) cell.classList.add('closed');
-        if (roster || closure) cell.classList.add('has-duty');
-        if (key === selectedKey) cell.classList.add('selected');
-        cell.dataset.key = key;
 
         const dateNum = document.createElement('span');
         dateNum.className = 'cal-date-num';
@@ -715,30 +669,7 @@
           cell.appendChild(list);
         }
 
-        if (roster || closure) {
-          cell.addEventListener('click', () => {
-            selectedKey = key;
-            renderCalendar();
-            showDayDetail(date, key, roster, closure, note);
-          });
-        }
-
         grid.appendChild(cell);
-      }
-    }
-
-    function showDayDetail(date, key, roster, closure, note) {
-      const panel = document.getElementById('day-detail');
-      const dateLabel = `${DOW_NAMES[date.getDay()]}, ${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
-
-      if (closure) {
-        panel.classList.add('closed');
-        panel.innerHTML = `<h4>${dateLabel}</h4>No School — ${closure.split(' — ')[0]}`;
-      } else if (roster) {
-        panel.classList.remove('closed');
-        const noteHtml = note ? `<div style="margin-top:6px; color:#B9975B; font-weight:700;">${note}</div>` : '';
-        panel.innerHTML = `<h4>${dateLabel} — ${roster.length} students on duty</h4>` +
-          `<ul>${roster.map(name => `<li>${name}</li>`).join('')}</ul>` + noteHtml;
       }
     }
 
@@ -798,6 +729,21 @@
 
     renderCalendar();
     renderStudentPills();
+
+    // ── Eyebrow nav: smooth scroll, and ask the parent page to scroll when embedded ──
+    document.querySelectorAll('.subnav a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const target = document.getElementById(link.getAttribute('href').slice(1));
+        if (!target) return;
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 56;
+        if (window.parent !== window) {
+          window.parent.postMessage({ source: 'sunshine-squad', type: 'scrollTo', top }, '*');
+        } else {
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
 
     // ── Auto-resize when embedded in an iframe (e.g. on the Blackbaud site) ──
     (function () {
