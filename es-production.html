@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PS/ES Production Team — Program Reference</title>
+  <title>PS/ES Production Team - Program Reference</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -121,48 +121,42 @@
       padding: 20px 20px 24px;
       margin-top: 24px;
     }
-    .session-card.draft { border: 1px dashed #B9975B; box-shadow: none; }
-    .session-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 6px 14px;
-      margin-bottom: 14px;
+    .subtable-title {
+      color: #2C5234;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
-    .session-header h3 {
+    .session-dates-label { color: #999; font-size: 10.5px; font-style: italic; }
+    .session-nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .session-nav-btn {
+      font-family: 'Montserrat', sans-serif;
+      background: #2C5234;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      width: 32px;
+      height: 32px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .session-nav-btn:hover { background: #B9975B; }
+    .session-nav-btn:disabled { opacity: 0.35; cursor: default; background: #2C5234; }
+    .session-nav-label { text-align: center; min-width: 220px; }
+    .session-nav-label h3 {
       color: #2C5234;
       font-size: 15px;
       letter-spacing: 0.03em;
       text-transform: uppercase;
     }
-    .session-dates-label { color: #999; font-size: 10.5px; font-style: italic; }
-    .session-dow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-    .session-dow span {
-      background: #2C5234;
-      color: #fff;
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-size: 10.5px;
-      font-weight: 600;
-    }
-    .session-card.draft .session-dow span { background: #B9975B; }
-    .session-roster {
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 6px 14px;
-    }
-    .session-roster li {
-      font-size: 11px;
-      color: #333;
-    }
-    .session-roster li::before { content: '• '; color: #B9975B; font-weight: 700; }
     .session-note {
       margin-top: 16px;
       color: #7a1f1f;
@@ -225,7 +219,7 @@
     .download-btn:hover { background: #B9975B; }
 
     @media print {
-      .download-btn, .schedule-actions, .subnav { display: none; }
+      .download-btn, .schedule-actions, .subnav, .session-nav-bar { display: none; }
       body { font-size: 9.5pt; background: #fff; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .section:not(#schedule) { display: none !important; }
       #schedule .section-title, #schedule .section-intro { display: none !important; }
@@ -252,8 +246,8 @@
   <div class="section" id="overview">
     <h2 class="section-title">Program Overview</h2>
     <p class="section-intro">
-      The PS/ES Warrior Production Team gives elementary students hands-on experience with chapel production —
-      cameras, sound, and equipment — working alongside the Middle/High School production crew each week.
+      The PS/ES Warrior Production Team gives elementary students hands-on experience with chapel production,
+      cameras, sound, and equipment, working alongside the Middle/High School production crew each week.
     </p>
   </div>
 
@@ -273,7 +267,7 @@
       </div>
       <div class="role-card">
         <h3>Walking to Chapel</h3>
-        <p>Walk as a group to Chapel — students must be at the front office and walk with the group. If late, go straight to class, NOT to the Lighthouse.</p>
+        <p>Walk as a group to Chapel. Students must be at the front office and walk with the group. If late, go straight to class, NOT to the Lighthouse.</p>
         <p>Act in a respectful manner when walking to chapel and handling Production equipment.</p>
       </div>
     </div>
@@ -292,48 +286,48 @@
     <div class="role-grid">
       <div class="role-card">
         <h3>Respect &amp; Courtesy</h3>
-        <p><strong>Respect Others</strong> — Treat fellow Production members and teachers with kindness and respect at all times.</p>
-        <p><strong>Listen Carefully</strong> — Pay attention when others are speaking or giving instructions and follow directions promptly.</p>
+        <p><strong>Respect Others</strong>: Treat fellow Production members and teachers with kindness and respect at all times.</p>
+        <p><strong>Listen Carefully</strong>: Pay attention when others are speaking or giving instructions and follow directions promptly.</p>
       </div>
       <div class="role-card">
         <h3>Focus &amp; Engagement</h3>
-        <p><strong>Stay on Task</strong> — Focus on your role and responsibilities during chapel.</p>
-        <p><strong>Be Prepared</strong> — Come to chapel prepared to work at your assigned post.</p>
+        <p><strong>Stay on Task</strong>: Focus on your role and responsibilities during chapel.</p>
+        <p><strong>Be Prepared</strong>: Come to chapel prepared to work at your assigned post.</p>
       </div>
       <div class="role-card">
         <h3>Punctuality &amp; Attendance</h3>
-        <p><strong>Be On Time</strong> — Arrive on time. Notify Mrs. Glavach in advance if you will be absent.</p>
-        <p><strong>Attendance</strong> — Attend all scheduled slots unless there's an emergency or a valid reason.</p>
+        <p><strong>Be On Time</strong>: Arrive on time. Notify Mrs. Glavach in advance if you will be absent.</p>
+        <p><strong>Attendance</strong>: Attend all scheduled slots unless there's an emergency or a valid reason.</p>
       </div>
       <div class="role-card">
         <h3>Behavior During Rehearsals</h3>
-        <p><strong>Stay Quiet</strong> — Maintain quiet and minimize distractions while others are leading and speaking.</p>
-        <p><strong>Follow Directions</strong> — Obey instructions and feedback. Be open to changes and adjustments.</p>
+        <p><strong>Stay Quiet</strong>: Maintain quiet and minimize distractions while others are leading and speaking.</p>
+        <p><strong>Follow Directions</strong>: Obey instructions and feedback. Be open to changes and adjustments.</p>
       </div>
       <div class="role-card">
         <h3>Safety &amp; Conduct</h3>
-        <p><strong>Follow Safety Rules</strong> — Adhere to all safety guidelines, especially when handling equipment.</p>
-        <p><strong>No Running</strong> — Avoid running or playing in the Lighthouse or when walking to chapel.</p>
+        <p><strong>Follow Safety Rules</strong>: Adhere to all safety guidelines, especially when handling equipment.</p>
+        <p><strong>No Running</strong>: Avoid running or playing in the Lighthouse or when walking to chapel.</p>
       </div>
       <div class="role-card">
         <h3>Positive Attitude</h3>
-        <p><strong>Stay Positive</strong> — Maintain a positive attitude and encourage your peers. Avoid complaining or negative behavior.</p>
-        <p><strong>Support Others</strong> — Be supportive of your fellow students, offering help and encouragement when needed.</p>
+        <p><strong>Stay Positive</strong>: Maintain a positive attitude and encourage your peers. Avoid complaining or negative behavior.</p>
+        <p><strong>Support Others</strong>: Be supportive of your fellow students, offering help and encouragement when needed.</p>
       </div>
       <div class="role-card">
         <h3>Conflict Resolution</h3>
-        <p><strong>Handle Disagreements</strong> — Address any conflicts calmly and respectfully. Seek help from a teacher if necessary.</p>
-        <p><strong>Apologize &amp; Forgive</strong> — If mistakes are made, apologize and work towards resolving issues. Forgive others and move forward.</p>
+        <p><strong>Handle Disagreements</strong>: Address any conflicts calmly and respectfully. Seek help from a teacher if necessary.</p>
+        <p><strong>Apologize &amp; Forgive</strong>: If mistakes are made, apologize and work towards resolving issues. Forgive others and move forward.</p>
       </div>
       <div class="role-card">
         <h3>Respect for the Lighthouse &amp; Equipment</h3>
-        <p><strong>Keep It Clean</strong> — Help keep the Lighthouse clean and tidy. Leave your space better than you found it.</p>
-        <p><strong>Respect Property</strong> — Respect the production equipment. Report any damage immediately.</p>
+        <p><strong>Keep It Clean</strong>: Help keep the Lighthouse clean and tidy. Leave your space better than you found it.</p>
+        <p><strong>Respect Property</strong>: Respect the production equipment. Report any damage immediately.</p>
       </div>
       <div class="role-card">
         <h3>Post-Performance Behavior</h3>
-        <p><strong>Thank You's</strong> — Thank your Production crew and any teachers who helped you.</p>
-        <p><strong>Reflect Positively</strong> — Reflect on your performance positively and be open to feedback for future improvements.</p>
+        <p><strong>Thank You's</strong>: Thank your Production crew and any teachers who helped you.</p>
+        <p><strong>Reflect Positively</strong>: Reflect on your performance positively and be open to feedback for future improvements.</p>
       </div>
     </div>
     <p class="section-intro" style="margin-top: 20px; font-size: 10px; font-style: italic;">
@@ -343,76 +337,42 @@
 
   <!-- Schedule -->
   <div class="section alt-bg" id="schedule">
-    <h2 class="section-title">2026–27 Schedule</h2>
+    <h2 class="section-title">2026-27 Schedule</h2>
     <p class="section-intro">
-      Each session runs for 5 Tuesdays. Every Tuesday needs 1 Switcher, 2 Audio, 4 Video Cam, and 2 Photography — 9
-      roles total — and students rotate through those roles week to week so no one is stuck with the same job (or
-      always resting) all session.
+      Each session runs for 5 Tuesdays. Sessions 1 and 2 are the original sign-up rosters (12 and 11 students).
+      Starting with Session 3, students are mixed into three equal groups of 9 so every Tuesday needs exactly
+      1 Switcher, 2 Audio, 4 Video Cam, and 2 Photography, rotating week to week so no one is stuck with the same
+      job all session. Use the arrows to browse each session.
     </p>
 
-    <div class="session-card">
-      <div class="session-header">
-        <h3>Session 1</h3>
-        <span class="session-dates-label">Aug 19 – Sep 15, 2026 — 12 students, roles rotate weekly</span>
+    <div class="session-nav-bar">
+      <button id="session-prev" class="session-nav-btn" aria-label="Previous session">‹</button>
+      <div class="session-nav-label">
+        <h3 id="session-title"></h3>
+        <span id="session-range" class="session-dates-label"></span>
       </div>
+      <button id="session-next" class="session-nav-btn" aria-label="Next session">›</button>
+    </div>
+
+    <div class="session-card">
+      <h4 class="subtable-title">Master Schedule</h4>
       <div class="role-schedule-wrap">
-        <table class="role-schedule">
-          <thead>
-            <tr><th>Role</th><th>Aug 19</th><th>Aug 25</th><th>Sep 1</th><th>Sep 8</th><th>Sep 15</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="role-label">Switcher (1)</td><td>Samantha O.</td><td>Bento A.</td><td>Kevin A.</td><td>Natalie B.</td><td>Alexandra B.</td></tr>
-            <tr><td class="role-label">Audio (2)</td><td>Bento A., Kevin A.</td><td>Kevin A., Natalie B.</td><td>Natalie B., Alexandra B.</td><td>Alexandra B., Griffin B.</td><td>Griffin B., Luke B.</td></tr>
-            <tr><td class="role-label">Video Cam (4)</td><td>Natalie B., Alexandra B., Griffin B., Luke B.</td><td>Alexandra B., Griffin B., Luke B., Jonah C.</td><td>Griffin B., Luke B., Jonah C., Adam D.</td><td>Luke B., Jonah C., Adam D., Maddox D.</td><td>Jonah C., Adam D., Maddox D., Charles F.</td></tr>
-            <tr><td class="role-label">Photography (2)</td><td>Jonah C., Adam D.</td><td>Adam D., Maddox D.</td><td>Maddox D., Charles F.</td><td>Charles F., Sean G.</td><td>Sean G., Samantha O.</td></tr>
-            <tr class="resting-row"><td class="role-label">Resting</td><td>Maddox D., Charles F., Sean G.</td><td>Charles F., Sean G., Samantha O.</td><td>Sean G., Samantha O., Bento A.</td><td>Samantha O., Bento A., Kevin A.</td><td>Bento A., Kevin A., Natalie B.</td></tr>
-          </tbody>
-        </table>
+        <table class="role-schedule" id="master-table"></table>
       </div>
     </div>
 
     <div class="session-card">
-      <div class="session-header">
-        <h3>Session 2</h3>
-        <span class="session-dates-label">Sep 22 – Oct 20, 2026 — 11 students, roles rotate weekly</span>
-      </div>
+      <h4 class="subtable-title">Roles Schedule</h4>
       <div class="role-schedule-wrap">
-        <table class="role-schedule">
-          <thead>
-            <tr><th>Role</th><th>Sep 22</th><th>Sep 29</th><th>Oct 6</th><th>Oct 13</th><th>Oct 20</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="role-label">Switcher (1)</td><td>Sofia G.</td><td>Adrian G.</td><td>Marilyn H.</td><td>Cillian K.</td><td>Hunter L.</td></tr>
-            <tr><td class="role-label">Audio (2)</td><td>Adrian G., Marilyn H.</td><td>Marilyn H., Cillian K.</td><td>Cillian K., Hunter L.</td><td>Hunter L., Lucia M.</td><td>Lucia M., Emma P.</td></tr>
-            <tr><td class="role-label">Video Cam (4)</td><td>Cillian K., Hunter L., Lucia M., Emma P.</td><td>Hunter L., Lucia M., Emma P., Alessandra P.</td><td>Lucia M., Emma P., Alessandra P., Caden S.</td><td>Emma P., Alessandra P., Caden S., Bryce S.</td><td>Alessandra P., Caden S., Bryce S., Van U.</td></tr>
-            <tr><td class="role-label">Photography (2)</td><td>Alessandra P., Caden S.</td><td>Caden S., Bryce S.</td><td>Bryce S., Van U.</td><td>Van U., Sofia G.</td><td>Sofia G., Adrian G.</td></tr>
-            <tr class="resting-row"><td class="role-label">Resting</td><td>Bryce S., Van U.</td><td>Van U., Sofia G.</td><td>Sofia G., Adrian G.</td><td>Adrian G., Marilyn H.</td><td>Marilyn H., Cillian K.</td></tr>
-          </tbody>
-        </table>
+        <table class="role-schedule" id="roles-table"></table>
       </div>
     </div>
 
-    <div class="session-card draft">
-      <div class="session-header">
-        <h3>Session 3 — Draft</h3>
-        <span class="session-dates-label">Oct 27 – Dec 1, 2026</span>
-      </div>
-      <div class="session-dow">
-        <span>Oct 27</span><span>Nov 3</span><span>Nov 10</span><span>Nov 17</span><span>Dec 1</span>
-      </div>
-      <ul class="session-roster">
-        <li>Luke B.</li>
-        <li>Luke G.</li>
-        <li>Parker M.</li>
-        <li>Jack B.</li>
-        <li>Luke E.</li>
-      </ul>
-      <p class="session-note">
-        Draft — only 5 students have been assigned so far. A full 9-student crew (1 Switcher, 2 Audio, 4 Video Cam,
-        2 Photography) needs 4 more names before a weekly role rotation can be built here. Nov 24 is skipped for
-        Thanksgiving Break, so Dec 1 fills the 5th Tuesday.
-      </p>
-    </div>
+    <p class="session-note">
+      Sessions 3-5 are a proposed reorganization mixing all 27 students into three equal groups of 9 - confirm
+      before publishing to families. Session 4 skips Dec 22 and Dec 29 for Christmas Break; Session 5 skips Feb 16
+      for Winter Break.
+    </p>
 
     <div class="schedule-actions">
       <button class="download-btn" onclick="window.print()">⬇ Download Schedule</button>
@@ -444,6 +404,125 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // ── PS/ES Production sessions ────────────────────────────────────────
+    // Sessions 1-2: original sign-up rosters (12 and 11 students) from the
+    // school's production schedule PDF. Sessions 3-5: all 27 students mixed
+    // into three equal groups of 9 (alphabetical order, split round-robin),
+    // each with a clean 9-role weekly rotation and no resting slot.
+    const SESSIONS = [
+      {
+        title: 'Session 1',
+        range: 'Aug 19 - Sep 15, 2026',
+        dates: ['Aug 19', 'Aug 25', 'Sep 1', 'Sep 8', 'Sep 15'],
+        roster: ['Samantha O.', 'Bento A.', 'Kevin A.', 'Natalie B.', 'Alexandra B.', 'Griffin B.', 'Luke B.', 'Jonah C.', 'Adam D.', 'Maddox D.', 'Charles F.', 'Sean G.'],
+        roles: {
+          Switcher: ['Samantha O.', 'Bento A.', 'Kevin A.', 'Natalie B.', 'Alexandra B.'],
+          Audio: [['Bento A.', 'Kevin A.'], ['Kevin A.', 'Natalie B.'], ['Natalie B.', 'Alexandra B.'], ['Alexandra B.', 'Griffin B.'], ['Griffin B.', 'Luke B.']],
+          'Video Cam': [['Natalie B.', 'Alexandra B.', 'Griffin B.', 'Luke B.'], ['Alexandra B.', 'Griffin B.', 'Luke B.', 'Jonah C.'], ['Griffin B.', 'Luke B.', 'Jonah C.', 'Adam D.'], ['Luke B.', 'Jonah C.', 'Adam D.', 'Maddox D.'], ['Jonah C.', 'Adam D.', 'Maddox D.', 'Charles F.']],
+          Photography: [['Jonah C.', 'Adam D.'], ['Adam D.', 'Maddox D.'], ['Maddox D.', 'Charles F.'], ['Charles F.', 'Sean G.'], ['Sean G.', 'Samantha O.']],
+          Resting: [['Maddox D.', 'Charles F.', 'Sean G.'], ['Charles F.', 'Sean G.', 'Samantha O.'], ['Sean G.', 'Samantha O.', 'Bento A.'], ['Samantha O.', 'Bento A.', 'Kevin A.'], ['Bento A.', 'Kevin A.', 'Natalie B.']],
+        },
+      },
+      {
+        title: 'Session 2',
+        range: 'Sep 22 - Oct 20, 2026',
+        dates: ['Sep 22', 'Sep 29', 'Oct 6', 'Oct 13', 'Oct 20'],
+        roster: ['Sofia G.', 'Adrian G.', 'Marilyn H.', 'Cillian K.', 'Hunter L.', 'Lucia M.', 'Emma P.', 'Alessandra P.', 'Caden S.', 'Bryce S.', 'Van U.'],
+        roles: {
+          Switcher: ['Sofia G.', 'Adrian G.', 'Marilyn H.', 'Cillian K.', 'Hunter L.'],
+          Audio: [['Adrian G.', 'Marilyn H.'], ['Marilyn H.', 'Cillian K.'], ['Cillian K.', 'Hunter L.'], ['Hunter L.', 'Lucia M.'], ['Lucia M.', 'Emma P.']],
+          'Video Cam': [['Cillian K.', 'Hunter L.', 'Lucia M.', 'Emma P.'], ['Hunter L.', 'Lucia M.', 'Emma P.', 'Alessandra P.'], ['Lucia M.', 'Emma P.', 'Alessandra P.', 'Caden S.'], ['Emma P.', 'Alessandra P.', 'Caden S.', 'Bryce S.'], ['Alessandra P.', 'Caden S.', 'Bryce S.', 'Van U.']],
+          Photography: [['Alessandra P.', 'Caden S.'], ['Caden S.', 'Bryce S.'], ['Bryce S.', 'Van U.'], ['Van U.', 'Sofia G.'], ['Sofia G.', 'Adrian G.']],
+          Resting: [['Bryce S.', 'Van U.'], ['Van U.', 'Sofia G.'], ['Sofia G.', 'Adrian G.'], ['Adrian G.', 'Marilyn H.'], ['Marilyn H.', 'Cillian K.']],
+        },
+      },
+      {
+        title: 'Session 3',
+        range: 'Oct 27 - Dec 1, 2026',
+        dates: ['Oct 27', 'Nov 3', 'Nov 10', 'Nov 17', 'Dec 1'],
+        roster: ['Adam D.', 'Alexandra B.', 'Caden S.', 'Emma P.', 'Jack B.', 'Lucia M.', 'Luke G.', 'Natalie B.', 'Sean G.'],
+        roles: {
+          Switcher: ['Adam D.', 'Alexandra B.', 'Caden S.', 'Emma P.', 'Jack B.'],
+          Audio: [['Alexandra B.', 'Caden S.'], ['Caden S.', 'Emma P.'], ['Emma P.', 'Jack B.'], ['Jack B.', 'Lucia M.'], ['Lucia M.', 'Luke G.']],
+          'Video Cam': [['Emma P.', 'Jack B.', 'Lucia M.', 'Luke G.'], ['Jack B.', 'Lucia M.', 'Luke G.', 'Natalie B.'], ['Lucia M.', 'Luke G.', 'Natalie B.', 'Sean G.'], ['Luke G.', 'Natalie B.', 'Sean G.', 'Adam D.'], ['Natalie B.', 'Sean G.', 'Adam D.', 'Alexandra B.']],
+          Photography: [['Natalie B.', 'Sean G.'], ['Sean G.', 'Adam D.'], ['Adam D.', 'Alexandra B.'], ['Alexandra B.', 'Caden S.'], ['Caden S.', 'Emma P.']],
+          Resting: null,
+        },
+      },
+      {
+        title: 'Session 4',
+        range: 'Dec 8, 2026 - Jan 19, 2027',
+        dates: ['Dec 8', 'Dec 15', 'Jan 5', 'Jan 12', 'Jan 19'],
+        roster: ['Adrian G.', 'Bento A.', 'Charles F.', 'Griffin B.', 'Jonah C.', 'Luke B.', 'Maddox D.', 'Parker M.', 'Sofia G.'],
+        roles: {
+          Switcher: ['Adrian G.', 'Bento A.', 'Charles F.', 'Griffin B.', 'Jonah C.'],
+          Audio: [['Bento A.', 'Charles F.'], ['Charles F.', 'Griffin B.'], ['Griffin B.', 'Jonah C.'], ['Jonah C.', 'Luke B.'], ['Luke B.', 'Maddox D.']],
+          'Video Cam': [['Griffin B.', 'Jonah C.', 'Luke B.', 'Maddox D.'], ['Jonah C.', 'Luke B.', 'Maddox D.', 'Parker M.'], ['Luke B.', 'Maddox D.', 'Parker M.', 'Sofia G.'], ['Maddox D.', 'Parker M.', 'Sofia G.', 'Adrian G.'], ['Parker M.', 'Sofia G.', 'Adrian G.', 'Bento A.']],
+          Photography: [['Parker M.', 'Sofia G.'], ['Sofia G.', 'Adrian G.'], ['Adrian G.', 'Bento A.'], ['Bento A.', 'Charles F.'], ['Charles F.', 'Griffin B.']],
+          Resting: null,
+        },
+      },
+      {
+        title: 'Session 5',
+        range: 'Jan 26 - Mar 2, 2027',
+        dates: ['Jan 26', 'Feb 2', 'Feb 9', 'Feb 23', 'Mar 2'],
+        roster: ['Alessandra P.', 'Bryce S.', 'Cillian K.', 'Hunter L.', 'Kevin A.', 'Luke E.', 'Marilyn H.', 'Samantha O.', 'Van U.'],
+        roles: {
+          Switcher: ['Alessandra P.', 'Bryce S.', 'Cillian K.', 'Hunter L.', 'Kevin A.'],
+          Audio: [['Bryce S.', 'Cillian K.'], ['Cillian K.', 'Hunter L.'], ['Hunter L.', 'Kevin A.'], ['Kevin A.', 'Luke E.'], ['Luke E.', 'Marilyn H.']],
+          'Video Cam': [['Hunter L.', 'Kevin A.', 'Luke E.', 'Marilyn H.'], ['Kevin A.', 'Luke E.', 'Marilyn H.', 'Samantha O.'], ['Luke E.', 'Marilyn H.', 'Samantha O.', 'Van U.'], ['Marilyn H.', 'Samantha O.', 'Van U.', 'Alessandra P.'], ['Samantha O.', 'Van U.', 'Alessandra P.', 'Bryce S.']],
+          Photography: [['Samantha O.', 'Van U.'], ['Van U.', 'Alessandra P.'], ['Alessandra P.', 'Bryce S.'], ['Bryce S.', 'Cillian K.'], ['Cillian K.', 'Hunter L.']],
+          Resting: null,
+        },
+      },
+    ];
+
+    let sessionIndex = 0;
+
+    function fmt(v) { return Array.isArray(v) ? v.join(', ') : v; }
+
+    function renderSession() {
+      const s = SESSIONS[sessionIndex];
+      document.getElementById('session-title').textContent = s.title;
+      document.getElementById('session-range').textContent = s.range + ' (' + s.roster.length + ' students)';
+
+      const dateHeaders = s.dates.map(d => `<th>${d}</th>`).join('');
+
+      const master = document.getElementById('master-table');
+      let mHtml = `<thead><tr>${dateHeaders}</tr></thead><tbody>`;
+      s.roster.forEach(name => {
+        mHtml += '<tr>' + s.dates.map(() => `<td>${name}</td>`).join('') + '</tr>';
+      });
+      mHtml += '</tbody>';
+      master.innerHTML = mHtml;
+
+      const roles = document.getElementById('roles-table');
+      let rHtml = `<thead><tr><th>Role</th>${dateHeaders}</tr></thead><tbody>`;
+      rHtml += '<tr><td class="role-label">Switcher (1)</td>' + s.roles.Switcher.map(v => `<td>${fmt(v)}</td>`).join('') + '</tr>';
+      rHtml += '<tr><td class="role-label">Audio (2)</td>' + s.roles.Audio.map(v => `<td>${fmt(v)}</td>`).join('') + '</tr>';
+      rHtml += '<tr><td class="role-label">Video Cam (4)</td>' + s.roles['Video Cam'].map(v => `<td>${fmt(v)}</td>`).join('') + '</tr>';
+      rHtml += '<tr><td class="role-label">Photography (2)</td>' + s.roles.Photography.map(v => `<td>${fmt(v)}</td>`).join('') + '</tr>';
+      if (s.roles.Resting) {
+        rHtml += '<tr class="resting-row"><td class="role-label">Resting</td>' + s.roles.Resting.map(v => `<td>${fmt(v)}</td>`).join('') + '</tr>';
+      }
+      rHtml += '</tbody>';
+      roles.innerHTML = rHtml;
+
+      document.getElementById('session-prev').disabled = sessionIndex === 0;
+      document.getElementById('session-next').disabled = sessionIndex === SESSIONS.length - 1;
+    }
+
+    document.getElementById('session-prev').addEventListener('click', () => {
+      if (sessionIndex > 0) { sessionIndex--; renderSession(); }
+    });
+    document.getElementById('session-next').addEventListener('click', () => {
+      if (sessionIndex < SESSIONS.length - 1) { sessionIndex++; renderSession(); }
+    });
+
+    renderSession();
+  </script>
 
 </body>
 </html>

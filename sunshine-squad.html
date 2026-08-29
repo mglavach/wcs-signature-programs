@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sunshine Squad — Program Reference</title>
+  <title>Sunshine Squad - Program Reference</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -546,7 +546,7 @@
     // Dates school is fully closed (from the official school calendar).
     const CLOSURES = {
       '2026-09-07': 'Labor Day',
-      '2026-10-09': 'Faculty In-Service Day — Q1 cutoff',
+      '2026-10-09': 'Faculty In-Service Day - Q1 cutoff',
       '2026-11-11': 'Veterans Day',
       '2026-11-23': 'Thanksgiving Break',
       '2026-11-24': 'Thanksgiving Break',
@@ -568,7 +568,7 @@
       '2027-02-12': 'Faculty In-Service Day',
       '2027-02-15': 'Winter Break',
       '2027-02-16': 'Winter Break',
-      '2027-03-12': 'Faculty In-Service Day — Q3 cutoff',
+      '2027-03-12': 'Faculty In-Service Day - Q3 cutoff',
       '2027-03-22': 'Spring Break',
       '2027-03-23': 'Spring Break',
       '2027-03-24': 'Spring Break',
@@ -580,8 +580,8 @@
     // School days with a calendar note, but not closed.
     const NOTES = {
       '2026-11-20': 'Early dismissal',
-      '2026-12-18': 'Early dismissal — Q2 cutoff',
-      '2027-05-20': 'Early dismissal — Last day of school — Q4 cutoff',
+      '2026-12-18': 'Early dismissal - Q2 cutoff',
+      '2027-05-20': 'Early dismissal - Last day of school - Q4 cutoff',
     };
 
     const PROGRAM_START = new Date(2026, 8, 1);
@@ -618,7 +618,7 @@
       const today = new Date();
       const isCurrentMonth = today.getFullYear() === viewYear && today.getMonth() === viewMonth;
 
-      // Mon-Fri grid only — leading blanks fill up to the month's first weekday.
+      // Mon-Fri grid only - leading blanks fill up to the month's first weekday.
       const leadingBlanks = (firstDay >= 1 && firstDay <= 5) ? firstDay - 1 : 0;
       for (let i = 0; i < leadingBlanks; i++) {
         const cell = document.createElement('div');
@@ -656,7 +656,7 @@
           if (note) {
             const n = document.createElement('span');
             n.className = 'cal-note';
-            n.textContent = note.split(' — ')[0];
+            n.textContent = note.split(' - ')[0];
             cell.appendChild(n);
           }
           const list = document.createElement('ul');
@@ -693,7 +693,7 @@
         ? `${days.slice(0, -1).join(', ')} & ${days[days.length - 1]}`
         : days[0];
 
-      content.innerHTML = `<h4>${name} — ${days.length} day${days.length === 1 ? '' : 's'}/week</h4>` +
+      content.innerHTML = `<h4>${name} - ${days.length} day${days.length === 1 ? '' : 's'}/week</h4>` +
         `<p>On Sunshine Squad duty every ${daysLabel}.</p>`;
       document.getElementById('student-popup-overlay').classList.add('open');
     }
