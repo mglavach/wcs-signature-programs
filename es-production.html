@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PS/ES Production Team — Program Reference</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11pt;
+      background: #f9f7f4;
+      color: #222;
+    }
+
+    /* ── Accent bar ── */
+    .accent-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #B9975B, #d4b07a, #B9975B);
+    }
+
+    /* ── Nav ── */
+    .subnav {
+      background: #fff;
+      border-bottom: 1px solid #e6e2da;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .subnav ul {
+      list-style: none;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      justify-content: center;
+    }
+    .subnav a {
+      color: #2C5234;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .subnav a:hover { color: #B9975B; }
+
+    /* ── Section wrapper ── */
+    .section {
+      padding: 44px 24px;
+      max-width: 980px;
+      margin: 0 auto;
+      scroll-margin-top: 56px;
+    }
+    .section-title {
+      color: #2C5234;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+      border-left: 4px solid #B9975B;
+      padding-left: 12px;
+      margin-bottom: 12px;
+    }
+    .section-intro {
+      color: #555;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+    .section-intro a { color: #2C5234; font-weight: 600; }
+    .alt-bg { background: #fff; }
+
+    .placeholder-box {
+      margin-top: 20px;
+      border: 1px dashed #B9975B;
+      border-radius: 6px;
+      padding: 18px 20px;
+      background: #fcfbf9;
+      color: #999;
+      font-style: italic;
+      font-size: 10.5px;
+      line-height: 1.7;
+    }
+
+    /* ── Role cards ── */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .role-card {
+      background: #fff;
+      border-radius: 6px;
+      border-top: 5px solid #2C5234;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .role-card h3 {
+      color: #2C5234;
+      margin-bottom: 8px;
+      line-height: 1.3;
+      font-size: 14px;
+    }
+    .role-card p {
+      line-height: 1.65;
+      color: #444;
+      font-size: 10.5px;
+    }
+    .role-card p + p { margin-top: 8px; }
+
+    /* ── Schedule ── */
+    .session-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      padding: 20px 20px 24px;
+      margin-top: 24px;
+    }
+    .session-card.draft { border: 1px dashed #B9975B; box-shadow: none; }
+    .session-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin-bottom: 14px;
+    }
+    .session-header h3 {
+      color: #2C5234;
+      font-size: 15px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .session-dates-label { color: #999; font-size: 10.5px; font-style: italic; }
+    .session-dow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .session-dow span {
+      background: #2C5234;
+      color: #fff;
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
+    .session-card.draft .session-dow span { background: #B9975B; }
+    .session-roster {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 6px 14px;
+    }
+    .session-roster li {
+      font-size: 11px;
+      color: #333;
+    }
+    .session-roster li::before { content: '• '; color: #B9975B; font-weight: 700; }
+    .session-note {
+      margin-top: 16px;
+      color: #7a1f1f;
+      font-size: 10px;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* ── Role rotation table ── */
+    .role-schedule-wrap { overflow-x: auto; margin-top: 4px; }
+    .role-schedule {
+      width: 100%;
+      min-width: 560px;
+      border-collapse: collapse;
+      font-size: 10.5px;
+    }
+    .role-schedule th {
+      background: #2C5234;
+      color: #fff;
+      text-align: left;
+      padding: 8px 10px;
+      font-size: 9.5px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .role-schedule td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #e6e2da;
+      color: #333;
+      vertical-align: top;
+    }
+    .role-schedule tr:last-child td { border-bottom: none; }
+    .role-schedule tr:nth-child(even) td { background: #f9f7f4; }
+    .role-schedule td.role-label {
+      font-weight: 700;
+      color: #2C5234;
+      white-space: nowrap;
+    }
+    .role-schedule tr.resting-row td { color: #999; font-style: italic; }
+    .role-schedule tr.resting-row td.role-label { color: #999; }
+    .schedule-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+    .download-btn {
+      background: #2C5234;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .download-btn:hover { background: #B9975B; }
+
+    @media print {
+      .download-btn, .schedule-actions, .subnav { display: none; }
+      body { font-size: 9.5pt; background: #fff; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section:not(#schedule) { display: none !important; }
+      #schedule .section-title, #schedule .section-intro { display: none !important; }
+      .section { padding: 20px 16px; max-width: 100%; }
+      .session-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="accent-bar"></div>
+
+  <nav class="subnav">
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#responsibilities">Responsibilities</a></li>
+      <li><a href="#code-of-conduct">Code of Conduct</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#team">Team</a></li>
+    </ul>
+  </nav>
+
+  <!-- Overview -->
+  <div class="section" id="overview">
+    <h2 class="section-title">Program Overview</h2>
+    <p class="section-intro">
+      The PS/ES Warrior Production Team gives elementary students hands-on experience with chapel production —
+      cameras, sound, and equipment — working alongside the Middle/High School production crew each week.
+    </p>
+  </div>
+
+  <!-- Responsibilities -->
+  <div class="section alt-bg" id="responsibilities">
+    <h2 class="section-title">Responsibilities</h2>
+    <p class="section-intro">Core expectations for every student on the Production Team:</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>Before Chapel</h3>
+        <p>Check the schedule and note which chapel days you're assigned to come to school for Production.</p>
+        <p>Email Mrs. Glavach in advance if you'll be absent so she can find a replacement.</p>
+      </div>
+      <div class="role-card">
+        <h3>Sign-In &amp; Prayer</h3>
+        <p>Meet Mrs. Suris by Mrs. Brigham's office at 7:25 a.m. to sign in for the day and meet for a time of prayer with Mr. Lopez.</p>
+      </div>
+      <div class="role-card">
+        <h3>Walking to Chapel</h3>
+        <p>Walk as a group to Chapel — students must be at the front office and walk with the group. If late, go straight to class, NOT to the Lighthouse.</p>
+        <p>Act in a respectful manner when walking to chapel and handling Production equipment.</p>
+      </div>
+    </div>
+    <div class="placeholder-box">
+      Please read, review, and sign the Production Crew Code of Conduct Form and turn it in to Mrs. Brigham on your first assigned day.
+    </div>
+  </div>
+
+  <!-- Code of Conduct -->
+  <div class="section" id="code-of-conduct">
+    <h2 class="section-title">Code of Conduct</h2>
+    <p class="section-intro">
+      Maintaining good behavior among students on the PS/ES Warrior Production Team is crucial for a smooth and
+      successful chapel.
+    </p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>Respect &amp; Courtesy</h3>
+        <p><strong>Respect Others</strong> — Treat fellow Production members and teachers with kindness and respect at all times.</p>
+        <p><strong>Listen Carefully</strong> — Pay attention when others are speaking or giving instructions and follow directions promptly.</p>
+      </div>
+      <div class="role-card">
+        <h3>Focus &amp; Engagement</h3>
+        <p><strong>Stay on Task</strong> — Focus on your role and responsibilities during chapel.</p>
+        <p><strong>Be Prepared</strong> — Come to chapel prepared to work at your assigned post.</p>
+      </div>
+      <div class="role-card">
+        <h3>Punctuality &amp; Attendance</h3>
+        <p><strong>Be On Time</strong> — Arrive on time. Notify Mrs. Glavach in advance if you will be absent.</p>
+        <p><strong>Attendance</strong> — Attend all scheduled slots unless there's an emergency or a valid reason.</p>
+      </div>
+      <div class="role-card">
+        <h3>Behavior During Rehearsals</h3>
+        <p><strong>Stay Quiet</strong> — Maintain quiet and minimize distractions while others are leading and speaking.</p>
+        <p><strong>Follow Directions</strong> — Obey instructions and feedback. Be open to changes and adjustments.</p>
+      </div>
+      <div class="role-card">
+        <h3>Safety &amp; Conduct</h3>
+        <p><strong>Follow Safety Rules</strong> — Adhere to all safety guidelines, especially when handling equipment.</p>
+        <p><strong>No Running</strong> — Avoid running or playing in the Lighthouse or when walking to chapel.</p>
+      </div>
+      <div class="role-card">
+        <h3>Positive Attitude</h3>
+        <p><strong>Stay Positive</strong> — Maintain a positive attitude and encourage your peers. Avoid complaining or negative behavior.</p>
+        <p><strong>Support Others</strong> — Be supportive of your fellow students, offering help and encouragement when needed.</p>
+      </div>
+      <div class="role-card">
+        <h3>Conflict Resolution</h3>
+        <p><strong>Handle Disagreements</strong> — Address any conflicts calmly and respectfully. Seek help from a teacher if necessary.</p>
+        <p><strong>Apologize &amp; Forgive</strong> — If mistakes are made, apologize and work towards resolving issues. Forgive others and move forward.</p>
+      </div>
+      <div class="role-card">
+        <h3>Respect for the Lighthouse &amp; Equipment</h3>
+        <p><strong>Keep It Clean</strong> — Help keep the Lighthouse clean and tidy. Leave your space better than you found it.</p>
+        <p><strong>Respect Property</strong> — Respect the production equipment. Report any damage immediately.</p>
+      </div>
+      <div class="role-card">
+        <h3>Post-Performance Behavior</h3>
+        <p><strong>Thank You's</strong> — Thank your Production crew and any teachers who helped you.</p>
+        <p><strong>Reflect Positively</strong> — Reflect on your performance positively and be open to feedback for future improvements.</p>
+      </div>
+    </div>
+    <p class="section-intro" style="margin-top: 20px; font-size: 10px; font-style: italic;">
+      Students who don't follow these expectations may be removed from the Production schedule.
+    </p>
+  </div>
+
+  <!-- Schedule -->
+  <div class="section alt-bg" id="schedule">
+    <h2 class="section-title">2026–27 Schedule</h2>
+    <p class="section-intro">
+      Each session runs for 5 Tuesdays. Every Tuesday needs 1 Switcher, 2 Audio, 4 Video Cam, and 2 Photography — 9
+      roles total — and students rotate through those roles week to week so no one is stuck with the same job (or
+      always resting) all session.
+    </p>
+
+    <div class="session-card">
+      <div class="session-header">
+        <h3>Session 1</h3>
+        <span class="session-dates-label">Aug 19 – Sep 15, 2026 — 12 students, roles rotate weekly</span>
+      </div>
+      <div class="role-schedule-wrap">
+        <table class="role-schedule">
+          <thead>
+            <tr><th>Role</th><th>Aug 19</th><th>Aug 25</th><th>Sep 1</th><th>Sep 8</th><th>Sep 15</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="role-label">Switcher (1)</td><td>Samantha O.</td><td>Bento A.</td><td>Kevin A.</td><td>Natalie B.</td><td>Alexandra B.</td></tr>
+            <tr><td class="role-label">Audio (2)</td><td>Bento A., Kevin A.</td><td>Kevin A., Natalie B.</td><td>Natalie B., Alexandra B.</td><td>Alexandra B., Griffin B.</td><td>Griffin B., Luke B.</td></tr>
+            <tr><td class="role-label">Video Cam (4)</td><td>Natalie B., Alexandra B., Griffin B., Luke B.</td><td>Alexandra B., Griffin B., Luke B., Jonah C.</td><td>Griffin B., Luke B., Jonah C., Adam D.</td><td>Luke B., Jonah C., Adam D., Maddox D.</td><td>Jonah C., Adam D., Maddox D., Charles F.</td></tr>
+            <tr><td class="role-label">Photography (2)</td><td>Jonah C., Adam D.</td><td>Adam D., Maddox D.</td><td>Maddox D., Charles F.</td><td>Charles F., Sean G.</td><td>Sean G., Samantha O.</td></tr>
+            <tr class="resting-row"><td class="role-label">Resting</td><td>Maddox D., Charles F., Sean G.</td><td>Charles F., Sean G., Samantha O.</td><td>Sean G., Samantha O., Bento A.</td><td>Samantha O., Bento A., Kevin A.</td><td>Bento A., Kevin A., Natalie B.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="session-card">
+      <div class="session-header">
+        <h3>Session 2</h3>
+        <span class="session-dates-label">Sep 22 – Oct 20, 2026 — 11 students, roles rotate weekly</span>
+      </div>
+      <div class="role-schedule-wrap">
+        <table class="role-schedule">
+          <thead>
+            <tr><th>Role</th><th>Sep 22</th><th>Sep 29</th><th>Oct 6</th><th>Oct 13</th><th>Oct 20</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="role-label">Switcher (1)</td><td>Sofia G.</td><td>Adrian G.</td><td>Marilyn H.</td><td>Cillian K.</td><td>Hunter L.</td></tr>
+            <tr><td class="role-label">Audio (2)</td><td>Adrian G., Marilyn H.</td><td>Marilyn H., Cillian K.</td><td>Cillian K., Hunter L.</td><td>Hunter L., Lucia M.</td><td>Lucia M., Emma P.</td></tr>
+            <tr><td class="role-label">Video Cam (4)</td><td>Cillian K., Hunter L., Lucia M., Emma P.</td><td>Hunter L., Lucia M., Emma P., Alessandra P.</td><td>Lucia M., Emma P., Alessandra P., Caden S.</td><td>Emma P., Alessandra P., Caden S., Bryce S.</td><td>Alessandra P., Caden S., Bryce S., Van U.</td></tr>
+            <tr><td class="role-label">Photography (2)</td><td>Alessandra P., Caden S.</td><td>Caden S., Bryce S.</td><td>Bryce S., Van U.</td><td>Van U., Sofia G.</td><td>Sofia G., Adrian G.</td></tr>
+            <tr class="resting-row"><td class="role-label">Resting</td><td>Bryce S., Van U.</td><td>Van U., Sofia G.</td><td>Sofia G., Adrian G.</td><td>Adrian G., Marilyn H.</td><td>Marilyn H., Cillian K.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="session-card draft">
+      <div class="session-header">
+        <h3>Session 3 — Draft</h3>
+        <span class="session-dates-label">Oct 27 – Dec 1, 2026</span>
+      </div>
+      <div class="session-dow">
+        <span>Oct 27</span><span>Nov 3</span><span>Nov 10</span><span>Nov 17</span><span>Dec 1</span>
+      </div>
+      <ul class="session-roster">
+        <li>Luke B.</li>
+        <li>Luke G.</li>
+        <li>Parker M.</li>
+        <li>Jack B.</li>
+        <li>Luke E.</li>
+      </ul>
+      <p class="session-note">
+        Draft — only 5 students have been assigned so far. A full 9-student crew (1 Switcher, 2 Audio, 4 Video Cam,
+        2 Photography) needs 4 more names before a weekly role rotation can be built here. Nov 24 is skipped for
+        Thanksgiving Break, so Dec 1 fills the 5th Tuesday.
+      </p>
+    </div>
+
+    <div class="schedule-actions">
+      <button class="download-btn" onclick="window.print()">⬇ Download Schedule</button>
+    </div>
+  </div>
+
+  <!-- Team -->
+  <div class="section" id="team">
+    <h2 class="section-title">Team</h2>
+    <p class="section-intro">
+      Questions? Contact Mrs. Glavach at <a href="mailto:mglavach@wcsmiami.org">mglavach@wcsmiami.org</a>.
+    </p>
+    <div class="role-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 240px));">
+      <div class="role-card">
+        <h3>ES Production Admin</h3>
+        <p><a href="mailto:mglavach@wcsmiami.org" style="color:#2C5234; font-weight:600;">Mrs. Glavach</a></p>
+      </div>
+      <div class="role-card">
+        <h3>ES Production Teacher</h3>
+        <p>Mrs. Suris</p>
+      </div>
+      <div class="role-card">
+        <h3>ES Chapel Leader</h3>
+        <p>Mrs. Brigham</p>
+      </div>
+      <div class="role-card">
+        <h3>MS/HS Production Team</h3>
+        <p>Mr. Garrido, Mr. Rodriguez &amp; Mr. Fernandez</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
