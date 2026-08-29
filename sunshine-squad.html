@@ -288,7 +288,6 @@
       transition: background 0.15s, color 0.15s;
     }
     .student-pill:hover { background: #eef3ec; }
-    .student-pill.selected { background: #2C5234; color: #fff; }
     .calendar-legend {
       margin-top: 16px;
       display: flex;
@@ -363,6 +362,14 @@
     @media print {
       .download-btn, .subnav, .hero .back-link, .cal-nav { display: none; }
       body { font-size: 9.5pt; background: #fff; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .accent-bar, .contact, .popup-overlay { display: none !important; }
+      .section:not(#calendar) { display: none !important; }
+      #calendar .section-title,
+      #calendar .section-intro,
+      .student-list-title,
+      .student-pills,
+      .calendar-legend,
+      .day-detail { display: none !important; }
       .section { padding: 20px 16px; max-width: 100%; }
       .role-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; border-top: 4px solid #2C5234; }
       .calendar-wrap { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
@@ -373,11 +380,58 @@
     .contact p { line-height: 1.75; }
     .contact a { color: #B9975B; text-decoration: none; font-weight: bold; }
     .contact a:hover { text-decoration: underline; }
+
+    /* ── Student popup ── */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 30, 20, 0.55);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+    .popup-overlay.open { display: flex; }
+    .popup-card {
+      position: relative;
+      background: #fff;
+      border-radius: 8px;
+      border-top: 6px solid #2C5234;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      padding: 26px 26px 22px;
+      max-width: 320px;
+      width: 100%;
+    }
+    .popup-card h4 {
+      color: #2C5234;
+      font-size: 15px;
+      margin-bottom: 10px;
+      padding-right: 20px;
+    }
+    .popup-card p {
+      color: #444;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: none;
+      border: none;
+      color: #999;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .popup-close:hover { color: #7a1f1f; }
   </style>
 </head>
 <body>
 
-  <button class="download-btn" onclick="window.print()">⬇ Download PDF</button>
+  <button class="download-btn" onclick="window.print()">⬇ Download Calendar</button>
 
   <div class="accent-bar"></div>
 
@@ -462,7 +516,7 @@
       </div>
       <div class="calendar-grid" id="cal-grid"></div>
 
-      <div class="day-detail" id="day-detail">Click on a name to see the Sunshine Squad roster for that student.</div>
+      <div class="day-detail" id="day-detail">Select a date above to see the Sunshine Squad roster for that day.</div>
     </div>
 
     <div class="calendar-legend">
@@ -487,6 +541,14 @@
         <h3>Ms. Loveless</h3>
         <p><a href="mailto:kloveless@wcsmiami.org" style="color:#2C5234; font-weight:600;">kloveless@wcsmiami.org</a></p>
       </div>
+    </div>
+  </div>
+
+  <!-- Student popup -->
+  <div class="popup-overlay" id="student-popup-overlay">
+    <div class="popup-card">
+      <button class="popup-close" id="student-popup-close" aria-label="Close">✕</button>
+      <div id="student-popup-content"></div>
     </div>
   </div>
 
@@ -573,7 +635,6 @@
     let viewYear = 2026;
     let viewMonth = 8; // September 2026
     let selectedKey = null;
-    let selectedStudent = null;
 
     function pad(n) { return String(n).padStart(2, '0'); }
     function keyFor(y, m, d) { return `${y}-${pad(m + 1)}-${pad(d)}`; }
@@ -642,9 +703,7 @@
         if (roster || closure) {
           cell.addEventListener('click', () => {
             selectedKey = key;
-            selectedStudent = null;
             renderCalendar();
-            renderStudentPills();
             showDayDetail(date, key, roster, closure, note);
           });
         }
@@ -675,30 +734,35 @@
         const pill = document.createElement('button');
         pill.type = 'button';
         pill.className = 'student-pill';
-        if (name === selectedStudent) pill.classList.add('selected');
         pill.textContent = name;
-        pill.addEventListener('click', () => {
-          selectedStudent = name;
-          selectedKey = null;
-          renderStudentPills();
-          renderCalendar();
-          showStudentDetail(name);
-        });
+        pill.addEventListener('click', () => openStudentPopup(name));
         wrap.appendChild(pill);
       });
     }
 
-    function showStudentDetail(name) {
-      const panel = document.getElementById('day-detail');
+    function openStudentPopup(name) {
+      const content = document.getElementById('student-popup-content');
       const days = STUDENT_DAYS[name].slice().sort((a, b) => a - b).map(d => DOW_NAMES[d]);
       const daysLabel = days.length > 1
         ? `${days.slice(0, -1).join(', ')} & ${days[days.length - 1]}`
         : days[0];
 
-      panel.classList.remove('closed');
-      panel.innerHTML = `<h4>${name} — ${days.length} day${days.length === 1 ? '' : 's'}/week</h4>` +
-        `On Sunshine Squad duty every ${daysLabel}.`;
+      content.innerHTML = `<h4>${name} — ${days.length} day${days.length === 1 ? '' : 's'}/week</h4>` +
+        `<p>On Sunshine Squad duty every ${daysLabel}.</p>`;
+      document.getElementById('student-popup-overlay').classList.add('open');
     }
+
+    function closeStudentPopup() {
+      document.getElementById('student-popup-overlay').classList.remove('open');
+    }
+
+    document.getElementById('student-popup-close').addEventListener('click', closeStudentPopup);
+    document.getElementById('student-popup-overlay').addEventListener('click', (e) => {
+      if (e.target.id === 'student-popup-overlay') closeStudentPopup();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeStudentPopup();
+    });
 
     document.getElementById('cal-prev').addEventListener('click', () => {
       viewMonth--;
