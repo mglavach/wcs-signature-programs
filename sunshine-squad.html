@@ -262,6 +262,33 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    .student-list-title {
+      color: #2C5234;
+      font-size: 12px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .student-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .student-pill {
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      color: #2C5234;
+      border: 1px solid #2C5234;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 10.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .student-pill:hover { background: #eef3ec; }
+    .student-pill.selected { background: #2C5234; color: #fff; }
     .calendar-legend {
       margin-top: 16px;
       display: flex;
@@ -411,6 +438,9 @@
       the school calendar are shown in red.
     </p>
 
+    <h3 class="student-list-title">Students of the Month</h3>
+    <div class="student-pills" id="student-pills"></div>
+
     <div class="calendar-wrap">
       <div class="calendar-header">
         <div class="cal-nav">
@@ -432,7 +462,7 @@
       </div>
       <div class="calendar-grid" id="cal-grid"></div>
 
-      <div class="day-detail" id="day-detail">Select a date above to see the Sunshine Squad roster for that day.</div>
+      <div class="day-detail" id="day-detail">Click on a name to see the Sunshine Squad roster for that student.</div>
     </div>
 
     <div class="calendar-legend">
@@ -530,9 +560,20 @@
       'July','August','September','October','November','December'];
     const DOW_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
+    // Derive each student's weekly duty days from the recurring template above.
+    const STUDENT_DAYS = {};
+    Object.entries(WEEKLY_TEMPLATE).forEach(([dow, names]) => {
+      names.forEach(name => {
+        if (!STUDENT_DAYS[name]) STUDENT_DAYS[name] = [];
+        STUDENT_DAYS[name].push(Number(dow));
+      });
+    });
+    const STUDENT_NAMES = Object.keys(STUDENT_DAYS).sort((a, b) => a.localeCompare(b));
+
     let viewYear = 2026;
     let viewMonth = 8; // September 2026
     let selectedKey = null;
+    let selectedStudent = null;
 
     function pad(n) { return String(n).padStart(2, '0'); }
     function keyFor(y, m, d) { return `${y}-${pad(m + 1)}-${pad(d)}`; }
@@ -601,7 +642,9 @@
         if (roster || closure) {
           cell.addEventListener('click', () => {
             selectedKey = key;
+            selectedStudent = null;
             renderCalendar();
+            renderStudentPills();
             showDayDetail(date, key, roster, closure, note);
           });
         }
@@ -625,6 +668,38 @@
       }
     }
 
+    function renderStudentPills() {
+      const wrap = document.getElementById('student-pills');
+      wrap.innerHTML = '';
+      STUDENT_NAMES.forEach(name => {
+        const pill = document.createElement('button');
+        pill.type = 'button';
+        pill.className = 'student-pill';
+        if (name === selectedStudent) pill.classList.add('selected');
+        pill.textContent = name;
+        pill.addEventListener('click', () => {
+          selectedStudent = name;
+          selectedKey = null;
+          renderStudentPills();
+          renderCalendar();
+          showStudentDetail(name);
+        });
+        wrap.appendChild(pill);
+      });
+    }
+
+    function showStudentDetail(name) {
+      const panel = document.getElementById('day-detail');
+      const days = STUDENT_DAYS[name].slice().sort((a, b) => a - b).map(d => DOW_NAMES[d]);
+      const daysLabel = days.length > 1
+        ? `${days.slice(0, -1).join(', ')} & ${days[days.length - 1]}`
+        : days[0];
+
+      panel.classList.remove('closed');
+      panel.innerHTML = `<h4>${name} — ${days.length} day${days.length === 1 ? '' : 's'}/week</h4>` +
+        `On Sunshine Squad duty every ${daysLabel}.`;
+    }
+
     document.getElementById('cal-prev').addEventListener('click', () => {
       viewMonth--;
       if (viewMonth < 0) { viewMonth = 11; viewYear--; }
@@ -643,6 +718,7 @@
     });
 
     renderCalendar();
+    renderStudentPills();
   </script>
 
 </body>
