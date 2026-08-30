@@ -94,14 +94,27 @@
       color: #2C5234;
       font-weight: normal;
       letter-spacing: 0.04em;
-      border-left: 4px solid #B9975B;
-      padding-left: 12px;
+      text-transform: uppercase;
       margin-bottom: 12px;
     }
     .section-intro {
       color: #555;
       line-height: 1.7;
       max-width: 760px;
+    }
+    .bullet-list {
+      color: #555;
+      line-height: 1.7;
+      max-width: 760px;
+      margin-top: 16px;
+      padding-left: 18px;
+    }
+    .bullet-list li { margin-bottom: 8px; }
+    .bullet-heading {
+      color: #2C5234;
+      font-size: 12.5px;
+      letter-spacing: 0.02em;
+      margin-top: 20px;
     }
     .alt-bg { background: #fff; }
 
@@ -154,6 +167,87 @@
       font-style: italic;
       font-size: 10.5px;
       line-height: 1.7;
+    }
+
+    /* ── FAQ blocks ── */
+    .faq-block { margin-top: 12px; border-bottom: 1px solid #e6e2da; }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 760px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      color: #2C5234;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 14px 0;
+    }
+    .faq-question:hover { color: #B9975B; }
+    .faq-icon {
+      flex-shrink: 0;
+      color: #B9975B;
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+    .faq-block.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer { display: none; padding-bottom: 16px; }
+    .faq-block.open .faq-answer { display: block; }
+    .faq-answer p, .faq-answer ul {
+      color: #555;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+    .faq-answer ul { padding-left: 18px; margin-top: 6px; }
+    .faq-answer li { margin-bottom: 8px; }
+
+    /* ── Checklist ── */
+    .checklist { list-style: none; margin-top: 20px; max-width: 760px; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #e6e2da;
+      color: #444;
+      line-height: 1.6;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist input[type="checkbox"] {
+      margin-top: 3px;
+      width: 16px;
+      height: 16px;
+      accent-color: #2C5234;
+      flex-shrink: 0;
+    }
+
+    /* ── Tips box ── */
+    .tips-box {
+      margin-top: 24px;
+      background: #f0ede8;
+      border-left: 4px solid #B9975B;
+      border-radius: 4px;
+      padding: 16px 20px;
+    }
+    .tips-box h4 {
+      color: #2C5234;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .tips-box ul {
+      padding-left: 18px;
+      color: #444;
+      font-size: 10.5px;
+      line-height: 1.8;
     }
 
     /* ── Timeline warning ── */
@@ -272,6 +366,8 @@
       .section { padding: 20px 16px; max-width: 100%; }
       .role-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; border-top: 4px solid #2C5234; }
       .timeline-step { break-inside: avoid; box-shadow: none; }
+      .faq-answer { display: block !important; }
+      .faq-icon { display: none; }
     }
 
     /* ── Contact footer ── */
@@ -289,45 +385,28 @@
   <div class="hero">
     <h1>Student Council</h1>
     <p>Program reference for the Elementary Campus Student Council - grades 3–5 - covering eligibility, representative duties, officers, advisors, and the election timeline.</p>
-    <a class="back-link" href="index.html">← Back to Signature Programs</a>
   </div>
   <div class="accent-bar"></div>
 
   <nav class="subnav">
     <ul>
-      <li><a href="#overview">Overview</a></li>
+      <li><a href="#overview">What It Is</a></li>
       <li><a href="#who-can-run">Who Can Run</a></li>
-      <li><a href="#responsibilities">Responsibilities</a></li>
-      <li><a href="#officers">Officers</a></li>
-      <li><a href="#advisors">Advisors</a></li>
+      <li><a href="#how-to-run">How To Run</a></li>
+      <li><a href="#campaign-rules">Campaign Rules</a></li>
+      <li><a href="#speech-guidelines">Writing Your Speech</a></li>
       <li><a href="#teacher-responsibilities">Teacher Responsibilities</a></li>
       <li><a href="#timeline">Election Timeline</a></li>
+      <li><a href="#officers">Officers</a></li>
+      <li><a href="#rep-responsibilities">My Responsibilities</a></li>
+      <li><a href="#requirements">Requirements</a></li>
+      <li><a href="#advisors">Advisors</a></li>
     </ul>
   </nav>
 
   <!-- Overview -->
   <div class="section" id="overview">
-    <h2 class="section-title">Program Overview</h2>
-    <p class="section-intro">
-      Our Student Council gives students in grades 3–5 a real voice in school life. Elected representatives attend
-      weekly meetings, share classmates' ideas, and help lead service projects throughout the year.
-    </p>
-  </div>
-
-  <!-- Who Can Run -->
-  <div class="section alt-bg" id="who-can-run">
-    <h2 class="section-title">Who Can Run</h2>
-    <p class="section-intro">
-      Any student in good academic and behavioral standing may apply. Candidates submit an application with their
-      teacher's confirmation, campaign for one week, and are elected by their classmates.
-    </p>
-    <a class="apply-btn" href="https://forms.cloud.microsoft/r/rFKbwCdz6W" target="_blank" rel="noopener">Interest Form - 26–27 School Year</a>
-    <span class="apply-note">Due Thursday, September 10 by 3:30 p.m. - no forms accepted via email or after this date/time.</span>
-  </div>
-
-  <!-- What Representatives Do -->
-  <div class="section" id="responsibilities">
-    <h2 class="section-title">What Representatives Do</h2>
+    <h2 class="section-title" style="font-weight: 700;">What It Is</h2>
     <p class="section-intro">
       Representatives attend weekly lunch meetings, report back to their class, and help plan and carry out school
       service projects and activities.
@@ -336,56 +415,230 @@
       <span class="stat-num">2</span>
       <span class="stat-label">Representatives elected per class,<br />grades 3–5</span>
     </div>
-  </div>
 
-  <!-- Officers -->
-  <div class="section alt-bg" id="officers">
-    <h2 class="section-title">Officers</h2>
-    <p class="section-intro">
-      Elected representatives vote among themselves for four officer positions, who lead meetings and oversee
-      Student Council responsibilities.
-    </p>
-    <div class="role-grid">
-      <div class="role-card">
-        <h3>President</h3>
-        <p>Presides over weekly meetings and represents the Council to the school community.</p>
+    <div class="faq-block">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        What is my school's Student Council all about?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Through your Student Council, every student's ideas can be heard. It is your responsibility to represent the views of your classmates at each Student Council meeting.</p>
       </div>
-      <div class="role-card">
-        <h3>Vice President</h3>
-        <p>Supports the President and steps in to lead meetings when needed.</p>
+    </div>
+    <div class="faq-block">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Why does my school have a Student Council?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Your school has a Student Council to keep the students, principal, and teachers informed of others' ideas, needs, and opinions. The Student Council also makes sure that everyone in your school cooperates in the day-to-day responsibilities of being part of a school community, enjoys special activities, and works together on specific problems.</p>
       </div>
-      <div class="role-card">
-        <h3>Treasurer</h3>
-        <p>Helps track funds and materials for Council projects and activities.</p>
+    </div>
+    <div class="faq-block">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Who is in the Student Council?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <ul>
+          <li><strong>All Students</strong> — their views and ideas are presented to the Student Council through their representatives.</li>
+          <li><strong>Representatives</strong> — elected by each class to act for students at Student Council meetings.</li>
+          <li><strong>Officers</strong> — elected by the class representatives to lead meetings and perform special functions (see Officers).</li>
+          <li><strong>Advisors</strong> — teachers who help guide the Student Council and serve as the link between the Council and the rest of the school staff (see Advisors).</li>
+          <li><strong>Principal</strong> — always a member of the Student Council; the final authority with ultimate responsibility for the school.</li>
+        </ul>
       </div>
-      <div class="role-card">
-        <h3>Chaplain</h3>
-        <p>Leads devotions and prayer at Council meetings.</p>
+    </div>
+    <div class="faq-block">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        What do Student Council members do?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <ul>
+          <li>All students nominate and elect Student Council representatives and share their ideas with them.</li>
+          <li>Representatives hold class meetings, listen to classmates' views, and report back on what happens at Student Council meetings. They attend every Student Council meeting.</li>
+          <li>Officers help conduct Student Council meetings, keep records of motions, discussions, and votes, and keep track of Student Council money.</li>
+          <li>Advisors attend all Student Council meetings, teach rules and regulations, offer guidance, and report on Student Council actions to the school staff.</li>
+          <li>The principal attends meetings if needed and is the final authority on all actions of the Student Council.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="faq-block">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        When do Student Council members meet?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Student Council members meet on Thursdays during lunch. Our first meeting will be on Thursday, 10/6.</p>
+      </div>
+    </div>
+    <div class="faq-block">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        How many students get elected?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>2 per homeroom - not gender specific.</p>
+      </div>
+    </div>
+    <div class="faq-block">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        How much work does Class Representative involve?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>You will be required to attend scheduled weekly meetings. These meetings will be once a week, during lunch. Members are expected to assist with all service projects and activities throughout the year.</p>
       </div>
     </div>
   </div>
 
-  <!-- Advisors -->
-  <div class="section" id="advisors">
-    <h2 class="section-title">Advisors</h2>
+  <!-- Who Can Run -->
+  <div class="section alt-bg" id="who-can-run">
+    <h2 class="section-title" style="font-weight: 700;">Who Can Run</h2>
     <p class="section-intro">
-      Faculty advisors guide the program, mentor student leaders, and help ensure every meeting and project runs
-      smoothly.
+      Any student in good academic and behavioral standing may apply. Candidates submit an application with their
+      teacher's confirmation, campaign for one week, and are elected by their classmates.
     </p>
-    <div class="role-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 260px));">
+    <h3 class="bullet-heading">Who is eligible to run for Class Representative?</h3>
+    <p class="section-intro">You must...</p>
+    <ul class="bullet-list">
+      <li>Have earned all A's and B's as a final grade in core subjects on your report card last year. NO EXCEPTIONS.</li>
+      <li>Have earned all 1's and 2's in conduct last year and no disciplinary issues this year. NO EXCEPTIONS.</li>
+      <li>Have no more than one disciplinary referral (sent to principal's office) last year.</li>
+      <li>Be in good standing this year - class and homework assignments turned in regularly, with all A's and B's in core subjects.</li>
+    </ul>
+  </div>
+
+  <!-- How To Run -->
+  <div class="section" id="how-to-run">
+    <h2 class="section-title">How To Run</h2>
+    <p class="section-intro">Steps to enter the race for Class Representative.</p>
+    <div class="role-grid">
       <div class="role-card">
-        <h3>Mrs. Glavach</h3>
-        <p><a href="mailto:mglavach@wcsmiami.org" style="color:#2C5234; font-weight:600;">mglavach@wcsmiami.org</a></p>
+        <h3>1. Check Eligibility</h3>
+        <p>Print your report card and check that you are eligible to run.</p>
       </div>
+      <div class="role-card">
+        <h3>2. Complete the Interest Form</h3>
+        <p>Fill out the online interest form for the 26–27 school year.</p>
+      </div>
+      <div class="role-card">
+        <h3>3. Turn In Your Report Card</h3>
+        <p>Turn in your report card to the front office. You will be given a receipt showing your complete application has been received. Incomplete applications will not be accepted.</p>
+      </div>
+      <div class="role-card">
+        <h3>4. Get Your Eligibility Card</h3>
+        <p>You will be given your eligibility to run card once your report card has been approved.</p>
+      </div>
+    </div>
+    <h3 class="bullet-heading">How to check your report card for eligibility</h3>
+    <ul class="bullet-list">
+      <li>Attach a copy of last year's Report Card (NOT Transcript) that has subject area grades and conduct scores.</li>
+      <li>The Report Card can be printed from myWCS under Progress &gt; Performance (be sure to select the 2024–2025 school year).</li>
+      <li>If you were in a different school last year, please be sure to submit a Report Card with conduct grades.</li>
+    </ul>
+    <a class="apply-btn" href="https://forms.cloud.microsoft/r/rFKbwCdz6W" target="_blank" rel="noopener">Interest Form - 26–27 School Year</a>
+    <span class="apply-note">Due Thursday, September 10 by 3:30 p.m. - no report cards accepted via email or after this date/time.</span>
+  </div>
+
+  <!-- Campaign Rules -->
+  <div class="section alt-bg" id="campaign-rules">
+    <h2 class="section-title">Campaign Rules</h2>
+    <p class="section-intro">
+      Please abide by the following rules and regulations. Failure to follow these rules will result in disqualification.
+    </p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>1. Make a Flyer</h3>
+        <p>You may hand out a flyer (no larger than 8½ x 11) to your classmates. You may not attach anything to it, and glitter is not allowed. Flyers may be handed out starting Monday, September 21.</p>
+      </div>
+      <div class="role-card">
+        <h3>2. Make a Poster</h3>
+        <p>You may make a poster using ONLY the poster board provided by Mrs. Glavach, to be displayed inside your classroom.</p>
+      </div>
+      <div class="role-card">
+        <h3>3. Make a Campaign T-Shirt</h3>
+        <p>You may make a campaign t-shirt to wear on Tuesday, 9/22. It must be appropriate, with no negative or derogatory slogans, and no glitter. It must be approved by your classroom teacher by Monday, September 21. Approved shirts may be worn all day Tuesday, 9/22, and during the speech on Wednesday.</p>
+      </div>
+      <div class="role-card">
+        <h3>4. Make a Speech</h3>
+        <p>A short speech will be given on Election Day, Wednesday, September 23, stating why you would make a good representative for your class. Speeches must be submitted to your homeroom teacher for approval by Monday, September 21. New: 4th and 5th graders approved to run will be given access to a Flint lesson to help prepare their speech.</p>
+      </div>
+    </div>
+    <div class="tips-box">
+      <h4>Additional Rules</h4>
+      <ul>
+        <li>There will be no campaigning outside the classroom.</li>
+        <li>Food, treats, stickers, pencils, erasers, videos, etc. are not allowed. Handing out any of these items will result in disqualification.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Writing Your Speech -->
+  <div class="section" id="speech-guidelines">
+    <h2 class="section-title">Writing Your Speech</h2>
+    <p class="section-intro">Guidelines for writing your campaign speech.</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>1. Keep It Short and Clear</h3>
+        <p>Aim for 1–2 minutes. Stay focused on the main points — don't make it too long.</p>
+      </div>
+      <div class="role-card">
+        <h3>2. Introduce Yourself</h3>
+        <p>Start with a friendly greeting. Say your name and your grade/class. Example: "Hi, my name is [Name], and I'm in [Grade/Class]."</p>
+      </div>
+      <div class="role-card">
+        <h3>3. Share Why You Want to Be Class Representative</h3>
+        <p>Explain what excites you about serving. Use simple, positive language. Example: "I want to help our class have fun and work together."</p>
+      </div>
+      <div class="role-card">
+        <h3>4. Talk About Your Strengths</h3>
+        <p>Mention 2–3 qualities that would make you a good leader. Example: "I am responsible, I work hard, and I like helping others."</p>
+      </div>
+      <div class="role-card">
+        <h3>5. Share Ideas</h3>
+        <p>Give 1–2 realistic ideas for how you could help the class or school. Do not make promises that you cannot keep. Example: "I will listen to your ideas and share them at meetings." NOT, "We will have cookies every day for lunch."</p>
+      </div>
+      <div class="role-card">
+        <h3>6. End with Confidence</h3>
+        <p>Thank your classmates for listening. Remind them why they should vote for you. Example: "I would be honored to represent you. Please vote for me!"</p>
+      </div>
+    </div>
+    <div class="tips-box">
+      <h4>Tips for Practicing Your Speech</h4>
+      <ul>
+        <li>Practice out loud at least 3 times.</li>
+        <li>Speak slowly and clearly so everyone can hear you.</li>
+        <li>Make eye contact with your audience.</li>
+        <li>Smile and show excitement!</li>
+      </ul>
     </div>
   </div>
 
   <!-- Teacher Responsibilities -->
   <div class="section alt-bg" id="teacher-responsibilities">
     <h2 class="section-title">Teacher Responsibilities</h2>
-    <div class="placeholder-box">
-      [Add teacher responsibilities here - e.g., confirming candidate eligibility, distributing and collecting
-      interest forms, supervising campaign speeches, and running classroom elections.]
+    <p class="section-intro">
+      Homeroom teachers help oversee the election process in their own classroom, including:
+    </p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>Monitor Campaigning</h3>
+        <p>Oversee campaigning and candidate speeches leading up to Election Day to keep them appropriate and on schedule.</p>
+      </div>
+      <div class="role-card">
+        <h3>Election Day Voting</h3>
+        <p>Supervise the voting process in the classroom on Election Day.</p>
+      </div>
+      <div class="role-card">
+        <h3>Poster Approval</h3>
+        <p>Review and approve campaign posters for appropriate content before they are displayed.</p>
+      </div>
+      <div class="role-card">
+        <h3>T-Shirt Approval</h3>
+        <p>Review and approve campaign t-shirt designs before they are worn at school.</p>
+      </div>
     </div>
   </div>
 
@@ -415,7 +668,75 @@
         <span class="step-date">Wed, Sep 23</span>
       </div>
     </div>
-    <p class="timeline-warning">No interest forms will be accepted via email or after the September 10 deadline.</p>
+    <p class="timeline-warning">No report cards will be accepted via email or after the September 10 deadline.</p>
+  </div>
+
+  <!-- Officers -->
+  <div class="section alt-bg" id="officers">
+    <h2 class="section-title">Officers</h2>
+    <p class="section-intro">
+      Elected representatives vote among themselves for three officer positions, who lead meetings and oversee
+      Student Council responsibilities.
+    </p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>President</h3>
+        <p>Presides over weekly meetings and represents the Council to the school community.</p>
+      </div>
+      <div class="role-card">
+        <h3>Vice President</h3>
+        <p>Supports the President and steps in to lead meetings when needed.</p>
+      </div>
+      <div class="role-card">
+        <h3>Treasurer</h3>
+        <p>Helps track funds and materials for Council projects and activities.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Representative Responsibilities -->
+  <div class="section" id="rep-responsibilities">
+    <h2 class="section-title">My Responsibilities</h2>
+    <p class="section-intro">
+      Besides being a good representative, check each box to confirm you have read and understand these duties.
+    </p>
+    <ul class="checklist">
+      <li><input type="checkbox" /> Attend all meetings if you are at school and don't have an excused absence from your homeroom teacher.</li>
+      <li><input type="checkbox" /> Be on time.</li>
+      <li><input type="checkbox" /> Take notes and keep good records so you can report back to class.</li>
+      <li><input type="checkbox" /> Come up with new ideas for projects, activities, or events.</li>
+      <li><input type="checkbox" /> Set a good example and behave well in and out of school.</li>
+      <li><input type="checkbox" /> Maintain your school work, planning ahead if necessary, to get it done.</li>
+    </ul>
+  </div>
+
+  <!-- Requirements -->
+  <div class="section alt-bg" id="requirements">
+    <h2 class="section-title">Requirements</h2>
+    <p class="section-intro">
+      Check each box to confirm you have read and understand these requirements.
+    </p>
+    <ul class="checklist">
+      <li><input type="checkbox" /> Must maintain all A's and B's on your report card. If you get a C on your report card you will have 4 weeks to bring up your grade. If you are unable, you will not be able to participate in any Student Council activities for the remainder of the quarter.</li>
+      <li><input type="checkbox" /> You are a representative of this school and should act appropriately. If you are sent to the office with a discipline referral, you will not be allowed to participate in any Student Council activities for one quarter. If there is a second referral during the school year, you will be asked to resign from your position.</li>
+      <li><input type="checkbox" /> Attendance at all meetings and events is mandatory (unless you have an excused absence from your homeroom teacher or Student Leadership sponsor).</li>
+      <li><input type="checkbox" /> You will do your best to represent WCS and Jesus!</li>
+    </ul>
+  </div>
+
+  <!-- Advisors -->
+  <div class="section" id="advisors">
+    <h2 class="section-title">Advisors</h2>
+    <p class="section-intro">
+      Faculty advisors guide the program, mentor student leaders, and help ensure every meeting and project runs
+      smoothly.
+    </p>
+    <div class="role-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 260px));">
+      <div class="role-card">
+        <h3>Mrs. Glavach</h3>
+        <p><a href="mailto:mglavach@wcsmiami.org" style="color:#2C5234; font-weight:600;">mglavach@wcsmiami.org</a></p>
+      </div>
+    </div>
   </div>
 
   <!-- Contact -->
