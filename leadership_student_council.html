@@ -348,14 +348,12 @@
 
     /* ── Election timeline ── */
     .timeline {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
       margin-top: 24px;
-      counter-reset: none;
     }
     .timeline-step {
-      flex: 1 1 170px;
       position: relative;
       background: #fff;
       border: 1px solid #B9975B;
@@ -364,17 +362,6 @@
       text-align: center;
       box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
-    .timeline-step::after {
-      content: '→';
-      position: absolute;
-      right: -22px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #B9975B;
-      font-weight: 700;
-      font-size: 16px;
-    }
-    .timeline-step:last-child::after { content: ''; }
     .timeline-step h4 {
       color: #2C5234;
       font-size: 12px;
@@ -450,7 +437,6 @@
   <nav class="subnav">
     <ul>
       <li><a href="#overview">What It Is</a></li>
-      <li><a href="#who-can-run">Who Can Run</a></li>
       <li><a href="#timeline">Election Timeline</a></li>
       <li><a href="#how-to-run">How To Run</a></li>
       <li><a href="#campaign-rules">Campaign Rules</a></li>
@@ -543,37 +529,40 @@
         <p>You will be required to attend scheduled weekly meetings. These meetings will be once a week, during lunch. Members are expected to assist with all service projects and activities throughout the year.</p>
       </div>
     </div>
-  </div>
-
-  <!-- Who Can Run -->
-  <div class="section alt-bg" id="who-can-run">
-    <h2 class="section-title" style="font-weight: 700;">Who Can Run</h2>
-    <p class="section-intro">
-      Any student in good academic and behavioral standing may apply. Candidates submit an application, are approved by their
-      gradelevel teachers, campaign for one week, and are elected by their classmates.
-    </p>
-    <h3 class="bullet-heading">Who is eligible to run for Class Representative?</h3>
-    <p class="section-intro">You must...</p>
-    <ul class="bullet-list">
-      <li>Have earned all A's and B's as a final grade in core subjects on your report card last year. NO EXCEPTIONS.</li>
-      <li>Have earned all 1's and 2's in conduct last year and no disciplinary issues this year. NO EXCEPTIONS.</li>
-      <li>Have no more than one disciplinary referral (sent to principal's office) last year.</li>
-      <li>Be in good standing this year - class and homework assignments turned in regularly, with all A's and B's in core subjects.</li>
-    </ul>
+    <div class="faq-block" id="who-can-run">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        Who can run?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Any student in good academic and behavioral standing may apply. Candidates submit an application, are approved by their gradelevel teachers, campaign for one week, and are elected by their classmates.</p>
+        <p><strong>Who is eligible to run for Class Representative?</strong> You must...</p>
+        <ul>
+          <li>Have earned all A's and B's as a final grade in core subjects on your report card last year. NO EXCEPTIONS.</li>
+          <li>Have earned all 1's and 2's in conduct last year and no disciplinary issues this year. NO EXCEPTIONS.</li>
+          <li>Have no more than one disciplinary referral (sent to principal's office) last year.</li>
+          <li>Be in good standing this year - class and homework assignments turned in regularly, with all A's and B's in core subjects.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <!-- Election Timeline -->
-  <div class="section" id="timeline">
-    <h2 class="section-title">Election Timeline</h2>
+  <div class="section alt-bg" id="timeline">
+    <h2 class="section-title" style="font-weight: 700;">Election Timeline</h2>
     <p class="section-intro">26–27 school year election process, grades 3–5.</p>
     <div class="timeline">
+      <div class="timeline-step">
+        <h4>Guideline Posted on myWCS</h4>
+        <span class="step-date">Mon, Sep 1</span>
+      </div>
       <div class="timeline-step">
         <h4>Form Due</h4>
         <span class="step-date">Thu, Sep 10 - by 3:30 p.m.</span>
       </div>
       <div class="timeline-step">
-        <h4>Guidelines &amp; Poster Board</h4>
-        <span class="step-date">Thu, Sep 17</span>
+        <h4>Poster Board Provided</h4>
+        <span class="step-date">Mon, Sep 14</span>
       </div>
       <div class="timeline-step">
         <h4>Campaigning Begins</h4>
@@ -592,7 +581,7 @@
   </div>
 
   <!-- How To Run -->
-  <div class="section alt-bg" id="how-to-run">
+  <div class="section" id="how-to-run">
     <h2 class="section-title" style="font-weight: 700;">How To Run</h2>
     <p class="section-intro">Steps to enter the race for Class Representative.</p>
     <div class="role-grid">
@@ -619,7 +608,7 @@
   </div>
 
   <!-- Campaign Rules -->
-  <div class="section" id="campaign-rules">
+  <div class="section alt-bg" id="campaign-rules">
     <h2 class="section-title" style="font-weight: 700;">Campaign Rules</h2>
     <p class="section-intro">
       Please abide by the following rules and regulations. Failure to follow these rules will result in disqualification.
@@ -652,7 +641,7 @@
   </div>
 
   <!-- Writing Your Speech -->
-  <div class="section alt-bg" id="speech-guidelines">
+  <div class="section" id="speech-guidelines">
     <h2 class="section-title" style="font-weight: 700;">Writing Your Speech</h2>
     <p class="section-intro">Guidelines for writing your campaign speech.</p>
     <div class="role-grid">
@@ -693,8 +682,8 @@
   </div>
 
   <!-- Teacher Responsibilities -->
-  <div class="section" id="teacher-responsibilities">
-    <h2 class="section-title">Teacher Responsibilities</h2>
+  <div class="section alt-bg" id="teacher-responsibilities">
+    <h2 class="section-title" style="font-weight: 700;">Teacher Responsibilities</h2>
     <p class="section-intro">
       Homeroom teachers help oversee the election process in their own classroom, including:
     </p>
@@ -719,7 +708,7 @@
   </div>
 
   <!-- Officers -->
-  <div class="section alt-bg" id="officers">
+  <div class="section" id="officers">
     <h2 class="section-title">Officers</h2>
     <p class="section-intro">
       Elected representatives vote among themselves for three officer positions, who lead meetings and oversee
@@ -742,7 +731,7 @@
   </div>
 
   <!-- Once You Are Elected -->
-  <div class="section" id="once-elected">
+  <div class="section alt-bg" id="once-elected">
     <h2 class="section-title">Once You Are Elected</h2>
     <p class="section-intro">
       Things to know about what you're committing to as a Student Council representative.
@@ -768,7 +757,7 @@
   </div>
 
   <!-- Advisors -->
-  <div class="section alt-bg" id="advisors">
+  <div class="section" id="advisors">
     <h2 class="section-title">Advisors</h2>
     <p class="section-intro">
       Faculty advisors guide the program, mentor student leaders, and help ensure every meeting and project runs
