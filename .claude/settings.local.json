@@ -10,7 +10,13 @@
       "Bash(git -c core.safecrlf=false add .)",
       "PowerShell($env:HOME = $env:USERPROFILE; git add .)",
       "PowerShell($env:HOME = $env:USERPROFILE; git commit -m \"Update index\")",
-      "PowerShell($env:HOME = $env:USERPROFILE; git push)"
+      "PowerShell($env:HOME = $env:USERPROFILE; git push)",
+      "Bash(git -C \"c:/Users/mglavach/OneDrive - Westminster Christian School/Signature Programs/Signature-Programs\" log --oneline -20)",
+      "Bash(git -C \"c:/Users/mglavach/OneDrive - Westminster Christian School/Signature Programs/Signature-Programs\" ls-files)",
+      "Bash(git -C \"c:/Users/mglavach/OneDrive - Westminster Christian School/Signature Programs/Signature-Programs\" remote -v)",
+      "Bash(git -C \"c:/Users/mglavach/OneDrive - Westminster Christian School/Signature Programs/Signature-Programs\" branch -a)",
+      "Bash(git -C \"c:/Users/mglavach/OneDrive - Westminster Christian School/Signature Programs/Signature-Programs\" status)",
+      "Bash(start \"\" \"c:/Users/mglavach/OneDrive - Westminster Christian School/Signature Programs/Signature-Programs/team.html\")"
     ]
   }
 }

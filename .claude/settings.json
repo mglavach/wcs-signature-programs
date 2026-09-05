@@ -6,7 +6,10 @@
       "PowerShell($env:USERPROFILE)",
       "PowerShell($env:HOMEDRIVE)",
       "PowerShell($env:HOMEPATH)",
-      "PowerShell($env:HOME = \"C:\\\\Users\\\\mglavach\"; Set-Location \"c:\\\\Users\\\\mglavach\\\\OneDrive - Westminster Christian School\\\\Signature Programs\\\\Signature-Programs\"; git add .; git status)"
+      "PowerShell($env:HOME = \"C:\\\\Users\\\\mglavach\"; Set-Location \"c:\\\\Users\\\\mglavach\\\\OneDrive - Westminster Christian School\\\\Signature Programs\\\\Signature-Programs\"; git add .; git status)",
+      "PowerShell($env:HOME = \"C:\\\\Users\\\\mglavach\"; Set-Location \"c:\\\\Users\\\\mglavach\\\\OneDrive - Westminster Christian School\\\\Signature Programs\\\\Signature-Programs\"; git commit -m \"Update index\")",
+      "PowerShell($env:HOME = \"C:\\\\Users\\\\mglavach\"; Set-Location \"c:\\\\Users\\\\mglavach\\\\OneDrive - Westminster Christian School\\\\Signature Programs\\\\Signature-Programs\"; git push)",
+      "PowerShell(wkhtmltopdf --version)"
     ]
   }
 }
