@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing Warriors - Program Reference</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; font-size: 11pt; background: #f9f7f4; color: #222; }
+    .accent-bar { height: 5px; background: linear-gradient(90deg, #B9975B, #d4b07a, #B9975B); }
+    .subnav { background: #fff; border-bottom: 1px solid #e6e2da; position: sticky; top: 0; z-index: 50; }
+    .subnav ul { list-style: none; max-width: 980px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; }
+    .subnav a { color: #2C5234; text-decoration: none; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .subnav a:hover { color: #B9975B; }
+    .section { padding: 44px 24px; max-width: 980px; margin: 0 auto; scroll-margin-top: 56px; }
+    .section-title { color: #2C5234; font-weight: normal; letter-spacing: .04em; border-left: 4px solid #B9975B; padding-left: 12px; margin-bottom: 12px; }
+    .section-intro { color: #555; line-height: 1.7; max-width: 780px; }
+    .section-intro a { color: #2C5234; font-weight: 600; }
+    .alt-bg { background: #fff; }
+    .program-card, .session-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,.07); padding: 26px 26px 28px; margin-top: 24px; }
+    .program-card h3 { color: #2C5234; font-size: 16px; letter-spacing: .03em; margin-bottom: 10px; }
+    .program-card p, .program-card li { color: #444; line-height: 1.7; font-size: 11px; }
+    .program-card ul { margin-top: 14px; padding-left: 20px; }
+    .program-card li + li { margin-top: 6px; }
+    .program-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+    .meta-pill { background: #f9f7f4; border: 1px solid #e6e2da; border-radius: 20px; padding: 8px 16px; font-size: 10px; color: #2C5234; font-weight: 700; letter-spacing: .03em; }
+    .meta-pill span { color: #777; font-weight: 400; margin-left: 4px; }
+    .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 24px; }
+    .course-card { background: #fff; border-radius: 6px; border-top: 5px solid #2C5234; box-shadow: 0 2px 8px rgba(0,0,0,.07); padding: 22px 20px; }
+    .course-card h3 { color: #2C5234; font-size: 15px; line-height: 1.35; margin-bottom: 8px; }
+    .course-card p { color: #444; font-size: 10.5px; line-height: 1.65; }
+    .course-label { color: #B9975B; font-size: 9.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+    .session-card { padding: 20px 20px 24px; }
+    .subtable-title { color: #2C5234; font-size: 13px; letter-spacing: .03em; text-transform: uppercase; margin-bottom: 12px; }
+    .schedule-wrap { overflow-x: auto; }
+    .schedule { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 10.5px; }
+    .schedule th { background: #2C5234; color: #fff; text-align: left; padding: 8px 10px; font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase; }
+    .schedule td { padding: 8px 10px; border-bottom: 1px solid #e6e2da; color: #333; vertical-align: top; }
+    .schedule tr:last-child td { border-bottom: none; }
+    .schedule tr:nth-child(even) td { background: #f9f7f4; }
+    .schedule td:first-child { color: #2C5234; font-weight: 700; white-space: nowrap; }
+    .register { display: inline-block; margin-top: 20px; background: #2C5234; color: #fff; border-radius: 6px; padding: 11px 18px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
+    .register:hover { background: #B9975B; }
+
+    /* ── Timeline ── */
+    .timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 24px; }
+    .timeline-step { position: relative; background: #fff; border: 1px solid #B9975B; border-radius: 6px; padding: 18px 16px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .timeline-step h4 { color: #2C5234; font-size: 12px; letter-spacing: .02em; margin-bottom: 6px; }
+    .timeline-step .step-date { display: block; color: #999; font-size: 9.5px; font-style: italic; letter-spacing: .03em; }
+
+    /* ── Coming soon ── */
+    .placeholder-box { margin-top: 20px; border: 1px dashed #B9975B; border-radius: 6px; padding: 18px 20px; background: #fcfbf9; color: #444; font-size: 11px; line-height: 1.7; }
+    .badge-coming-soon { display: inline-block; background: #eaf0ea; color: #2C5234; border: 1px solid #2C5234; border-radius: 3px; padding: 3px 9px; font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+
+    /* ── Team ── */
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 240px)); gap: 20px; margin-top: 24px; }
+    .role-card { background: #fff; border-radius: 6px; border-top: 5px solid #2C5234; box-shadow: 0 2px 8px rgba(0,0,0,.07); padding: 22px 20px; display: flex; flex-direction: column; }
+    .role-card h3 { color: #2C5234; margin-bottom: 8px; line-height: 1.3; font-size: 14px; }
+    .role-card p { line-height: 1.65; color: #444; font-size: 10.5px; }
+    .role-card p + p { margin-top: 8px; }
+    .role-title { color: #999; font-size: 9.5px; font-weight: 400; letter-spacing: .03em; text-transform: uppercase; }
+
+    @media print { .subnav, .register { display: none; } body { font-size: 9.5pt; background: #fff; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .section { padding: 20px 16px; max-width: 100%; } .program-card, .session-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; } }
+  </style>
+</head>
+<body>
+  <div class="accent-bar"></div>
+  <nav class="subnav">
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#flint">Flint Prep</a></li>
+      <li><a href="#schedule">Schedule &amp; Cost</a></li>
+      <li><a href="#team">Team</a></li>
+    </ul>
+  </nav>
+
+  <!-- Overview -->
+  <div class="section" id="overview">
+    <h2 class="section-title">Writing Warriors</h2>
+    <p class="section-intro">
+      Have you ever wanted to become a Writing Warrior? The Writing Warriors program brings together two courses for
+      students in second through fifth grade: the Warrior Lab: Writing Crash Course and the Author Academy.
+    </p>
+    <div class="program-meta">
+      <div class="meta-pill">Grades <span>2nd-5th</span></div>
+      <div class="meta-pill">Program Time <span>After School</span></div>
+      <div class="meta-pill">Faculty <span>Mrs. Childers &amp; Mrs. Simril</span></div>
+    </div>
+    <div class="course-grid">
+      <div class="course-card">
+        <div class="course-label">Writing Warriors</div>
+        <h3>Warrior Lab: Writing Crash Course</h3>
+        <p>Students will learn to correct common grammatical errors, build complete sentences, organize ideas effectively, and select the right words to express their thoughts clearly.</p>
+      </div>
+      <div class="course-card">
+        <div class="course-label">Writing Warriors</div>
+        <h3>Author Academy</h3>
+        <p>Selected third through fifth graders develop creative writing skills alongside high school mentors, using writer's notebooks to collect and develop ideas. Students are published in the <em>Warrior Chronicle</em> literary magazine.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="section alt-bg" id="timeline">
+    <h2 class="section-title">Writing Warriors Timeline</h2>
+    <p class="section-intro">
+      Author Academy runs year-long, while the Crash Course runs as a two-week intensive each quarter.
+    </p>
+    <div class="timeline">
+      <div class="timeline-step">
+        <h4>Author Academy Begins</h4>
+        <span class="step-date">Year-long &mdash; After School</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Crash Course Q1</h4>
+        <span class="step-date">Aug 31 &ndash; Sep 11</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Crash Course Q2</h4>
+        <span class="step-date">Nov 9 &ndash; Nov 19</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Crash Course Q3</h4>
+        <span class="step-date">Jan 5 &ndash; Jan 14</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Crash Course Q4</h4>
+        <span class="step-date">May 3 &ndash; May 13</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Warrior Chronicle Published</h4>
+        <span class="step-date">End of Year</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flint Prep -->
+  <div class="section" id="flint">
+    <h2 class="section-title">Flint Prep</h2>
+    <span class="badge-coming-soon">Coming Soon</span>
+    <p class="section-intro">
+      FLINT Prep is an AI-directed writing coach offered for free to all fourth and fifth grade students to help take
+      their writing to the next level. Courses were developed with the Writing Warriors team.
+    </p>
+    <div class="placeholder-box">
+      More details on FLINT Prep &mdash; including how to enroll and when it launches &mdash; are coming soon.
+    </div>
+    <div class="program-meta">
+      <div class="meta-pill">Format <span>AI-Directed</span></div>
+      <div class="meta-pill">Grades <span>4th &amp; 5th</span></div>
+      <div class="meta-pill">Cost <span>Free</span></div>
+      <div class="meta-pill">Developed With <span>Writing Warriors Team</span></div>
+    </div>
+  </div>
+
+  <!-- Schedule & Cost -->
+  <div class="section alt-bg" id="schedule">
+    <h2 class="section-title">Schedule &amp; Cost</h2>
+    <p class="section-intro">Classes meet Monday through Thursday during each two-week session. Monday, Tuesday, and Wednesday classes meet from 3:00 p.m. to 4:00 p.m. Thursday classes meet from 2:00 p.m. to 3:00 p.m.</p>
+    <div class="program-meta">
+      <div class="meta-pill">Meeting days <span>Monday-Thursday</span></div>
+      <div class="meta-pill">Monday-Wednesday <span>3:00-4:00 p.m.</span></div>
+      <div class="meta-pill">Thursday <span>2:00-3:00 p.m.</span></div>
+      <div class="meta-pill">Cost <span>$250 per quarter (Crash Course)</span></div>
+    </div>
+
+    <div class="session-card">
+      <h4 class="subtable-title">Remaining Meeting Dates</h4>
+      <div class="schedule-wrap">
+        <table class="schedule">
+          <thead><tr><th>Quarter</th><th>Meeting dates</th></tr></thead>
+          <tbody>
+            <tr><td>Quarter 1</td><td>Monday, August 31 - Thursday, September 3 and Tuesday, September 8 - Friday, September 11</td></tr>
+            <tr><td>Quarter 2</td><td>Monday, November 9 - Friday, November 13 and Monday, November 16 - Thursday, November 19</td></tr>
+            <tr><td>Quarter 3</td><td>Tuesday, January 5 - Friday, January 8 and Monday, January 11 - Thursday, January 14</td></tr>
+            <tr><td>Quarter 4</td><td>Monday, May 3 - Thursday, May 6 and Monday, May 10 - Thursday, May 13</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="program-card">
+      <h3>Before and After Class</h3>
+      <ul>
+        <li>Students may visit the Snack Shop or bring a snack from home to each class. Nuts are not allowed.</li>
+        <li>Pick up will take place in the roundabout next to the SAC.</li>
+        <li>Dismissal takes place right on time. Any child not picked up after 10 minutes will be sent to afterschool.</li>
+      </ul>
+    </div>
+
+    <p class="section-intro" style="margin-top: 24px;">To register your child, please use the Writing Warrior Lab: Crash Course signup form.</p>
+    <a class="register" href="https://forms.cloud.microsoft/Pages/DesignPageV2.aspx?subpage=design&amp;FormId=afDZK1wS9ESBi_azsjSU1qw1TBG0NI9Liu05Q45HU7JUNVRPSTVCOTY4Q040OFlQWEtHUTY3QjZNTS4u&amp;Token=7ca109aefa524728a508db4f4e7255e0" target="_blank" rel="noopener">Open Signup Form</a>
+  </div>
+
+  <!-- Team -->
+  <div class="section" id="team">
+    <h2 class="section-title">Team</h2>
+    <p class="section-intro">
+      Questions? Contact the Writing Warriors team below.
+    </p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3><a href="mailto:mchilders@wcsmiami.org" style="color: inherit; text-decoration: none;">Mrs. Childers</a></h3>
+        <p class="role-title">Teacher, Author Academy &amp; Crash Course</p>
+      </div>
+      <div class="role-card">
+        <h3><a href="mailto:msimril@wcsmiami.org" style="color: inherit; text-decoration: none;">Mrs. Simril</a></h3>
+        <p class="role-title">Teacher, Author Academy &amp; Crash Course</p>
+      </div>
+      <div class="role-card">
+        <h3><a href="mailto:mglavach@wcsmiami.org" style="color: inherit; text-decoration: none;">Manya Glavach</a></h3>
+        <p class="role-title">Lead Coordinator, Signature Pathways</p>
+        <p>Teacher, FLINT Prep Writing</p>
+      </div>
+      <div class="role-card">
+        <h3>Dani Lovo &rsquo;27</h3>
+        <p class="role-title">HS Student Liaison, FLINT Prep Writing</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.subnav a[href^="#"]').forEach(link => {
+      link.addEventListener('click', event => {
+        const target = document.getElementById(link.getAttribute('href').slice(1));
+        if (!target) return;
+        event.preventDefault();
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 56, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
