@@ -236,14 +236,35 @@
   </div>
 
   <script>
+    // ── Eyebrow nav: smooth scroll, and ask the parent page to scroll when embedded ──
     document.querySelectorAll('.subnav a[href^="#"]').forEach(link => {
       link.addEventListener('click', event => {
         const target = document.getElementById(link.getAttribute('href').slice(1));
         if (!target) return;
         event.preventDefault();
-        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 56, behavior: 'smooth' });
+        const top = target.getBoundingClientRect().top + window.scrollY - 56;
+        if (window.parent !== window) {
+          window.parent.postMessage({ source: 'writing-warriors', type: 'scrollTo', top }, '*');
+        } else {
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
       });
     });
+
+    // ── Auto-resize when embedded in an iframe (e.g. on the Blackbaud site) ──
+    (function () {
+      function sendHeight() {
+        if (window.parent === window) return; // not embedded
+        const height = document.documentElement.scrollHeight;
+        window.parent.postMessage({ source: 'writing-warriors', height: height }, '*');
+      }
+      if (window.ResizeObserver) {
+        new ResizeObserver(sendHeight).observe(document.documentElement);
+      }
+      window.addEventListener('load', sendHeight);
+      window.addEventListener('resize', sendHeight);
+      setTimeout(sendHeight, 500);
+    })();
   </script>
 </body>
 </html>
