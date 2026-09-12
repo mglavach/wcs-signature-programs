@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Council Elections - Program Reference</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11pt;
+      background: #f9f7f4;
+      color: #222;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: #2C5234;
+      color: #fff;
+      text-align: center;
+      padding: 40px 24px 32px;
+    }
+    .hero h1 {
+      font-weight: normal;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.75;
+      color: #c8dac2;
+    }
+    .hero .back-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #B9975B;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      font-size: 12px;
+      text-transform: uppercase;
+      border: 1px solid #B9975B;
+      border-radius: 3px;
+      padding: 6px 14px;
+    }
+    .hero .back-link:hover { background: #B9975B; color: #2C5234; }
+
+    /* ── Accent bar ── */
+    .accent-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #B9975B, #d4b07a, #B9975B);
+    }
+
+    /* ── Nav ── */
+    .subnav {
+      background: #fff;
+      border-bottom: 1px solid #e6e2da;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .subnav ul {
+      list-style: none;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      justify-content: center;
+    }
+    .subnav a {
+      color: #2C5234;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .subnav a:hover { color: #B9975B; }
+
+    /* ── Section wrapper ── */
+    .section {
+      padding: 44px 24px;
+      max-width: 980px;
+      margin: 0 auto;
+      scroll-margin-top: 56px;
+    }
+    .section-title {
+      color: #2C5234;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-intro {
+      color: #555;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+    .bullet-list {
+      color: #555;
+      line-height: 1.7;
+      max-width: 760px;
+      margin-top: 16px;
+      padding-left: 18px;
+    }
+    .bullet-list li { margin-bottom: 8px; }
+    .bullet-heading {
+      color: #2C5234;
+      font-size: 12.5px;
+      letter-spacing: 0.02em;
+      margin-top: 20px;
+    }
+    .alt-bg { background: #fff; }
+
+    /* ── Register CTA ── */
+    .apply-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: #B9975B;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 11px;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 10px 22px;
+      transition: background 0.15s;
+    }
+    .apply-btn:hover { background: #2C5234; }
+    .apply-note {
+      display: block;
+      margin-top: 10px;
+      color: #7a1f1f;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
+
+    /* ── FAQ blocks ── */
+    .faq-block { margin-top: 12px; border-bottom: 1px solid #e6e2da; }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 760px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      color: #2C5234;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 14px 0;
+    }
+    .faq-question:hover { color: #B9975B; }
+    .faq-icon {
+      flex-shrink: 0;
+      color: #B9975B;
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+    .faq-block.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer { display: none; padding-bottom: 16px; }
+    .faq-block.open .faq-answer { display: block; }
+    .faq-answer p, .faq-answer ul {
+      color: #555;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+    .faq-answer ul { padding-left: 18px; margin-top: 6px; }
+    .faq-answer li { margin-bottom: 8px; }
+
+    /* ── Checklist ── */
+    .checklist { list-style: none; margin-top: 20px; max-width: 760px; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #e6e2da;
+      color: #444;
+      line-height: 1.6;
+    }
+    .checklist li:last-child { border-bottom: none; }
+
+    /* ── Modal ── */
+    .modal-trigger {
+      display: inline-block;
+      margin-top: 12px;
+      background: none;
+      border: 1px solid #2C5234;
+      border-radius: 4px;
+      color: #2C5234;
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 8px 12px;
+    }
+    .modal-trigger:hover { background: #2C5234; color: #fff; }
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 1000;
+    }
+    .modal-box {
+      position: relative;
+      background: #fff;
+      border-radius: 8px;
+      max-width: 480px;
+      width: 100%;
+      padding: 28px 26px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .modal-box h3 {
+      color: #2C5234;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      padding-right: 20px;
+    }
+    .modal-box p {
+      color: #444;
+      font-size: 11px;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .modal-box p:last-of-type { margin-bottom: 0; }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #999;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .modal-close:hover { color: #2C5234; }
+
+    /* ── Tips box ── */
+    .tips-box {
+      margin-top: 24px;
+      background: #f0ede8;
+      border-left: 4px solid #B9975B;
+      border-radius: 4px;
+      padding: 16px 20px;
+    }
+    .tips-box h4 {
+      color: #2C5234;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .tips-box ul {
+      padding-left: 18px;
+      color: #444;
+      font-size: 10.5px;
+      line-height: 1.8;
+    }
+
+    /* ── Timeline warning ── */
+    .timeline-warning {
+      margin-top: 16px;
+      color: #7a1f1f;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Officer cards ── */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .role-card {
+      background: #fff;
+      border-radius: 6px;
+      border-top: 5px solid #2C5234;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .role-card h3 {
+      color: #2C5234;
+      margin-bottom: 8px;
+      line-height: 1.3;
+      font-size: 14px;
+    }
+    .role-card p {
+      line-height: 1.65;
+      color: #444;
+      font-size: 10.5px;
+    }
+
+    /* ── Election timeline ── */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .timeline-step {
+      position: relative;
+      background: #fff;
+      border: 1px solid #B9975B;
+      border-radius: 6px;
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .timeline-step h4 {
+      color: #2C5234;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+    }
+    .timeline-step .step-date {
+      display: block;
+      color: #999;
+      font-size: 9.5px;
+      font-style: italic;
+      letter-spacing: 0.03em;
+    }
+    .timeline-note {
+      margin-top: 14px;
+      color: #999;
+      font-size: 10px;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* ── Download button ── */
+    .download-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #2C5234;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 22px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      z-index: 999;
+      transition: background 0.15s;
+    }
+    .download-btn:hover { background: #B9975B; }
+
+    @media print {
+      .download-btn, .subnav, .hero .back-link { display: none; }
+      body { font-size: 9.5pt; background: #fff; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section { padding: 20px 16px; max-width: 100%; }
+      .role-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; border-top: 4px solid #2C5234; }
+      .timeline-step { break-inside: avoid; box-shadow: none; }
+      .faq-answer { display: block !important; }
+      .faq-icon { display: none; }
+      .modal-trigger, .modal-overlay { display: none !important; }
+    }
+
+    /* ── Contact footer ── */
+    .contact { background: #2C5234; color: #fff; text-align: center; padding: 28px 24px; }
+    .contact p { line-height: 1.75; }
+    .contact a { color: #B9975B; text-decoration: none; font-weight: bold; }
+    .contact a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <button class="download-btn" onclick="window.print()">⬇ Download PDF</button>
+
+  <!-- Header -->
+  <div class="hero">
+    <h1>Student Council Elections</h1>
+    <p>Election timeline, how to run, campaign rules, speech guidelines, teacher responsibilities, and what to expect once you're elected - Elementary Campus, grades 3–5.</p>
+    <a class="back-link" href="leadership_student_council.html">&larr; Back to Student Council</a>
+  </div>
+  <div class="accent-bar"></div>
+
+  <nav class="subnav">
+    <ul>
+      <li><a href="#timeline">Election Timeline</a></li>
+      <li><a href="#how-to-run">How To Run</a></li>
+      <li><a href="#campaign-rules">Campaign Rules</a></li>
+      <li><a href="#speech-guidelines">Writing Your Speech</a></li>
+      <li><a href="#teacher-responsibilities">Teacher Responsibilities</a></li>
+      <li><a href="#once-elected">Once You Are Elected</a></li>
+    </ul>
+  </nav>
+
+  <!-- Election Timeline -->
+  <div class="section" id="timeline">
+    <h2 class="section-title" style="font-weight: 700;">Election Timeline</h2>
+    <p class="section-intro">26–27 school year election process, grades 3–5.</p>
+    <div class="timeline">
+      <div class="timeline-step">
+        <h4>Guideline Posted on myWCS</h4>
+        <span class="step-date">Mon, Sep 1</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Form Due</h4>
+        <span class="step-date">Thu, Sep 10 - by 3:30 p.m.</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Poster Board Provided</h4>
+        <span class="step-date">Mon, Sep 14</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Campaigning Begins</h4>
+        <span class="step-date">Mon, Sep 21</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Speeches Due</h4>
+        <span class="step-date">Mon, Sep 21 - to homeroom teacher</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Election Day</h4>
+        <span class="step-date">Wed, Sep 23</span>
+      </div>
+    </div>
+    <p class="timeline-warning">No report cards will be accepted via email or after the September 10 deadline.</p>
+  </div>
+
+  <!-- How To Run -->
+  <div class="section alt-bg" id="how-to-run">
+    <h2 class="section-title" style="font-weight: 700;">How To Run</h2>
+    <p class="section-intro">Steps to enter the race for Class Representative.</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>1. Check Eligibility</h3>
+        <p>Print your report card and check that you are eligible to run.</p>
+        <button class="modal-trigger" onclick="document.getElementById('eligibility-modal').style.display='flex'">How to check your report card for eligibility</button>
+      </div>
+      <div class="role-card">
+        <h3>2. Complete the Interest Form</h3>
+        <p>Fill out the online interest form for the 26–27 school year.</p>
+        <a class="modal-trigger" href="https://forms.cloud.microsoft/r/rFKbwCdz6W" target="_blank" rel="noopener">Interest Form - 26–27 School Year</a>
+      </div>
+      <div class="role-card">
+        <h3>3. Turn In Your Report Card</h3>
+        <p>Turn in your report card to the front office. You will be given a receipt showing your complete application has been received. Incomplete applications will not be accepted.</p>
+      </div>
+      <div class="role-card">
+        <h3>4. Get Your Eligibility Card and Poster Board</h3>
+        <p>You will be given your eligibility to run card and poster board once your report card has been approved.</p>
+      </div>
+    </div>
+    <span class="apply-note">Due Thursday, September 10 by 3:30 p.m. - no report cards accepted via email or after this date/time.</span>
+  </div>
+
+  <!-- Campaign Rules -->
+  <div class="section" id="campaign-rules">
+    <h2 class="section-title" style="font-weight: 700;">Campaign Rules</h2>
+    <p class="section-intro">
+      Please abide by the following rules and regulations. Failure to follow these rules will result in disqualification.
+    </p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>1. Make a Flyer</h3>
+        <p>You may hand out a flyer (no larger than 8½ x 11) to your classmates. You may not attach anything to it, and glitter is not allowed. Flyers may be handed out starting Monday, September 21.</p>
+      </div>
+      <div class="role-card">
+        <h3>2. Make a Poster</h3>
+        <p>You may make a poster using ONLY the poster board provided by Mrs. Glavach, to be displayed inside your classroom.</p>
+      </div>
+      <div class="role-card">
+        <h3>3. Make a Campaign T-Shirt</h3>
+        <p>You may make a campaign t-shirt to wear on Tuesday, 9/22. It must be appropriate, with no negative or derogatory slogans, and no glitter. It must be approved by your classroom teacher by Monday, September 21. Approved shirts may be worn all day Tuesday, 9/22, and during the speech on Wednesday.</p>
+      </div>
+      <div class="role-card">
+        <h3>4. Make a Speech</h3>
+        <p>A short speech will be given on Election Day, Wednesday, September 23, stating why you would make a good representative for your class. Speeches must be submitted to your homeroom teacher for approval by Monday, September 21. New: 4th and 5th graders approved to run will be given access to a Flint lesson to help prepare their speech.</p>
+      </div>
+    </div>
+    <div class="tips-box">
+      <h4>Additional Rules</h4>
+      <ul>
+        <li>There will be no campaigning outside the classroom.</li>
+        <li>Food, treats, stickers, pencils, erasers, videos, etc. are not allowed. Handing out any of these items will result in disqualification.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Writing Your Speech -->
+  <div class="section alt-bg" id="speech-guidelines">
+    <h2 class="section-title" style="font-weight: 700;">Writing Your Speech</h2>
+    <p class="section-intro">Guidelines for writing your campaign speech.</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>1. Keep It Short and Clear</h3>
+        <p>Aim for 1–2 minutes. Stay focused on the main points — don't make it too long.</p>
+      </div>
+      <div class="role-card">
+        <h3>2. Introduce Yourself</h3>
+        <p>Start with a friendly greeting. Say your name and your grade/class. Example: "Hi, my name is [Name], and I'm in [Grade/Class]."</p>
+      </div>
+      <div class="role-card">
+        <h3>3. Share Why You Want to Be Class Representative</h3>
+        <p>Explain what excites you about serving. Use simple, positive language. Example: "I want to help our class have fun and work together."</p>
+      </div>
+      <div class="role-card">
+        <h3>4. Talk About Your Strengths</h3>
+        <p>Mention 2–3 qualities that would make you a good leader. Example: "I am responsible, I work hard, and I like helping others."</p>
+      </div>
+      <div class="role-card">
+        <h3>5. Share Ideas</h3>
+        <p>Give 1–2 realistic ideas for how you could help the class or school. Do not make promises that you cannot keep. Example: "I will listen to your ideas and share them at meetings." NOT, "We will have cookies every day for lunch."</p>
+      </div>
+      <div class="role-card">
+        <h3>6. End with Confidence</h3>
+        <p>Thank your classmates for listening. Remind them why they should vote for you. Example: "I would be honored to represent you. Please vote for me!"</p>
+      </div>
+    </div>
+    <div class="tips-box">
+      <h4>Tips for Practicing Your Speech</h4>
+      <ul>
+        <li>Practice out loud at least 3 times.</li>
+        <li>Speak slowly and clearly so everyone can hear you.</li>
+        <li>Make eye contact with your audience.</li>
+        <li>Smile and show excitement!</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Teacher Responsibilities -->
+  <div class="section" id="teacher-responsibilities">
+    <h2 class="section-title" style="font-weight: 700;">Teacher Responsibilities</h2>
+    <p class="section-intro">
+      Homeroom teachers help oversee the election process in their own classroom, including:
+    </p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>Monitor Campaigning</h3>
+        <p>Oversee campaigning and candidate speeches leading up to Election Day to keep them appropriate and on schedule.</p>
+      </div>
+      <div class="role-card">
+        <h3>Election Day Voting</h3>
+        <p>Supervise the voting process in the classroom on Election Day.</p>
+      </div>
+      <div class="role-card">
+        <h3>Poster Approval</h3>
+        <p>Review and approve campaign posters for appropriate content before they are displayed.</p>
+      </div>
+      <div class="role-card">
+        <h3>T-Shirt Approval</h3>
+        <p>Review and approve campaign t-shirt designs before they are worn at school.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Once You Are Elected -->
+  <div class="section alt-bg" id="once-elected">
+    <h2 class="section-title" style="font-weight: 700;">Once You Are Elected</h2>
+    <p class="section-intro">
+      Things to know about what you're committing to as a Student Council representative.
+    </p>
+
+    <h3 class="bullet-heading">My Responsibilities</h3>
+    <ul class="checklist">
+      <li>Attend all meetings if you are at school and don't have an excused absence from your homeroom teacher.</li>
+      <li>Be on time.</li>
+      <li>Take notes and keep good records so you can report back to class.</li>
+      <li>Come up with new ideas for projects, activities, or events.</li>
+      <li>Set a good example and behave well in and out of school.</li>
+      <li>Maintain your school work, planning ahead if necessary, to get it done.</li>
+    </ul>
+
+    <h3 class="bullet-heading">Requirements</h3>
+    <ul class="checklist">
+      <li>Must maintain all A's and B's on your report card. If you get a C on your report card you will have 4 weeks to bring up your grade. If you are unable, you will not be able to participate in any Student Council activities for the remainder of the quarter.</li>
+      <li>You are a representative of this school and should act appropriately. If you are sent to the office with a discipline referral, you will not be allowed to participate in any Student Council activities for one quarter. If there is a second referral during the school year, you will be asked to resign from your position.</li>
+      <li>Attendance at all meetings and events is mandatory (unless you have an excused absence from your homeroom teacher or Student Leadership sponsor).</li>
+      <li>You will do your best to represent WCS and Jesus!</li>
+    </ul>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact">
+    <p>
+      Questions? Contact <strong>Mrs. Glavach</strong> at
+      <a href="mailto:mglavach@wcsmiami.org">mglavach@wcsmiami.org</a>
+    </p>
+  </div>
+
+  <!-- Eligibility Modal -->
+  <div class="modal-overlay" id="eligibility-modal" onclick="if(event.target===this) this.style.display='none'">
+    <div class="modal-box">
+      <button class="modal-close" onclick="document.getElementById('eligibility-modal').style.display='none'">&times;</button>
+      <h3>Click Here to Learn How to Check Your Report Card for Eligibility</h3>
+      <p>The Report Card (not transcript) can be printed from myWCS under Progress &gt; Performance (be sure to select the 2025–2026 school year).</p>
+      <p>If you were in a different school last year, please be sure to submit a Report Card with conduct grades.</p>
+    </div>
+  </div>
+
+</body>
+</html>
