@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leadership Council Chronicles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11pt;
+      background: #f9f7f4;
+      color: #222;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: #2C5234;
+      color: #fff;
+      text-align: center;
+      padding: 40px 24px 32px;
+    }
+    .hero h1 {
+      font-weight: normal;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.75;
+      color: #c8dac2;
+    }
+    .hero .private-tag {
+      display: inline-block;
+      margin-top: 16px;
+      color: #B9975B;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      border: 1px solid #B9975B;
+      border-radius: 3px;
+      padding: 5px 14px;
+    }
+
+    /* ── Accent bar ── */
+    .accent-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #B9975B, #d4b07a, #B9975B);
+    }
+
+    /* ── Nav ── */
+    .subnav {
+      background: #fff;
+      border-bottom: 1px solid #e6e2da;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .subnav ul {
+      list-style: none;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      justify-content: center;
+    }
+    .subnav a {
+      color: #2C5234;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .subnav a:hover { color: #B9975B; }
+
+    /* ── Section wrapper ── */
+    .section {
+      padding: 44px 24px;
+      max-width: 1040px;
+      margin: 0 auto;
+      scroll-margin-top: 56px;
+    }
+    .section-title {
+      color: #2C5234;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-intro {
+      color: #555;
+      line-height: 1.7;
+      max-width: 780px;
+    }
+    .alt-bg { background: #fff; }
+
+    /* ── Editable table (Weekly Planning Chart) ── */
+    .table-scroll { overflow-x: auto; margin-top: 24px; border: 1px solid #e6e2da; border-radius: 6px; background: #fff; }
+    .editable-table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    .editable-table th {
+      background: #2C5234;
+      color: #fff;
+      text-align: left;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 10px 12px;
+    }
+    .editable-table td {
+      border-bottom: 1px solid #e6e2da;
+      border-right: 1px solid #f0ede8;
+      padding: 10px 12px;
+      font-size: 10.5px;
+      color: #333;
+      line-height: 1.5;
+      vertical-align: top;
+      min-width: 110px;
+    }
+    .editable-table td.week-col { font-weight: 700; color: #2C5234; min-width: 100px; }
+    .editable-table td[contenteditable="true"]:hover { background: #fcfbf9; cursor: text; }
+    .editable-table td[contenteditable="true"]:focus { outline: 2px solid #B9975B; outline-offset: -2px; background: #fff; }
+    .editable-table tr:last-child td { border-bottom: none; }
+    .editable-table td.remove-col { text-align: center; min-width: 36px; }
+
+    .chart-controls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .chart-btn {
+      background: none;
+      border: 1px solid #2C5234;
+      border-radius: 4px;
+      color: #2C5234;
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 8px 14px;
+    }
+    .chart-btn:hover { background: #2C5234; color: #fff; }
+    .chart-btn.subtle { border-color: #c9c2af; color: #777; }
+    .chart-btn.subtle:hover { background: #c9c2af; color: #fff; }
+    .row-delete-btn {
+      background: none; border: none; cursor: pointer; color: #999; font-size: 13px; line-height: 1; padding: 4px;
+    }
+    .row-delete-btn:hover { color: #8A3B3B; }
+
+    .save-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 4px;
+      color: #2F5233;
+      font-size: 9.5px;
+      font-style: italic;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .save-note.show { opacity: 1; }
+
+    /* ── Schedule of Events (read-only cards) ── */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .role-card {
+      background: #fff;
+      border-radius: 6px;
+      border-top: 5px solid #2C5234;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .role-card h3 { color: #2C5234; margin-bottom: 8px; line-height: 1.3; font-size: 14px; }
+    .role-card p { line-height: 1.65; color: #444; font-size: 10.5px; }
+    .topic-pill {
+      display: inline-block;
+      align-self: flex-start;
+      background: #2C5234;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 999px;
+      padding: 4px 12px;
+      margin-bottom: 12px;
+    }
+    .event-date {
+      color: #B9975B; font-weight: 700; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px;
+    }
+    .event-place { color: #999; font-size: 9.5px; font-style: italic; letter-spacing: 0.03em; }
+
+    /* ── Annual Checklist ── */
+    .checklist { list-style: none; margin-top: 20px; max-width: 780px; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #e6e2da;
+      color: #444;
+      line-height: 1.6;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist input[type="checkbox"] { margin-top: 3px; width: 15px; height: 15px; accent-color: #2C5234; flex-shrink: 0; }
+    .checklist span[contenteditable="true"] { flex: 1; outline: none; }
+    .checklist span[contenteditable="true"]:hover { background: #fcfbf9; cursor: text; }
+    .checklist span[contenteditable="true"]:focus { background: #f0ede8; }
+    .checklist li.done span { color: #999; text-decoration: line-through; }
+
+    /* ── Resource buttons ── */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .resource-card {
+      background: #fcfbf9;
+      border: 1px dashed #B9975B;
+      border-radius: 6px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .resource-card h3 { color: #2C5234; font-size: 13px; letter-spacing: 0.02em; }
+    .resource-card p { color: #777; font-size: 10px; font-style: italic; line-height: 1.6; }
+    .resource-btn {
+      align-self: flex-start;
+      background: none;
+      border: 1px solid #B9975B;
+      border-radius: 4px;
+      color: #B9975B;
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: not-allowed;
+      padding: 8px 14px;
+    }
+
+    /* ── Idea Bank ── */
+    .idea-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .idea-filter-btn {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid #c9c2af;
+      background: #fff;
+      color: #555;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .idea-filter-btn.active { color: #fff; border-color: transparent; }
+
+    .idea-table-wrap { overflow-x: auto; margin-top: 18px; border: 1px solid #e6e2da; border-radius: 6px; background: #fff; }
+    .idea-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+    .idea-table th {
+      background: #f0ede8; text-align: left; font-size: 10.5px; color: #777; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase; padding: 12px 14px; border-bottom: 1px solid #e6e2da;
+    }
+    .idea-table td { padding: 12px 14px; border-bottom: 1px solid #e6e2da; vertical-align: top; font-size: 11px; }
+    .idea-table tr:last-child td { border-bottom: none; }
+    .idea-cat-badge {
+      display: inline-block; font-size: 10px; font-weight: 700; border-radius: 4px; padding: 2px 9px; white-space: nowrap;
+    }
+    .idea-title { font-weight: 700; color: #222; }
+    .idea-desc { color: #555; line-height: 1.55; }
+    .idea-actions { white-space: nowrap; }
+    .idea-icon-btn {
+      background: none; border: none; cursor: pointer; padding: 4px 6px; font-size: 12px; font-family: inherit; font-weight: 700;
+    }
+    .idea-icon-btn.edit { color: #555; }
+    .idea-icon-btn.delete { color: #8A3B3B; }
+    .idea-icon-btn.save { color: #2C5234; }
+    .idea-icon-btn.cancel { color: #8A3B3B; }
+    .idea-input, .idea-select, .idea-textarea {
+      width: 100%; border: 1px solid #c9c2af; border-radius: 4px; padding: 6px 8px; font-size: 11px; font-family: inherit; box-sizing: border-box;
+    }
+    .idea-textarea { min-height: 56px; resize: vertical; }
+
+    .add-idea-btn {
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #2C5234;
+      background: none;
+      border: 1px solid #2C5234;
+      border-radius: 6px;
+      padding: 9px 16px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .add-idea-btn:hover { background: #2C5234; color: #fff; }
+
+    /* ── Tips box ── */
+    .tips-box {
+      margin-top: 24px;
+      background: #f0ede8;
+      border-left: 4px solid #B9975B;
+      border-radius: 4px;
+      padding: 16px 20px;
+    }
+    .tips-box p { color: #444; font-size: 10.5px; line-height: 1.7; }
+
+    /* ── Contact footer ── */
+    .contact { background: #2C5234; color: #fff; text-align: center; padding: 28px 24px; }
+    .contact p { line-height: 1.75; }
+    .contact a { color: #B9975B; text-decoration: none; font-weight: bold; }
+    .contact a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .editable-table { min-width: 640px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="hero">
+    <h1>Leadership Council Chronicles</h1>
+    <p>A running record for Student Council members — weekly planning, our schedule of events, the annual checklist, key resources, and the idea bank, all in one place to review what we've discussed.</p>
+    <span class="private-tag">Council Members Only</span>
+  </div>
+  <div class="accent-bar"></div>
+
+  <nav class="subnav">
+    <ul>
+      <li><a href="#weekly-planning">Weekly Planning</a></li>
+      <li><a href="#schedule-of-events">Schedule of Events</a></li>
+      <li><a href="#annual-checklist">Annual Checklist</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#idea-bank">Idea Bank</a></li>
+    </ul>
+  </nav>
+
+  <!-- Weekly Planning Chart -->
+  <div class="section" id="weekly-planning">
+    <h2 class="section-title">Weekly Planning Chart</h2>
+    <p class="section-intro">
+      Every row is editable — click any cell to type directly, your changes save automatically in this browser
+      (via local storage) so the chart stays yours to adjust as plans change. Dates and school-wide events are
+      pulled from the 2026-27 School Calendar and the Opening of School Faculty &amp; Staff Packet. Grade 5's
+      weekly Hub rotation isn't defined yet — add it in once it's decided.
+      <span class="save-note" id="chart-save-note">✓ Saved</span>
+    </p>
+    <div class="table-scroll">
+      <table class="editable-table" id="chart-table">
+        <thead>
+          <tr>
+            <th>Week Of</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Notes / School-Wide Events</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="chart-body"></tbody>
+      </table>
+    </div>
+    <div class="chart-controls">
+      <button class="chart-btn" id="add-week-btn">+ Add Week</button>
+      <button class="chart-btn subtle" id="reset-chart-btn">Reset to Starter Template</button>
+    </div>
+  </div>
+
+  <!-- Schedule of Events -->
+  <div class="section alt-bg" id="schedule-of-events">
+    <h2 class="section-title">Schedule of Events</h2>
+    <p class="section-intro">Council-relevant dates for the 26–27 school year, for reference during planning.</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <span class="topic-pill">Leadership</span>
+        <h3>Student Council Elections</h3>
+        <p class="event-date">Wed, Sep 23</p>
+        <p class="event-place">Homeroom Classroom</p>
+        <p>Campaign speeches given and votes cast for Class Representatives, grades 3–5.</p>
+      </div>
+      <div class="role-card">
+        <span class="topic-pill">Council Meetings</span>
+        <h3>First Student Council Meeting</h3>
+        <p class="event-date">Fri, Oct 9</p>
+        <p class="event-place">Weekly, every Friday during lunch</p>
+        <p>Ongoing weekly meetings begin here for the rest of the school year.</p>
+      </div>
+      <div class="role-card">
+        <span class="topic-pill">School Spirit</span>
+        <h3>PS/ES Homecoming Pep Rally</h3>
+        <p class="event-date">Fri, Oct 23 at 7:30 a.m.</p>
+        <p class="event-place">ES Courtyard</p>
+        <p>Event Sponsor: Mrs. McGee.</p>
+      </div>
+      <div class="role-card">
+        <span class="topic-pill">Community Connect</span>
+        <h3>Thanksgiving Food Drive</h3>
+        <p class="event-date">Mon, Nov 2 – Tue, Nov 17</p>
+        <p class="event-place">Location: TBD</p>
+        <p>Details pending.</p>
+      </div>
+      <div class="role-card">
+        <span class="topic-pill">Worship</span>
+        <h3>PS/ES Worship Night</h3>
+        <p class="event-date">Sat, Dec 5</p>
+        <p class="event-place">The Lighthouse</p>
+      </div>
+      <div class="role-card">
+        <span class="topic-pill">School Spirit</span>
+        <h3>Share the Love Spirit Week</h3>
+        <p class="event-date">Mon, Feb 8 – Fri, Feb 12</p>
+        <p class="event-place">PS/ES Campus</p>
+        <p>Details pending.</p>
+      </div>
+    </div>
+    <div class="tips-box">
+      <p>Dates come from <a href="leadership_student_council.html#events" style="color:#2C5234; font-weight:700;">the Student Council events page</a>. Add school day-off dates from the 2026-27 calendar into the Weekly Planning Chart above once you have it handy.</p>
+    </div>
+  </div>
+
+  <!-- Annual Checklist -->
+  <div class="section" id="annual-checklist">
+    <h2 class="section-title">Annual Checklist</h2>
+    <p class="section-intro">
+      Recurring tasks for the Council to track across the year. Check items off, edit the text, or add your own —
+      changes save automatically in this browser.
+      <span class="save-note" id="checklist-save-note">✓ Saved</span>
+    </p>
+    <ul class="checklist" id="checklist-list"></ul>
+    <button class="add-idea-btn" id="add-checklist-btn">+ Add Item</button>
+  </div>
+
+  <!-- Resources -->
+  <div class="section alt-bg" id="resources">
+    <h2 class="section-title">Resources</h2>
+    <p class="section-intro">Quick links to the documents Council planning draws from.</p>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h3>Calendar PDF</h3>
+        <p>2026-27 School Calendar.</p>
+        <a class="resource-btn" href="Cal_26.27.pdf" target="_blank" rel="noopener" style="cursor:pointer;">View Calendar</a>
+      </div>
+      <div class="resource-card">
+        <h3>Opening Packet</h3>
+        <p>Link coming soon — Opening of School Faculty &amp; Staff Packet.</p>
+        <!-- TODO(mglavach): replace href with the Opening of School Faculty & Staff Packet PDF -->
+        <a class="resource-btn" href="#" onclick="return false;">View Packet</a>
+      </div>
+      <div class="resource-card">
+        <h3>Flint Prep Lessons</h3>
+        <p>Link coming soon — Flint speech-prep lessons for candidates.</p>
+        <!-- TODO(mglavach): replace href with the Flint Prep Lessons link -->
+        <a class="resource-btn" href="#" onclick="return false;">View Lessons</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Idea Bank -->
+  <div class="section" id="idea-bank">
+    <h2 class="section-title">Idea Bank</h2>
+    <p class="section-intro">
+      Ideas raised in Council discussions, organized by category. Edit, add, or remove ideas below — changes save
+      automatically.
+      <span class="save-note" id="idea-save-note">✓ Saved</span>
+    </p>
+    <div class="idea-filters" id="idea-filters"></div>
+    <div class="idea-table-wrap">
+      <table class="idea-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Idea</th>
+            <th>Description</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="idea-body"></tbody>
+      </table>
+    </div>
+    <button class="add-idea-btn" id="add-idea-btn">+ Add Idea</button>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact">
+    <p>
+      Questions? Contact <strong>Mrs. Glavach</strong> at
+      <a href="mailto:mglavach@wcsmiami.org">mglavach@wcsmiami.org</a>
+    </p>
+  </div>
+
+  <script>
+    /* ───────────────────── Shared helpers ───────────────────── */
+    function flashSaveNote(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('show');
+      clearTimeout(el._t);
+      el._t = setTimeout(function () { el.classList.remove('show'); }, 1200);
+    }
+    function escapeHtml(str) {
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function loadJSON(key, fallback) {
+      try {
+        var raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (e) { return fallback; }
+    }
+    function saveJSON(key, value, noteId) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        if (noteId) flashSaveNote(noteId);
+      } catch (e) { /* storage unavailable — edits still work for this session */ }
+    }
+
+    /* ───────────────────── Weekly Planning Chart ───────────────────── */
+    var CHART_KEY = 'councilChronicles_weeklyChart_v1';
+    var CHART_COLS = ['week', 'mon', 'tue', 'wed', 'thu', 'fri', 'notes'];
+    var DEFAULT_CHART_ROWS = [
+      { week: 'Sep 14', mon: '', tue: '', wed: '', thu: '', fri: '', notes: '' },
+      { week: 'Sep 21', mon: '', tue: 'Campaign speeches due', wed: 'Student Council Elections', thu: '', fri: '', notes: 'Election week, grades 3–5' },
+      { week: 'Oct 5', mon: '', tue: '', wed: '', thu: '', fri: 'First Student Council meeting', notes: 'Weekly meetings begin — every Friday during lunch' },
+      { week: 'Oct 19', mon: '', tue: '', wed: '', thu: '', fri: 'PS/ES Homecoming Pep Rally, 7:30am', notes: '' },
+      { week: 'Nov 2', mon: 'Thanksgiving Food Drive begins', tue: '', wed: '', thu: '', fri: '', notes: 'Runs through Nov 17' },
+      { week: 'Nov 16', mon: '', tue: 'Thanksgiving Food Drive ends', wed: '', thu: '', fri: '', notes: '' },
+      { week: 'Nov 30', mon: '', tue: '', wed: '', thu: '', fri: '', notes: 'PS/ES Worship Night, Sat Dec 5 — The Lighthouse' },
+      { week: 'Feb 8', mon: 'Share the Love Spirit Week', tue: '', wed: '', thu: '', fri: '', notes: '' }
+    ];
+
+    var chartRows = loadJSON(CHART_KEY, null) || DEFAULT_CHART_ROWS.map(function (r) { return Object.assign({}, r); });
+
+    function renderChart() {
+      var body = document.getElementById('chart-body');
+      body.innerHTML = '';
+      chartRows.forEach(function (row, idx) {
+        var tr = document.createElement('tr');
+        CHART_COLS.forEach(function (col) {
+          var td = document.createElement('td');
+          td.contentEditable = 'true';
+          if (col === 'week') td.classList.add('week-col');
+          td.textContent = row[col] || '';
+          td.addEventListener('blur', function () {
+            chartRows[idx][col] = td.textContent.trim();
+            saveJSON(CHART_KEY, chartRows, 'chart-save-note');
+          });
+          tr.appendChild(td);
+        });
+        var tdRemove = document.createElement('td');
+        tdRemove.className = 'remove-col';
+        var btn = document.createElement('button');
+        btn.className = 'row-delete-btn';
+        btn.title = 'Remove week';
+        btn.textContent = '✕';
+        btn.addEventListener('click', function () {
+          chartRows.splice(idx, 1);
+          saveJSON(CHART_KEY, chartRows, 'chart-save-note');
+          renderChart();
+        });
+        tdRemove.appendChild(btn);
+        tr.appendChild(tdRemove);
+        body.appendChild(tr);
+      });
+    }
+
+    document.getElementById('add-week-btn').addEventListener('click', function () {
+      chartRows.push({ week: '', mon: '', tue: '', wed: '', thu: '', fri: '', notes: '' });
+      saveJSON(CHART_KEY, chartRows, 'chart-save-note');
+      renderChart();
+    });
+    document.getElementById('reset-chart-btn').addEventListener('click', function () {
+      if (!confirm('Reset the Weekly Planning Chart back to the starter template? This clears your edits.')) return;
+      chartRows = DEFAULT_CHART_ROWS.map(function (r) { return Object.assign({}, r); });
+      saveJSON(CHART_KEY, chartRows, 'chart-save-note');
+      renderChart();
+    });
+    renderChart();
+
+    /* ───────────────────── Annual Checklist ───────────────────── */
+    var CHECKLIST_KEY = 'councilChronicles_checklist_v1';
+    var DEFAULT_CHECKLIST = [
+      { id: '1', text: 'Post election guidelines on myWCS', done: false },
+      { id: '2', text: 'Collect and approve Class Representative interest forms', done: false },
+      { id: '3', text: 'Hold Class Representative elections', done: false },
+      { id: '4', text: 'Schedule weekly Friday lunch meetings for the year', done: false },
+      { id: '5', text: 'Plan Thanksgiving Food Drive logistics', done: false },
+      { id: '6', text: 'Confirm Spirit Week theme days', done: false },
+      { id: '7', text: 'Review and update the Idea Bank each semester', done: false }
+    ];
+    var checklistItems = loadJSON(CHECKLIST_KEY, null) || DEFAULT_CHECKLIST.map(function (i) { return Object.assign({}, i); });
+
+    function renderChecklist() {
+      var list = document.getElementById('checklist-list');
+      list.innerHTML = '';
+      checklistItems.forEach(function (item) {
+        var li = document.createElement('li');
+        if (item.done) li.classList.add('done');
+
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = !!item.done;
+        checkbox.addEventListener('change', function () {
+          item.done = checkbox.checked;
+          li.classList.toggle('done', item.done);
+          saveJSON(CHECKLIST_KEY, checklistItems, 'checklist-save-note');
+        });
+
+        var span = document.createElement('span');
+        span.contentEditable = 'true';
+        span.textContent = item.text;
+        span.addEventListener('blur', function () {
+          item.text = span.textContent.trim();
+          saveJSON(CHECKLIST_KEY, checklistItems, 'checklist-save-note');
+        });
+
+        var del = document.createElement('button');
+        del.className = 'row-delete-btn';
+        del.title = 'Remove item';
+        del.textContent = '✕';
+        del.addEventListener('click', function () {
+          checklistItems = checklistItems.filter(function (i) { return i.id !== item.id; });
+          saveJSON(CHECKLIST_KEY, checklistItems, 'checklist-save-note');
+          renderChecklist();
+        });
+
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        li.appendChild(del);
+        list.appendChild(li);
+      });
+    }
+
+    document.getElementById('add-checklist-btn').addEventListener('click', function () {
+      checklistItems.push({ id: Date.now().toString(), text: 'New checklist item', done: false });
+      saveJSON(CHECKLIST_KEY, checklistItems, 'checklist-save-note');
+      renderChecklist();
+    });
+    renderChecklist();
+
+    /* ───────────────────── Idea Bank ───────────────────── */
+    var IDEA_KEY = 'councilChronicles_ideaBank_v1';
+    var CATEGORY_COLORS = {
+      'Community & Belonging': '#2F5233',
+      'Faith & Worship': '#B08D57',
+      'Service & Giving': '#3B6E8F',
+      'Fun & Engagement': '#8A3B3B'
+    };
+    var CATEGORIES = Object.keys(CATEGORY_COLORS);
+    var DEFAULT_IDEAS = [
+      { id: '1', category: 'Community & Belonging', title: 'Buddy Bench', description: "A designated bench so kids who feel left out or lonely have a way to signal they want company." },
+      { id: '2', category: 'Community & Belonging', title: 'Mentor/Guide Club', description: 'New students get paired with a returning student at the start of the year to help them feel welcome.' },
+      { id: '3', category: 'Community & Belonging', title: 'No One Eats Alone', description: "A grade-level bonding day where students sit outside at lunch with classmates they don't usually hang out with, listening to worship music together." },
+      { id: '4', category: 'Community & Belonging', title: 'Class Park/Community Day', description: 'An outside-of-school gathering (park day, church visit, or community service day) to build unity across the class.' },
+      { id: '5', category: 'Community & Belonging', title: 'Helping Shy Students', description: 'General focus and initiative on making quieter students feel included and supported.' },
+      { id: '6', category: 'Faith & Worship', title: 'Worship Song Timeline', description: 'Each class picks a worship song throughout the year, then shares it at chapel.' },
+      { id: '7', category: 'Faith & Worship', title: 'Bible Verse of the Day', description: 'Shared at school drop-off each morning.' },
+      { id: '8', category: 'Faith & Worship', title: 'Gratitude Wall', description: "Students add their favorite Bible verse on a star for a wall everyone can see." },
+      { id: '9', category: 'Faith & Worship', title: 'Faith Mural', description: "A muralist paints a mural about the school's faith in God, funded by student donations, as a lasting reminder of the school's Christian mission." },
+      { id: '10', category: 'Faith & Worship', title: 'Fun Faith Friday Box', description: 'A suggestion/prayer box checked weekly, used for fun ways to learn about different subjects and faith topics.' },
+      { id: '11', category: 'Service & Giving', title: 'Feed the Homeless', description: 'Organized service project to support those in need.' },
+      { id: '12', category: 'Service & Giving', title: 'Toy Drive', description: 'Collecting toys to donate to children in need.' },
+      { id: '13', category: 'Service & Giving', title: 'Gardening Club', description: "Grow plants and vegetables and sell them to local kitchens, including the school's, with proceeds going toward giving back." },
+      { id: '14', category: 'Service & Giving', title: 'Movie Night Donation Drive', description: 'A movie night where admission is a donation item instead of money.' },
+      { id: '15', category: 'Fun & Engagement', title: 'Talent Show', description: 'A schoolwide event for students to showcase their talents.' },
+      { id: '16', category: 'Fun & Engagement', title: 'Suggestion Box', description: 'A simple way for students to submit ideas year-round.' }
+    ];
+
+    var ideas = loadJSON(IDEA_KEY, null) || DEFAULT_IDEAS.map(function (i) { return Object.assign({}, i); });
+    var ideaFilter = 'All';
+    var editingIdeaId = null;
+    var addingIdea = false;
+
+    function renderIdeaFilters() {
+      var wrap = document.getElementById('idea-filters');
+      wrap.innerHTML = '';
+      var allBtn = document.createElement('button');
+      allBtn.className = 'idea-filter-btn' + (ideaFilter === 'All' ? ' active' : '');
+      allBtn.textContent = 'All';
+      if (ideaFilter === 'All') { allBtn.style.background = '#2C5234'; allBtn.style.borderColor = '#2C5234'; }
+      allBtn.addEventListener('click', function () { ideaFilter = 'All'; renderIdeaFilters(); renderIdeas(); });
+      wrap.appendChild(allBtn);
+
+      CATEGORIES.forEach(function (cat) {
+        var btn = document.createElement('button');
+        var active = ideaFilter === cat;
+        btn.className = 'idea-filter-btn' + (active ? ' active' : '');
+        btn.textContent = cat;
+        btn.style.borderColor = CATEGORY_COLORS[cat];
+        if (active) { btn.style.background = CATEGORY_COLORS[cat]; }
+        btn.addEventListener('click', function () { ideaFilter = cat; renderIdeaFilters(); renderIdeas(); });
+        wrap.appendChild(btn);
+      });
+    }
+
+    function categorySelectHTML(selected) {
+      return CATEGORIES.map(function (c) {
+        return '<option value="' + escapeHtml(c) + '"' + (c === selected ? ' selected' : '') + '>' + escapeHtml(c) + '</option>';
+      }).join('');
+    }
+
+    function renderIdeas() {
+      var body = document.getElementById('idea-body');
+      body.innerHTML = '';
+      var visible = ideaFilter === 'All' ? ideas : ideas.filter(function (i) { return i.category === ideaFilter; });
+
+      visible.forEach(function (idea) {
+        var tr = document.createElement('tr');
+        if (editingIdeaId === idea.id) {
+          tr.innerHTML =
+            '<td><select class="idea-select" data-field="category">' + categorySelectHTML(idea.category) + '</select></td>' +
+            '<td><input class="idea-input" data-field="title" value="' + escapeHtml(idea.title) + '" /></td>' +
+            '<td><textarea class="idea-textarea" data-field="description">' + escapeHtml(idea.description) + '</textarea></td>' +
+            '<td class="idea-actions">' +
+              '<button class="idea-icon-btn save" data-action="save">✓ Save</button>' +
+              '<button class="idea-icon-btn cancel" data-action="cancel">✕ Cancel</button>' +
+            '</td>';
+
+          tr.querySelector('[data-action="save"]').addEventListener('click', function () {
+            idea.category = tr.querySelector('[data-field="category"]').value;
+            idea.title = tr.querySelector('[data-field="title"]').value.trim();
+            idea.description = tr.querySelector('[data-field="description"]').value.trim();
+            editingIdeaId = null;
+            saveJSON(IDEA_KEY, ideas, 'idea-save-note');
+            renderIdeas();
+          });
+          tr.querySelector('[data-action="cancel"]').addEventListener('click', function () {
+            editingIdeaId = null;
+            renderIdeas();
+          });
+        } else {
+          var badgeColor = CATEGORY_COLORS[idea.category] || '#555';
+          tr.innerHTML =
+            '<td><span class="idea-cat-badge" style="color:' + badgeColor + '; border:1px solid ' + badgeColor + ';">' + escapeHtml(idea.category) + '</span></td>' +
+            '<td class="idea-title">' + escapeHtml(idea.title) + '</td>' +
+            '<td class="idea-desc">' + escapeHtml(idea.description) + '</td>' +
+            '<td class="idea-actions">' +
+              '<button class="idea-icon-btn edit" data-action="edit">✎ Edit</button>' +
+              '<button class="idea-icon-btn delete" data-action="delete">✕ Delete</button>' +
+            '</td>';
+
+          tr.querySelector('[data-action="edit"]').addEventListener('click', function () {
+            editingIdeaId = idea.id;
+            renderIdeas();
+          });
+          tr.querySelector('[data-action="delete"]').addEventListener('click', function () {
+            if (!confirm('Remove "' + idea.title + '" from the Idea Bank?')) return;
+            ideas = ideas.filter(function (i) { return i.id !== idea.id; });
+            saveJSON(IDEA_KEY, ideas, 'idea-save-note');
+            renderIdeas();
+          });
+        }
+        body.appendChild(tr);
+      });
+
+      if (addingIdea) {
+        var addTr = document.createElement('tr');
+        addTr.innerHTML =
+          '<td><select class="idea-select" id="new-idea-category">' + categorySelectHTML(CATEGORIES[0]) + '</select></td>' +
+          '<td><input class="idea-input" id="new-idea-title" placeholder="Idea name" /></td>' +
+          '<td><textarea class="idea-textarea" id="new-idea-description" placeholder="Quick description"></textarea></td>' +
+          '<td class="idea-actions">' +
+            '<button class="idea-icon-btn save" id="new-idea-save">✓ Save</button>' +
+            '<button class="idea-icon-btn cancel" id="new-idea-cancel">✕ Cancel</button>' +
+          '</td>';
+        body.appendChild(addTr);
+
+        document.getElementById('new-idea-save').addEventListener('click', function () {
+          var title = document.getElementById('new-idea-title').value.trim();
+          if (!title) return;
+          ideas.push({
+            id: Date.now().toString(),
+            category: document.getElementById('new-idea-category').value,
+            title: title,
+            description: document.getElementById('new-idea-description').value.trim()
+          });
+          addingIdea = false;
+          saveJSON(IDEA_KEY, ideas, 'idea-save-note');
+          renderIdeas();
+        });
+        document.getElementById('new-idea-cancel').addEventListener('click', function () {
+          addingIdea = false;
+          renderIdeas();
+        });
+      }
+    }
+
+    document.getElementById('add-idea-btn').addEventListener('click', function () {
+      addingIdea = true;
+      renderIdeas();
+    });
+
+    renderIdeaFilters();
+    renderIdeas();
+  </script>
+
+</body>
+</html>
