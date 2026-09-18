@@ -339,7 +339,7 @@
   <!-- Header -->
   <div class="hero">
     <h1>Leadership Council Chronicles</h1>
-    <p>A running record for Student Council members — weekly planning, our schedule of events, the annual checklist, key resources, and the idea bank, all in one place to review what we've discussed.</p>
+    <p></p>
     <span class="private-tag">Council Members Only</span>
   </div>
   <div class="accent-bar"></div>
@@ -358,11 +358,7 @@
   <div class="section" id="weekly-planning">
     <h2 class="section-title">Weekly Planning Chart</h2>
     <p class="section-intro">
-      Every row is editable — click any cell to type directly, your changes save automatically in this browser
-      (via local storage) so the chart stays yours to adjust as plans change. Dates and school-wide events are
-      pulled from the 2026-27 School Calendar and the Opening of School Faculty &amp; Staff Packet. Grade 5's
-      weekly Hub rotation isn't defined yet — add it in once it's decided.
-      <span class="save-note" id="chart-save-note">✓ Saved</span>
+            <span class="save-note" id="chart-save-note">✓ Saved</span>
     </p>
     <div class="table-scroll">
       <table class="editable-table" id="chart-table">
@@ -384,9 +380,6 @@
     <div class="chart-controls">
       <button class="chart-btn local-only" id="add-week-btn">+ Add Week</button>
       <button class="chart-btn subtle local-only" id="reset-chart-btn">Reset to Starter Template</button>
-    </div>
-    <div class="tips-box">
-      <p>No School and Early Dismissal days above are pulled from the 2026-27 School Calendar (Cal_26.27.pdf, linked under Resources). *Early Dismissal times: PK3–Gr. 1 at 11 a.m., Gr. 2–5 at 11:15 a.m., Gr. 6–12 at 11:30 a.m.</p>
     </div>
   </div>
 
@@ -556,26 +549,37 @@
       { week: 'Sep 21', mon: '', tue: 'Campaign speeches due', wed: 'Student Council Elections', thu: '', fri: '', notes: 'Election week, grades 3–5' },
       { week: 'Sep 28', mon: '', tue: '', wed: '', thu: '', fri: 'First weekly Student Council meeting', notes: 'Weekly meetings begin — every Friday during lunch, Pavilion by the SAC' },
       { week: 'Oct 5', mon: '', tue: '', wed: '', thu: '', fri: 'NO SCHOOL — Faculty In-Service Day', notes: 'No Council meeting this week' },
-      { week: 'Oct 12', mon: 'Second Quarter Begins', tue: '', wed: '', thu: '', fri: '', notes: '' },
-      { week: 'Oct 19', mon: '', tue: '', wed: '', thu: '', fri: 'PS/ES Homecoming Pep Rally, 7:30am', notes: '' },
-      { week: 'Nov 2', mon: 'Thanksgiving Food Drive begins', tue: '', wed: '', thu: '', fri: '', notes: 'Runs through Nov 17' },
-      { week: 'Nov 9', mon: '', tue: '', wed: 'NO SCHOOL — Veterans Day', thu: '', fri: '', notes: '' },
-      { week: 'Nov 16', mon: '', tue: 'Thanksgiving Food Drive ends', wed: '', thu: '', fri: 'Early Dismissal*', notes: '' },
+      { week: 'Oct 12', mon: 'Second Quarter Begins', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Oct 19', mon: '', tue: '', wed: '', thu: '', fri: 'PS/ES Homecoming Pep Rally, 7:30am; Student Council Meeting', notes: '' },
+      { week: 'Oct 26', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Nov 2', mon: 'Thanksgiving Food Drive begins', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: 'Runs through Nov 17' },
+      { week: 'Nov 9', mon: '', tue: '', wed: 'NO SCHOOL — Veterans Day', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Nov 16', mon: '', tue: 'Thanksgiving Food Drive ends', wed: '', thu: '', fri: 'Early Dismissal*; Student Council Meeting', notes: '' },
       { week: 'Nov 23', mon: 'NO SCHOOL — Thanksgiving Break', tue: 'NO SCHOOL — Thanksgiving Break', wed: 'NO SCHOOL — Thanksgiving Break', thu: 'NO SCHOOL — Thanksgiving Break', fri: 'NO SCHOOL — Thanksgiving Break', notes: '' },
-      { week: 'Nov 30', mon: '', tue: '', wed: '', thu: '', fri: '', notes: 'PS/ES Worship Night, Sat Dec 5 — The Lighthouse' },
-      { week: 'Dec 14', mon: '', tue: '', wed: '', thu: '', fri: 'Early Dismissal*', notes: '' },
+      { week: 'Nov 30', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: 'PS/ES Worship Night, Sat Dec 5 — The Lighthouse' },
+      { week: 'Dec 7', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Dec 14', mon: '', tue: '', wed: '', thu: '', fri: 'Early Dismissal*; Student Council Meeting', notes: '' },
       { week: 'Dec 21', mon: 'NO SCHOOL — Christmas Break', tue: 'NO SCHOOL — Christmas Break', wed: 'NO SCHOOL — Christmas Break', thu: 'NO SCHOOL — Christmas Break', fri: 'NO SCHOOL — Christmas Break', notes: '' },
       { week: 'Dec 28', mon: 'NO SCHOOL — Christmas Break', tue: 'NO SCHOOL — Christmas Break', wed: 'NO SCHOOL — Christmas Break', thu: 'NO SCHOOL — Christmas Break', fri: 'NO SCHOOL — Christmas Break', notes: '' },
-      { week: 'Jan 4', mon: 'NO SCHOOL — Christmas Break (last day)', tue: 'Third Quarter Begins', wed: '', thu: '', fri: '', notes: '' },
-      { week: 'Jan 18', mon: 'NO SCHOOL — Martin Luther King, Jr. Day', tue: '', wed: '', thu: '', fri: '', notes: '' },
+      { week: 'Jan 4', mon: 'NO SCHOOL — Christmas Break (last day)', tue: 'Third Quarter Begins', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Jan 11', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Jan 18', mon: 'NO SCHOOL — Martin Luther King, Jr. Day', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Jan 25', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Feb 1', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Feb 8', mon: 'Share the Love Spirit Week', tue: '', wed: '', thu: '', fri: 'NO SCHOOL — Faculty In-Service Day', notes: 'Confirm Spirit Week schedule — Feb 12 is a Faculty In-Service Day (No School) per the 26-27 calendar' },
-      { week: 'Feb 15', mon: 'NO SCHOOL — Winter Break', tue: 'NO SCHOOL — Winter Break', wed: '', thu: '', fri: '', notes: '' },
+      { week: 'Feb 15', mon: 'NO SCHOOL — Winter Break', tue: 'NO SCHOOL — Winter Break', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Feb 22', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Mar 1', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Mar 8', mon: '', tue: '', wed: '', thu: '', fri: 'NO SCHOOL — Faculty In-Service Day', notes: '' },
-      { week: 'Mar 15', mon: 'Fourth Quarter Begins', tue: '', wed: '', thu: '', fri: '', notes: '' },
+      { week: 'Mar 15', mon: 'Fourth Quarter Begins', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Mar 22', mon: 'NO SCHOOL — Spring Break', tue: 'NO SCHOOL — Spring Break', wed: 'NO SCHOOL — Spring Break', thu: 'NO SCHOOL — Spring Break', fri: 'NO SCHOOL — Spring Break', notes: '' },
-      { week: 'Mar 29', mon: 'NO SCHOOL — Spring Break (last day)', tue: '', wed: '', thu: '', fri: '', notes: '' },
-      { week: 'May 3', mon: '', tue: '', wed: '', thu: '', fri: 'Grade 12: Last Day of School', notes: 'AP Exams (HS) run May 3–14' },
-      { week: 'May 10', mon: '', tue: '', wed: '', thu: '', fri: '', notes: 'AP Exams (HS) continue through Fri, May 14' },
+      { week: 'Mar 29', mon: 'NO SCHOOL — Spring Break (last day)', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Apr 5', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Apr 12', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Apr 19', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'Apr 26', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
+      { week: 'May 3', mon: '', tue: '', wed: '', thu: '', fri: 'Grade 12: Last Day of School; Student Council Meeting', notes: 'AP Exams (HS) run May 3–14' },
+      { week: 'May 10', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: 'AP Exams (HS) continue through Fri, May 14' },
       { week: 'May 17', mon: 'Grade 8: Last Day of School', tue: '', wed: 'Grade 5: Last Day of School', thu: 'Last Day of School — Early Dismissal*', fri: 'NO SCHOOL — Faculty In-Service Day', notes: 'End of school year' }
     ];
 
