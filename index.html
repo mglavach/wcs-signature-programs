@@ -287,49 +287,78 @@
     .download-btn:hover { background: #B9975B; }
 
     /* ── Print / PDF styles ── */
+    @page {
+      size: letter;
+      margin: 0.4in;
+    }
     @media print {
       .download-btn { display: none; }
+      .why-list { display: none; }
 
       body {
-        font-size: 9.5pt;
+        font-size: 7.5pt;
+        line-height: 1.3;
         background: #fff;
         color: #000;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
 
-      .hero {
-        padding: 28px 16px 24px;
-      }
-      .hero img { height: 60px; }
+      .hero { padding: 10px 12px 8px; }
+      .hero img { height: 34px !important; margin-bottom: 6px !important; }
+      .hero h1 { font-size: 13pt; margin-bottom: 0 !important; }
 
-      .section {
-        padding: 24px 16px;
-        max-width: 100%;
-      }
+      .section { padding: 8px 10px; max-width: 100%; }
+      .section-title { font-size: 10pt; margin-bottom: 8px !important; }
 
       .card-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
       }
 
       .card {
         break-inside: avoid;
-        padding: 16px 14px;
+        padding: 6px 7px;
         box-shadow: none;
         border: 1px solid #ccc;
       }
+      .card h3 { font-size: 8pt; margin-bottom: 3px !important; }
+      .card p {
+        font-size: 6.7pt;
+        line-height: 1.25;
+        margin-bottom: 4px !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .card .badge, .card .badge-coming-soon {
+        font-size: 6pt;
+        padding: 1px 5px;
+        margin-bottom: 4px !important;
+      }
+      .card-meta {
+        gap: 2px 6px;
+        padding-top: 4px;
+        font-size: 6.3pt;
+      }
+      .card-meta .mk.register-pill { display: none; }
 
-      .category { break-inside: avoid; margin-bottom: 28px; }
+      .category { break-inside: avoid; margin-bottom: 10px; }
+      .cat-header { margin-bottom: 6px; }
+      .cat-header span { font-size: 7.5pt; }
 
       .team-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 4px;
       }
+      .team-avatar { display: none; }
+      .team-card .name { font-size: 6.5pt; margin-bottom: 1px; }
+      .team-card .role { font-size: 5.5pt; line-height: 1.15; margin-bottom: 2px; }
+      .team-card a.email-btn { display: none; }
 
-      .team-avatar { width: 80px; height: 80px; }
-
-      .contact { padding: 20px 16px; }
+      .contact { padding: 8px 10px; }
+      .contact p { font-size: 7pt; line-height: 1.3; }
 
       a { color: inherit !important; text-decoration: none !important; }
     }
