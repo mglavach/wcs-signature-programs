@@ -543,6 +543,11 @@
       5: ['Alaïa A.','Blaire S.','Cillian K.','Jose Elijah C.','Lexie B.','Mary R.','Sabrina B.','Shaylin S.','Sienna R.'],
     };
 
+    // Students removed from the recurring schedule as of a given date (inclusive).
+    const STUDENT_REMOVALS = {
+      'Alaïa A.': new Date(2026, 8, 21), // removed starting the week of 9/21/2026
+    };
+
     // Dates school is fully closed (from the official school calendar).
     const CLOSURES = {
       '2026-09-07': 'Labor Day',
@@ -635,7 +640,9 @@
         const inRange = date >= PROGRAM_START && date <= PROGRAM_END;
         const closure = CLOSURES[key];
         const note = NOTES[key];
-        const roster = (inRange && !closure && WEEKLY_TEMPLATE[dow]) ? WEEKLY_TEMPLATE[dow] : null;
+        const roster = (inRange && !closure && WEEKLY_TEMPLATE[dow])
+          ? WEEKLY_TEMPLATE[dow].filter(name => !(STUDENT_REMOVALS[name] && date >= STUDENT_REMOVALS[name]))
+          : null;
 
         const cell = document.createElement('div');
         cell.className = 'cal-day';
