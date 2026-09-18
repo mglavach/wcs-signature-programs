@@ -375,15 +375,15 @@
             <th>Thursday</th>
             <th>Friday</th>
             <th>Notes / School-Wide Events</th>
-            <th></th>
+            <th id="chart-remove-header" class="local-only"></th>
           </tr>
         </thead>
         <tbody id="chart-body"></tbody>
       </table>
     </div>
     <div class="chart-controls">
-      <button class="chart-btn" id="add-week-btn">+ Add Week</button>
-      <button class="chart-btn subtle" id="reset-chart-btn">Reset to Starter Template</button>
+      <button class="chart-btn local-only" id="add-week-btn">+ Add Week</button>
+      <button class="chart-btn subtle local-only" id="reset-chart-btn">Reset to Starter Template</button>
     </div>
     <div class="tips-box">
       <p>No School and Early Dismissal days above are pulled from the 2026-27 School Calendar (Cal_26.27.pdf, linked under Resources). *Early Dismissal times: PK3–Gr. 1 at 11 a.m., Gr. 2–5 at 11:15 a.m., Gr. 6–12 at 11:30 a.m.</p>
@@ -451,7 +451,7 @@
       <span class="save-note" id="checklist-save-note">✓ Saved</span>
     </p>
     <ul class="checklist" id="checklist-list"></ul>
-    <button class="add-idea-btn" id="add-checklist-btn">+ Add Item</button>
+    <button class="add-idea-btn local-only" id="add-checklist-btn">+ Add Item</button>
   </div>
 
   <!-- Resources -->
@@ -501,7 +501,7 @@
         <tbody id="idea-body"></tbody>
       </table>
     </div>
-    <button class="add-idea-btn" id="add-idea-btn">+ Add Idea</button>
+    <button class="add-idea-btn local-only" id="add-idea-btn">+ Add Idea</button>
   </div>
 
   <!-- Contact -->
@@ -514,6 +514,12 @@
 
   <script>
     /* ───────────────────── Shared helpers ───────────────────── */
+    /* Add/remove controls only show when viewed locally (file:// or localhost) —
+       the live GitHub Pages site is view + edit-in-place only, no adding or deleting rows. */
+    var isLocalEdit = location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if (!isLocalEdit) {
+      document.querySelectorAll('.local-only').forEach(function (el) { el.style.display = 'none'; });
+    }
     function flashSaveNote(id) {
       var el = document.getElementById(id);
       if (!el) return;
@@ -593,16 +599,18 @@
         });
         var tdRemove = document.createElement('td');
         tdRemove.className = 'remove-col';
-        var btn = document.createElement('button');
-        btn.className = 'row-delete-btn';
-        btn.title = 'Remove week';
-        btn.textContent = '✕';
-        btn.addEventListener('click', function () {
-          chartRows.splice(idx, 1);
-          saveJSON(CHART_KEY, chartRows, 'chart-save-note');
-          renderChart();
-        });
-        tdRemove.appendChild(btn);
+        if (isLocalEdit) {
+          var btn = document.createElement('button');
+          btn.className = 'row-delete-btn';
+          btn.title = 'Remove week';
+          btn.textContent = '✕';
+          btn.addEventListener('click', function () {
+            chartRows.splice(idx, 1);
+            saveJSON(CHART_KEY, chartRows, 'chart-save-note');
+            renderChart();
+          });
+          tdRemove.appendChild(btn);
+        }
         tr.appendChild(tdRemove);
         body.appendChild(tr);
       });
@@ -658,19 +666,20 @@
           saveJSON(CHECKLIST_KEY, checklistItems, 'checklist-save-note');
         });
 
-        var del = document.createElement('button');
-        del.className = 'row-delete-btn';
-        del.title = 'Remove item';
-        del.textContent = '✕';
-        del.addEventListener('click', function () {
-          checklistItems = checklistItems.filter(function (i) { return i.id !== item.id; });
-          saveJSON(CHECKLIST_KEY, checklistItems, 'checklist-save-note');
-          renderChecklist();
-        });
-
         li.appendChild(checkbox);
         li.appendChild(span);
-        li.appendChild(del);
+        if (isLocalEdit) {
+          var del = document.createElement('button');
+          del.className = 'row-delete-btn';
+          del.title = 'Remove item';
+          del.textContent = '✕';
+          del.addEventListener('click', function () {
+            checklistItems = checklistItems.filter(function (i) { return i.id !== item.id; });
+            saveJSON(CHECKLIST_KEY, checklistItems, 'checklist-save-note');
+            renderChecklist();
+          });
+          li.appendChild(del);
+        }
         list.appendChild(li);
       });
     }
@@ -780,19 +789,21 @@
             '<td class="idea-desc">' + escapeHtml(idea.description) + '</td>' +
             '<td class="idea-actions">' +
               '<button class="idea-icon-btn edit" data-action="edit">✎ Edit</button>' +
-              '<button class="idea-icon-btn delete" data-action="delete">✕ Delete</button>' +
+              (isLocalEdit ? '<button class="idea-icon-btn delete" data-action="delete">✕ Delete</button>' : '') +
             '</td>';
 
           tr.querySelector('[data-action="edit"]').addEventListener('click', function () {
             editingIdeaId = idea.id;
             renderIdeas();
           });
-          tr.querySelector('[data-action="delete"]').addEventListener('click', function () {
-            if (!confirm('Remove "' + idea.title + '" from the Idea Bank?')) return;
-            ideas = ideas.filter(function (i) { return i.id !== idea.id; });
-            saveJSON(IDEA_KEY, ideas, 'idea-save-note');
-            renderIdeas();
-          });
+          if (isLocalEdit) {
+            tr.querySelector('[data-action="delete"]').addEventListener('click', function () {
+              if (!confirm('Remove "' + idea.title + '" from the Idea Bank?')) return;
+              ideas = ideas.filter(function (i) { return i.id !== idea.id; });
+              saveJSON(IDEA_KEY, ideas, 'idea-save-note');
+              renderIdeas();
+            });
+          }
         }
         body.appendChild(tr);
       });
