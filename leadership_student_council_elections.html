@@ -318,6 +318,26 @@
       color: #444;
       font-size: 10.5px;
     }
+    .rule-pill {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 20px;
+      vertical-align: middle;
+    }
+    .rule-pill.required {
+      background: #2C5234;
+      color: #fff;
+    }
+    .rule-pill.optional {
+      background: #eee;
+      color: #777;
+      border: 1px solid #ccc;
+    }
 
     /* ── Election timeline ── */
     .timeline {
@@ -437,12 +457,20 @@
         <span class="step-date">Mon, Sep 14</span>
       </div>
       <div class="timeline-step">
+        <h4>Muffins and Mentors</h4>
+        <span class="step-date">Thu, Sep 17</span>
+      </div>
+      <div class="timeline-step">
         <h4>Campaigning Begins</h4>
         <span class="step-date">Mon, Sep 21</span>
       </div>
       <div class="timeline-step">
         <h4>Speeches Due</h4>
         <span class="step-date">Mon, Sep 21 - to homeroom teacher</span>
+      </div>
+      <div class="timeline-step">
+        <h4>Muffins and Mentors</h4>
+        <span class="step-date">Tue, Sep 22</span>
       </div>
       <div class="timeline-step">
         <h4>Election Day</h4>
@@ -487,19 +515,23 @@
     </p>
     <div class="role-grid">
       <div class="role-card">
-        <h3>1. Make a Flyer</h3>
+        <h3>1. Make a Flyer <span class="rule-pill optional">Optional</span></h3>
         <p>You may hand out a flyer (no larger than 8½ x 11) to your classmates. You may not attach anything to it, and glitter is not allowed. Flyers may be handed out starting Monday, September 21.</p>
       </div>
       <div class="role-card">
-        <h3>2. Make a Poster</h3>
+        <h3>2. Make a Poster <span class="rule-pill optional">Optional</span></h3>
         <p>You may make a poster using ONLY the poster board provided by Mrs. Glavach, to be displayed inside your classroom.</p>
       </div>
       <div class="role-card">
-        <h3>3. Make a Campaign T-Shirt</h3>
+        <h3>3. Make a Campaign T-Shirt <span class="rule-pill optional">Optional</span></h3>
         <p>You may make a campaign t-shirt to wear on Tuesday, 9/22. It must be appropriate, with no negative or derogatory slogans, and no glitter. It must be approved by your classroom teacher by Monday, September 21. Approved shirts may be worn all day Tuesday, 9/22, and during the speech on Wednesday.</p>
       </div>
       <div class="role-card">
-        <h3>4. Make a Speech</h3>
+        <h3>4. Attend Muffins and Mentors <span class="rule-pill optional">Optional</span> <span class="rule-pill required">RSVP Required</span></h3>
+        <p>Meet with HS leadership students to work on your speech and practice enunciation.</p>
+      </div>
+      <div class="role-card">
+        <h3>5. Make a Speech <span class="rule-pill required">Required</span></h3>
         <p>A short speech will be given on Election Day, Wednesday, September 23, stating why you would make a good representative for your class. Speeches must be submitted to your homeroom teacher for approval by Monday, September 21. New: 4th and 5th graders approved to run will be given access to a Flint lesson to help prepare their speech.</p>
       </div>
     </div>
