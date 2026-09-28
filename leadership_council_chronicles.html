@@ -689,32 +689,34 @@
     /* ───────────────────── Idea Bank ───────────────────── */
     var IDEA_KEY = 'councilChronicles_ideaBank_v1';
     var CATEGORY_COLORS = {
-      'Community & Belonging': '#2F5233',
+      'Community Connect': '#2F5233',
       'Faith & Worship': '#B08D57',
-      'Service & Giving': '#3B6E8F',
-      'Fun & Engagement': '#8A3B3B'
+      'School Spirit': '#8A3B3B',
+      'Nature Ambassador': '#5E7D3A'
     };
     var CATEGORIES = Object.keys(CATEGORY_COLORS);
     var DEFAULT_IDEAS = [
-      { id: '1', category: 'Community & Belonging', title: 'Buddy Bench', description: "A designated bench so kids who feel left out or lonely have a way to signal they want company." },
-      { id: '2', category: 'Community & Belonging', title: 'Mentor/Guide Club', description: 'New students get paired with a returning student at the start of the year to help them feel welcome.' },
-      { id: '3', category: 'Community & Belonging', title: 'No One Eats Alone', description: "A grade-level bonding day where students sit outside at lunch with classmates they don't usually hang out with, listening to worship music together." },
-      { id: '4', category: 'Community & Belonging', title: 'Class Park/Community Day', description: 'An outside-of-school gathering (park day, church visit, or community service day) to build unity across the class.' },
-      { id: '5', category: 'Community & Belonging', title: 'Helping Shy Students', description: 'General focus and initiative on making quieter students feel included and supported.' },
+      { id: '1', category: 'Community Connect', title: 'Buddy Bench', description: "A designated bench so kids who feel left out or lonely have a way to signal they want company." },
+      { id: '2', category: 'Community Connect', title: 'Mentor/Guide Club', description: 'New students get paired with a returning student at the start of the year to help them feel welcome.' },
+      { id: '3', category: 'Community Connect', title: 'No One Eats Alone', description: "A grade-level bonding day where students sit outside at lunch with classmates they don't usually hang out with, listening to worship music together." },
+      { id: '4', category: 'Community Connect', title: 'Class Park/Community Day', description: 'An outside-of-school gathering (park day, church visit, or community service day) to build unity across the class.' },
+      { id: '5', category: 'Community Connect', title: 'Helping Shy Students', description: 'General focus and initiative on making quieter students feel included and supported.' },
       { id: '6', category: 'Faith & Worship', title: 'Worship Song Timeline', description: 'Each class picks a worship song throughout the year, then shares it at chapel.' },
       { id: '7', category: 'Faith & Worship', title: 'Bible Verse of the Day', description: 'Shared at school drop-off each morning.' },
       { id: '8', category: 'Faith & Worship', title: 'Gratitude Wall', description: "Students add their favorite Bible verse on a star for a wall everyone can see." },
       { id: '9', category: 'Faith & Worship', title: 'Faith Mural', description: "A muralist paints a mural about the school's faith in God, funded by student donations, as a lasting reminder of the school's Christian mission." },
       { id: '10', category: 'Faith & Worship', title: 'Fun Faith Friday Box', description: 'A suggestion/prayer box checked weekly, used for fun ways to learn about different subjects and faith topics.' },
-      { id: '11', category: 'Service & Giving', title: 'Feed the Homeless', description: 'Organized service project to support those in need.' },
-      { id: '12', category: 'Service & Giving', title: 'Toy Drive', description: 'Collecting toys to donate to children in need.' },
-      { id: '13', category: 'Service & Giving', title: 'Gardening Club', description: "Grow plants and vegetables and sell them to local kitchens, including the school's, with proceeds going toward giving back." },
-      { id: '14', category: 'Service & Giving', title: 'Movie Night Donation Drive', description: 'A movie night where admission is a donation item instead of money.' },
-      { id: '15', category: 'Fun & Engagement', title: 'Talent Show', description: 'A schoolwide event for students to showcase their talents.' },
-      { id: '16', category: 'Fun & Engagement', title: 'Suggestion Box', description: 'A simple way for students to submit ideas year-round.' }
+      { id: '11', category: 'Community Connect', title: 'Feed the Homeless', description: 'Organized service project to support those in need.' },
+      { id: '12', category: 'Community Connect', title: 'Toy Drive', description: 'Collecting toys to donate to children in need.' },
+      { id: '13', category: 'Community Connect', title: 'Gardening Club', description: "Grow plants and vegetables and sell them to local kitchens, including the school's, with proceeds going toward giving back." },
+      { id: '14', category: 'Community Connect', title: 'Movie Night Donation Drive', description: 'A movie night where admission is a donation item instead of money.' },
+      { id: '15', category: 'School Spirit', title: 'Talent Show', description: 'A schoolwide event for students to showcase their talents.' },
+      { id: '16', category: 'School Spirit', title: 'Suggestion Box', description: 'A simple way for students to submit ideas year-round.' }
     ];
 
     var ideas = (isLocalEdit && loadJSON(IDEA_KEY, null)) || DEFAULT_IDEAS.map(function (i) { return Object.assign({}, i); });
+    var MERGED_CATEGORIES = { 'Community & Belonging': 'Community Connect', 'Service & Giving': 'Community Connect', 'Fun & Engagement': 'School Spirit' };
+    ideas.forEach(function (i) { if (MERGED_CATEGORIES[i.category]) i.category = MERGED_CATEGORIES[i.category]; });
     var ideaFilter = 'All';
     var editingIdeaId = null;
     var addingIdea = false;
