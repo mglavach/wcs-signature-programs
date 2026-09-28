@@ -323,6 +323,193 @@
     }
     .tips-box p { color: #444; font-size: 10.5px; line-height: 1.7; }
 
+    /* ── Warrior Wrap-Up (flip book) ── */
+    .book {
+      margin: 28px auto 0;
+      max-width: 720px;
+      perspective: 1800px;
+    }
+    .book-pages {
+      display: grid;
+      position: relative;
+      border-radius: 4px 10px 10px 4px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.12), 6px 6px 0 -2px #ece7dc, 6px 6px 0 -1px #d9d1bf, 11px 11px 0 -4px #ece7dc, 11px 11px 0 -3px #d9d1bf;
+    }
+    .book-page {
+      grid-area: 1 / 1;
+      background: #fffdf8;
+      border-left: 14px solid #2C5234;
+      border-radius: 4px 10px 10px 4px;
+      padding: 34px 38px 26px;
+      display: flex;
+      flex-direction: column;
+      transform-origin: left center;
+      backface-visibility: hidden;
+      visibility: hidden;
+      background-image: linear-gradient(90deg, rgba(0,0,0,0.07), rgba(0,0,0,0) 28px);
+    }
+    .book-page.is-current { visibility: visible; z-index: 2; }
+    .book-page.is-turning { visibility: visible; z-index: 3; }
+    .book-page.turn-away { animation: pageTurnAway 0.55s ease-in forwards; }
+    .book-page.turn-back { animation: pageTurnBack 0.55s ease-out forwards; }
+    @keyframes pageTurnAway {
+      from { transform: rotateY(0deg); }
+      to   { transform: rotateY(-100deg); opacity: 0.4; }
+    }
+    @keyframes pageTurnBack {
+      from { transform: rotateY(-100deg); opacity: 0.4; }
+      to   { transform: rotateY(0deg); opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .book-page.turn-away, .book-page.turn-back { animation-duration: 0.01s; }
+    }
+
+    .book-cover {
+      background: #2C5234;
+      background-image: linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0) 36px);
+      border-left-color: #1f3b25;
+      padding: 22px;
+      color: #fff;
+    }
+    .cover-frame {
+      flex: 1;
+      border: 2px solid #B9975B;
+      outline: 1px solid rgba(185,151,91,0.5);
+      outline-offset: -8px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+    }
+    .cover-seal { width: 150px; height: 150px; margin-bottom: 26px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3)); }
+    .cover-kicker { color: #c8dac2; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+    .cover-title { color: #B9975B; font-size: 38px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.15; }
+    .cover-rule { width: 80px; height: 3px; background: #B9975B; margin: 18px auto; }
+    .cover-subtitle { font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .cover-year { color: #c8dac2; font-size: 12px; letter-spacing: 0.12em; margin-top: 8px; }
+    .cover-hint { color: #B9975B; font-size: 10px; font-style: italic; letter-spacing: 0.06em; margin-top: 44px; }
+    @media (max-width: 600px) {
+      .cover-seal { width: 110px; height: 110px; }
+      .cover-title { font-size: 28px; }
+    }
+
+    .page-running-head {
+      display: flex;
+      justify-content: space-between;
+      color: #B9975B;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #e6e2da;
+      padding-bottom: 8px;
+      margin-bottom: 18px;
+    }
+    .page-title { color: #2C5234; font-size: 18px; letter-spacing: 0.03em; margin-bottom: 4px; }
+    .page-subtitle { color: #777; font-size: 10.5px; font-style: italic; margin-bottom: 18px; }
+    .page-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px 18px;
+      margin-bottom: 20px;
+      font-size: 10.5px;
+      color: #555;
+    }
+    .page-meta span { border-bottom: 1px solid #d9d1bf; padding-bottom: 4px; }
+    .page-meta strong { color: #2C5234; }
+
+    .agenda-list { list-style: none; counter-reset: agenda; }
+    .agenda-list > li { counter-increment: agenda; padding: 10px 0; border-bottom: 1px dashed #e6e2da; }
+    .agenda-list > li:last-child { border-bottom: none; }
+    .agenda-head { display: flex; align-items: baseline; gap: 10px; }
+    .agenda-head::before {
+      content: counter(agenda);
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: #2C5234;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+      align-self: center;
+    }
+    .agenda-head h4 { color: #222; font-size: 12px; flex: 1; }
+    .agenda-time { color: #B9975B; font-size: 9.5px; font-weight: 700; white-space: nowrap; }
+    .agenda-list ul { margin: 6px 0 0 32px; color: #555; font-size: 10.5px; line-height: 1.6; }
+
+    .page-notes { margin-top: 20px; }
+    .page-notes h4 { color: #2C5234; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .page-notes .lines {
+      height: 120px;
+      background-image: repeating-linear-gradient(transparent, transparent 23px, #d9d1bf 23px, #d9d1bf 24px);
+    }
+    .page-number { margin-top: auto; padding-top: 20px; text-align: center; color: #999; font-size: 9.5px; letter-spacing: 0.08em; }
+
+    .book-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 26px;
+      flex-wrap: wrap;
+    }
+    .book-controls .chart-btn:disabled { opacity: 0.35; cursor: default; background: none; color: #2C5234; }
+    .book-jump {
+      border: 1px solid #c9c2af;
+      border-radius: 4px;
+      padding: 7px 10px;
+      font-family: inherit;
+      font-size: 10.5px;
+      color: #2C5234;
+      background: #fff;
+      max-width: 240px;
+    }
+
+    @media (max-width: 600px) {
+      .book-page { padding: 24px 18px 20px; border-left-width: 9px; }
+      .agenda-list ul { margin-left: 18px; }
+    }
+
+    /* Print This Page: only the open Wrap-Up page goes to the printer */
+    @media print {
+      body.print-wrap { background: #fff; }
+      body.print-wrap > *:not(#warrior-wrap-up) { display: none !important; }
+      body.print-wrap #warrior-wrap-up { padding: 0; max-width: none; }
+      body.print-wrap #warrior-wrap-up > .section-title,
+      body.print-wrap #warrior-wrap-up > .section-intro,
+      body.print-wrap .book-controls { display: none !important; }
+      body.print-wrap .book { margin: 0; max-width: none; perspective: none; }
+      body.print-wrap .book-pages { display: block; box-shadow: none; }
+      body.print-wrap .book-page { display: none; }
+      body.print-wrap .book-page.is-current {
+        display: flex;
+        visibility: visible;
+        animation: none;
+        transform: none;
+        min-height: 9.5in;
+        break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      body.print-wrap .agenda-list > li { break-inside: avoid; }
+      /* Print Whole Book: every page, each on its own sheet */
+      body.print-wrap.print-all .book-page {
+        display: flex;
+        visibility: visible;
+        animation: none;
+        transform: none;
+        min-height: 9.5in;
+        break-after: page;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      body.print-wrap.print-all .book-page:last-child { break-after: auto; }
+    }
+
     /* ── Contact footer ── */
     .contact { background: #2C5234; color: #fff; text-align: center; padding: 28px 24px; }
     .contact p { line-height: 1.75; }
@@ -351,6 +538,7 @@
       <li><a href="#annual-checklist">Annual Checklist</a></li>
       <li><a href="#resources">Resources</a></li>
       <li><a href="#idea-bank">Idea Bank</a></li>
+      <li><a href="#warrior-wrap-up">Warrior Wrap-Up</a></li>
     </ul>
   </nav>
 
@@ -404,10 +592,12 @@
       </div>
       <div class="role-card">
         <span class="topic-pill">School Spirit</span>
-        <h3>PS/ES Homecoming Pep Rally</h3>
-        <p class="event-date">Fri, Oct 23 at 7:30 a.m.</p>
-        <p class="event-place">ES Courtyard</p>
-        <p>Event Sponsor: Mrs. McGee.</p>
+        <h3>PS/ES Homecoming Spirit Week</h3>
+        <p class="event-date">Mon, Oct 19 – Fri, Oct 23</p>
+        <p class="event-place">Pep Rally: Fri, Oct 23, 7:45 a.m., ES Courtyard</p>
+        <p>"Lost, But Now I'm Found" Edition.</p>
+        <p style="margin-top:8px;"><strong>Event Liaison:</strong> Mrs. McGee</p>
+        <a class="resource-btn" href="Spirit Week 2026 v.2.pdf" target="_blank" rel="noopener" style="cursor:pointer; margin-top:10px;">Click for More</a>
       </div>
       <div class="role-card">
         <span class="topic-pill">Community Connect</span>
@@ -418,10 +608,21 @@
         <a class="resource-btn" href="leadership_thanksgiving_food_drive.html" target="_blank" rel="noopener" style="cursor:pointer; margin-top:10px;">More Info</a>
       </div>
       <div class="role-card">
+        <span class="topic-pill">Community Connect</span>
+        <h3>ICU Baby Hope Parade</h3>
+        <p class="event-date">Sun, Nov 8</p>
+        <p class="event-place">Zoo Miami</p>
+        <p style="margin-bottom:8px;"><strong>Family Connection:</strong> Urquidi Family</p>
+        <p>A family walk supporting NICU families, presented by ICU Baby and Nicklaus Children's Hospital. Registration includes a choice of two walk distances, all-day zoo admission, a T-shirt (baby bib for under 1), finisher medals for kids, breakfast snacks, and activities.</p>
+        <p style="margin-top:8px;"><strong>Early bird:</strong> Adults $36 · Ages 1–17 $20 · Under 1 free. Save 20% with code EARLYBIRD through Oct 9.</p>
+        <span class="resource-btn" style="margin-top:10px; opacity:0.7;">More Info Coming Soon</span>
+      </div>
+      <div class="role-card">
         <span class="topic-pill">Worship</span>
         <h3>PS/ES Worship Night</h3>
         <p class="event-date">Fri, Dec 4</p>
         <p class="event-place">The Lighthouse</p>
+        <p style="margin-top:8px;"><strong>Event Liaison:</strong> Mrs. Moon</p>
       </div>
       <div class="role-card">
         <span class="topic-pill">School Spirit</span>
@@ -467,8 +668,7 @@
   <div class="section" id="idea-bank">
     <h2 class="section-title">Idea Bank</h2>
     <p class="section-intro">
-      Ideas raised in Council discussions, organized by category.<span class="local-only"> Edit, add, or remove ideas below — changes save
-      automatically.</span>
+      Ideas raised in Council discussions, organized by category.<span class="local-only"> </span>
       <span class="save-note" id="idea-save-note">✓ Saved</span>
     </p>
     <div class="idea-filters" id="idea-filters"></div>
@@ -486,6 +686,165 @@
       </table>
     </div>
     <button class="add-idea-btn local-only" id="add-idea-btn">+ Add Idea</button>
+  </div>
+
+  <!-- Warrior Wrap-Up -->
+  <!-- To add a week: copy a <article class="book-page"> block, place it after the last page,
+       and update data-label. Page numbers fill in automatically. -->
+  <div class="section alt-bg" id="warrior-wrap-up">
+    <h2 class="section-title">Warrior Wrap-Up</h2>
+    <p class="section-intro">Our meeting minutes: one page per weekly meeting. Flip through to see what we covered.</p>
+
+    <div class="book" id="wrap-book" tabindex="0" aria-label="Warrior Wrap-Up book. Use the left and right arrow keys to turn pages.">
+      <div class="book-pages" id="wrap-pages">
+
+        <article class="book-page book-cover" data-label="Cover" data-cover>
+          <div class="cover-frame">
+            <img class="cover-seal" src="WCS academic logo.png" alt="Westminster Christian School seal" />
+            <p class="cover-kicker">Student Council</p>
+            <h3 class="cover-title">Warrior Wrap-Up</h3>
+            <div class="cover-rule"></div>
+            <p class="cover-subtitle">Weekly Meeting Minutes</p>
+            <p class="cover-year">2026 – 2027</p>
+            <p class="cover-hint">Turn the page ›</p>
+          </div>
+        </article>
+
+        <article class="book-page" data-label="Warrior Rules of Order">
+          <div class="page-running-head"><span>Warrior Wrap-Up</span><span>Rules of Order</span></div>
+          <h3 class="page-title">Warrior Rules of Order</h3>
+          <p class="page-subtitle">How we run every meeting, so every voice is heard.</p>
+          <ol class="agenda-list">
+            <li>
+              <div class="agenda-head"><h4>One Voice at a Time</h4></div>
+              <ul><li>Only one person talks at a time. No talking over classmates.</li></ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Raise It Before You Say It</h4></div>
+              <ul><li>Want to share an idea? Raise your hand and wait to be called on by the President.</li></ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Stay on Topic</h4></div>
+              <ul><li>Keep your comments about what's being discussed, not something else.</li></ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Disagree Kindly</h4></div>
+              <ul><li>It's okay to have a different idea. Say it respectfully, no putting anyone down.</li></ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>The President Leads</h4></div>
+              <ul><li>The President runs the meeting and decides who speaks next. Respect their lead.</li></ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Ideas Become Motions</h4></div>
+              <ul><li>If you want the council to decide on something, say: "I move that we..." Then the group votes.</li></ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Majority Rules</h4></div>
+              <ul><li>When we vote, most votes wins. If your idea doesn't win, that's okay, we're still a team.</li></ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Listen to Understand</h4></div>
+              <ul><li>When someone else is talking, listen instead of planning what you'll say next.</li></ul>
+            </li>
+          </ol>
+          <p class="page-number"></p>
+        </article>
+
+        <article class="book-page" data-label="Meeting Agenda Template">
+          <div class="page-running-head"><span>Warrior Wrap-Up</span><span>Meeting Agenda</span></div>
+          <h3 class="page-title">Weekly Meeting Agenda</h3>
+          <p class="page-subtitle">The order we follow every Friday. Each wrap-up page summarizes these sections.</p>
+          <div class="page-meta">
+            <span><strong>Date:</strong></span>
+            <span><strong>Place:</strong> Pavilion by the SAC</span>
+            <span><strong>Recorded by:</strong></span>
+          </div>
+          <ol class="agenda-list">
+            <li>
+              <div class="agenda-head"><h4>Call to Order &amp; Prayer</h4><span class="agenda-time">2 min</span></div>
+              <ul>
+                <li>President welcomes everyone and calls the meeting to order.</li>
+                <li>Chaplain opens with a short prayer.</li>
+              </ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Roll Call</h4><span class="agenda-time">2 min</span></div>
+              <ul>
+                <li>Take attendance — make sure every class is represented.</li>
+                <li>Note any absences for the record.</li>
+              </ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Welcome &amp; Last Week's Recap</h4><span class="agenda-time">3 min</span></div>
+              <ul>
+                <li>Quick reminder of what we talked about last time.</li>
+                <li>Any corrections or updates?</li>
+              </ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Officer Updates</h4><span class="agenda-time">5 min</span></div>
+              <ul>
+                <li>President: What's happening with Student Leadership this week?</li>
+                <li>Vice President: Any upcoming events to know about?</li>
+                <li>Chaplain: Spiritual focus, chapel planning, or a verse of the week.</li>
+              </ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Committee Updates</h4><span class="agenda-time">5 min</span></div>
+              <ul>
+                <li>Nature Ambassadors: progress, ideas, or upcoming activities.</li>
+                <li>Sunshine Squad: ways we're spreading positivity this week.</li>
+                <li>Community Connect: outreach opportunities and plans.</li>
+              </ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Old Business</h4><span class="agenda-time">3 min</span></div>
+              <ul>
+                <li>Check in on projects or ideas from previous meetings.</li>
+                <li>Is there anything still left to finish?</li>
+              </ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>New Business &amp; Ideas</h4><span class="agenda-time">5 min</span></div>
+              <ul>
+                <li>Share new ideas from your class.</li>
+                <li>Discuss any new projects, events, or service opportunities.</li>
+                <li>Decide who will help with what, and by when.</li>
+              </ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Announcements &amp; Reminders</h4><span class="agenda-time">2 min</span></div>
+              <ul>
+                <li>Important dates or deadlines coming up.</li>
+                <li>Reminders for the whole school, if any.</li>
+              </ul>
+            </li>
+            <li>
+              <div class="agenda-head"><h4>Closing</h4><span class="agenda-time">1 min</span></div>
+              <ul>
+                <li>Thank everyone for coming and for representing their class well.</li>
+                <li>Confirm the date, time, and place of next week's meeting.</li>
+              </ul>
+            </li>
+          </ol>
+          <div class="page-notes">
+            <h4>Notes</h4>
+            <div class="lines"></div>
+          </div>
+          <p class="page-number"></p>
+        </article>
+
+      </div>
+
+      <div class="book-controls">
+        <button class="chart-btn" id="wrap-prev" aria-label="Previous page">‹ Prev</button>
+        <select class="book-jump" id="wrap-jump" aria-label="Jump to page"></select>
+        <button class="chart-btn" id="wrap-next" aria-label="Next page">Next ›</button>
+        <button class="chart-btn subtle" id="wrap-print">🖨 Print This Page</button>
+        <button class="chart-btn subtle" id="wrap-print-all">🖨 Print Whole Book</button>
+      </div>
+    </div>
   </div>
 
   <!-- Contact -->
@@ -541,9 +900,9 @@
       { week: 'Sep 28', mon: '', tue: '', wed: '', thu: '', fri: 'First weekly Student Council meeting', notes: 'Weekly meetings begin — every Friday during lunch, Pavilion by the SAC' },
       { week: 'Oct 5', mon: '', tue: '', wed: '', thu: '', fri: 'NO SCHOOL — Faculty In-Service Day', notes: 'No Council meeting this week' },
       { week: 'Oct 12', mon: 'Second Quarter Begins', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
-      { week: 'Oct 19', mon: '', tue: '', wed: '', thu: '', fri: 'PS/ES Homecoming Pep Rally, 7:30am; Student Council Meeting', notes: '' },
+      { week: 'Oct 19', mon: 'Lost in the Wild Day', tue: 'Find Your Flock Day', wed: 'Rest with the Shepherd', thu: '1961 Throwback Day', fri: 'ES Pep Rally, 7:45am; Student Council Meeting', notes: 'PS/ES Homecoming Spirit Week' },
       { week: 'Oct 26', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
-      { week: 'Nov 2', mon: 'Thanksgiving Food Drive begins', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: 'Runs through Nov 20' },
+      { week: 'Nov 2', mon: 'Thanksgiving Food Drive begins', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: 'Food Drive runs through Nov 20; Sun, Nov 8: ICU Baby Hope Parade at Zoo Miami' },
       { week: 'Nov 9', mon: '', tue: '', wed: 'NO SCHOOL — Veterans Day', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Nov 16', mon: '', tue: '', wed: '', thu: '', fri: 'Thanksgiving Food Drive ends; Early Dismissal*; Student Council Meeting', notes: '' },
       { week: 'Nov 23', mon: 'NO SCHOOL — Thanksgiving Break', tue: 'NO SCHOOL — Thanksgiving Break', wed: 'NO SCHOOL — Thanksgiving Break', thu: 'NO SCHOOL — Thanksgiving Break', fri: 'NO SCHOOL — Thanksgiving Break', notes: '' },
@@ -845,6 +1204,90 @@
 
     renderIdeaFilters();
     renderIdeas();
+
+    /* ───────────────────── Warrior Wrap-Up (flip book) ───────────────────── */
+    (function () {
+      var book = document.getElementById('wrap-book');
+      var pages = Array.prototype.slice.call(document.querySelectorAll('#wrap-pages .book-page'));
+      var prevBtn = document.getElementById('wrap-prev');
+      var nextBtn = document.getElementById('wrap-next');
+      var jump = document.getElementById('wrap-jump');
+      var current = 0;
+      var turning = false;
+
+      // The cover isn't numbered; page 1 is the first page after it.
+      var numbered = pages.filter(function (p) { return !p.hasAttribute('data-cover'); });
+      pages.forEach(function (page, i) {
+        var n = numbered.indexOf(page) + 1;
+        var label = page.getAttribute('data-label') || 'Page ' + n;
+        var numEl = page.querySelector('.page-number');
+        if (numEl) numEl.textContent = 'Page ' + n + ' of ' + numbered.length;
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = n ? n + '. ' + label : label;
+        jump.appendChild(opt);
+      });
+
+      function updateControls() {
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === pages.length - 1;
+        jump.value = current;
+      }
+
+      function goTo(target) {
+        if (turning || target === current || target < 0 || target >= pages.length) return;
+        var from = pages[current];
+        var to = pages[target];
+        var forward = target > current;
+        turning = true;
+
+        // Going forward, the old page swings away to reveal the new one underneath.
+        // Going back, the new page swings in on top of the old one.
+        var mover = forward ? from : to;
+        var animClass = forward ? 'turn-away' : 'turn-back';
+        to.classList.add('is-current');
+        mover.classList.add('is-turning', animClass);
+        mover.addEventListener('animationend', function done() {
+          mover.removeEventListener('animationend', done);
+          mover.classList.remove('is-turning', animClass);
+          from.classList.remove('is-current');
+          turning = false;
+        });
+
+        current = target;
+        updateControls();
+      }
+
+      prevBtn.addEventListener('click', function () { goTo(current - 1); });
+      nextBtn.addEventListener('click', function () { goTo(current + 1); });
+      jump.addEventListener('change', function () { goTo(parseInt(jump.value, 10)); });
+      document.getElementById('wrap-print').addEventListener('click', function () {
+        document.body.classList.add('print-wrap');
+        window.print();
+      });
+      document.getElementById('wrap-print-all').addEventListener('click', function () {
+        document.body.classList.add('print-wrap', 'print-all');
+        window.print();
+      });
+      window.addEventListener('afterprint', function () { document.body.classList.remove('print-wrap', 'print-all'); });
+      book.addEventListener('keydown', function (e) {
+        if (e.target === jump) return;
+        if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+        if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+      });
+
+      var touchX = null;
+      book.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+      book.addEventListener('touchend', function (e) {
+        if (touchX === null) return;
+        var dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1);
+        touchX = null;
+      });
+
+      pages[0].classList.add('is-current');
+      updateControls();
+    })();
   </script>
 
 </body>
