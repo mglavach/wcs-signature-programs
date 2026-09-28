@@ -420,7 +420,7 @@
       <div class="role-card">
         <span class="topic-pill">Worship</span>
         <h3>PS/ES Worship Night</h3>
-        <p class="event-date">Sat, Dec 5</p>
+        <p class="event-date">Fri, Dec 4</p>
         <p class="event-place">The Lighthouse</p>
       </div>
       <div class="role-card">
@@ -467,8 +467,8 @@
   <div class="section" id="idea-bank">
     <h2 class="section-title">Idea Bank</h2>
     <p class="section-intro">
-      Ideas raised in Council discussions, organized by category. Edit, add, or remove ideas below — changes save
-      automatically.
+      Ideas raised in Council discussions, organized by category.<span class="local-only"> Edit, add, or remove ideas below — changes save
+      automatically.</span>
       <span class="save-note" id="idea-save-note">✓ Saved</span>
     </p>
     <div class="idea-filters" id="idea-filters"></div>
@@ -479,7 +479,7 @@
             <th>Category</th>
             <th>Idea</th>
             <th>Description</th>
-            <th></th>
+            <th class="local-only"></th>
           </tr>
         </thead>
         <tbody id="idea-body"></tbody>
@@ -547,7 +547,7 @@
       { week: 'Nov 9', mon: '', tue: '', wed: 'NO SCHOOL — Veterans Day', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Nov 16', mon: '', tue: '', wed: '', thu: '', fri: 'Thanksgiving Food Drive ends; Early Dismissal*; Student Council Meeting', notes: '' },
       { week: 'Nov 23', mon: 'NO SCHOOL — Thanksgiving Break', tue: 'NO SCHOOL — Thanksgiving Break', wed: 'NO SCHOOL — Thanksgiving Break', thu: 'NO SCHOOL — Thanksgiving Break', fri: 'NO SCHOOL — Thanksgiving Break', notes: '' },
-      { week: 'Nov 30', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: 'PS/ES Worship Night, Sat Dec 5 — The Lighthouse' },
+      { week: 'Nov 30', mon: '', tue: '', wed: '', thu: '', fri: 'PS/ES Worship Night (The Lighthouse); Student Council Meeting', notes: '' },
       { week: 'Dec 7', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Dec 14', mon: '', tue: '', wed: '', thu: '', fri: 'Early Dismissal*; Student Council Meeting', notes: '' },
       { week: 'Dec 21', mon: 'NO SCHOOL — Christmas Break', tue: 'NO SCHOOL — Christmas Break', wed: 'NO SCHOOL — Christmas Break', thu: 'NO SCHOOL — Christmas Break', fri: 'NO SCHOOL — Christmas Break', notes: '' },
@@ -714,7 +714,7 @@
       { id: '16', category: 'Fun & Engagement', title: 'Suggestion Box', description: 'A simple way for students to submit ideas year-round.' }
     ];
 
-    var ideas = loadJSON(IDEA_KEY, null) || DEFAULT_IDEAS.map(function (i) { return Object.assign({}, i); });
+    var ideas = (isLocalEdit && loadJSON(IDEA_KEY, null)) || DEFAULT_IDEAS.map(function (i) { return Object.assign({}, i); });
     var ideaFilter = 'All';
     var editingIdeaId = null;
     var addingIdea = false;
@@ -782,16 +782,17 @@
             '<td><span class="idea-cat-badge" style="color:' + badgeColor + '; border:1px solid ' + badgeColor + ';">' + escapeHtml(idea.category) + '</span></td>' +
             '<td class="idea-title">' + escapeHtml(idea.title) + '</td>' +
             '<td class="idea-desc">' + escapeHtml(idea.description) + '</td>' +
-            '<td class="idea-actions">' +
-              '<button class="idea-icon-btn edit" data-action="edit">✎ Edit</button>' +
-              (isLocalEdit ? '<button class="idea-icon-btn delete" data-action="delete">✕ Delete</button>' : '') +
-            '</td>';
+            (isLocalEdit ?
+              '<td class="idea-actions">' +
+                '<button class="idea-icon-btn edit" data-action="edit">✎ Edit</button>' +
+                '<button class="idea-icon-btn delete" data-action="delete">✕ Delete</button>' +
+              '</td>' : '');
 
-          tr.querySelector('[data-action="edit"]').addEventListener('click', function () {
-            editingIdeaId = idea.id;
-            renderIdeas();
-          });
           if (isLocalEdit) {
+            tr.querySelector('[data-action="edit"]').addEventListener('click', function () {
+              editingIdeaId = idea.id;
+              renderIdeas();
+            });
             tr.querySelector('[data-action="delete"]').addEventListener('click', function () {
               if (!confirm('Remove "' + idea.title + '" from the Idea Bank?')) return;
               ideas = ideas.filter(function (i) { return i.id !== idea.id; });
