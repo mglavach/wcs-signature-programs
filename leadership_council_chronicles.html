@@ -891,24 +891,20 @@
     var CHART_KEY = 'councilChronicles_weeklyChart_v1';
     var CHART_COLS = ['week', 'mon', 'tue', 'wed', 'thu', 'fri', 'notes'];
     var DEFAULT_CHART_ROWS = [
-      { week: 'Aug 3', mon: '', tue: '', wed: '', thu: '', fri: 'Preschool Preview Day (9am–12pm)', notes: '' },
-      { week: 'Aug 10', mon: 'First Day of School — Early Dismissal*', tue: '', wed: '', thu: '', fri: '', notes: 'Warrior Week (HS), Aug 10–14' },
-      { week: 'Aug 17', mon: 'First Day on Campus (HS)', tue: '', wed: '', thu: '', fri: '', notes: '' },
-      { week: 'Sep 7', mon: 'NO SCHOOL — Labor Day', tue: '', wed: '', thu: '', fri: '', notes: '' },
       { week: 'Sep 14', mon: '', tue: '', wed: '', thu: 'Muffins and Mentors', fri: '', notes: '' },
       { week: 'Sep 21', mon: '', tue: 'Campaign speeches due; Muffins and Mentors', wed: 'Student Council Elections', thu: '', fri: '', notes: 'Election week, grades 3–5' },
-      { week: 'Sep 28', mon: '', tue: '', wed: '', thu: '', fri: 'First weekly Student Council meeting', notes: 'Weekly meetings begin — every Friday during lunch, Pavilion by the SAC' },
+      { week: 'Sep 28', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting; Location: Pavilion by the SAC', notes: '' },
       { week: 'Oct 5', mon: '', tue: '', wed: '', thu: '', fri: 'NO SCHOOL — Faculty In-Service Day', notes: 'No Council meeting this week' },
       { week: 'Oct 12', mon: 'Second Quarter Begins', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Oct 19', mon: 'Lost in the Wild Day', tue: 'Find Your Flock Day', wed: 'Rest with the Shepherd', thu: '1961 Throwback Day', fri: 'ES Pep Rally, 7:45am; Student Council Meeting', notes: 'PS/ES Homecoming Spirit Week' },
       { week: 'Oct 26', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
-      { week: 'Nov 2', mon: 'Thanksgiving Food Drive begins', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: 'Food Drive runs through Nov 20; Sun, Nov 8: ICU Baby Hope Parade at Zoo Miami' },
-      { week: 'Nov 9', mon: '', tue: '', wed: 'NO SCHOOL — Veterans Day', thu: '', fri: 'Student Council Meeting', notes: '' },
-      { week: 'Nov 16', mon: '', tue: '', wed: '', thu: '', fri: 'Thanksgiving Food Drive ends; Early Dismissal*; Student Council Meeting', notes: '' },
+      { week: 'Nov 2', mon: 'Thanksgiving Food Drive begins; runs through Nov 20', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: 'Sun, Nov 8: ICU Baby Hope Parade at Zoo Miami' },
+      { week: 'Nov 9', mon: '', tue: '', wed: 'NO SCHOOL — Veterans Day', thu: '', fri: 'Student Council Meeting', notes: 'Thanksgiving Food Drive' },
+      { week: 'Nov 16', mon: '', tue: '', wed: '', thu: '', fri: 'Thanksgiving Food Drive ends; Early Dismissal*; Student Council Meeting', notes: 'Thanksgiving Food Drive' },
       { week: 'Nov 23', mon: 'NO SCHOOL — Thanksgiving Break', tue: 'NO SCHOOL — Thanksgiving Break', wed: 'NO SCHOOL — Thanksgiving Break', thu: 'NO SCHOOL — Thanksgiving Break', fri: 'NO SCHOOL — Thanksgiving Break', notes: '' },
       { week: 'Nov 30', mon: '', tue: '', wed: '', thu: '', fri: 'PS/ES Worship Night (The Lighthouse); Student Council Meeting', notes: '' },
       { week: 'Dec 7', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
-      { week: 'Dec 14', mon: '', tue: '', wed: '', thu: '', fri: 'Early Dismissal*; Student Council Meeting', notes: '' },
+      { week: 'Dec 14', mon: '', tue: '', wed: '', thu: '', fri: 'Early Dismissal*', notes: '' },
       { week: 'Dec 21', mon: 'NO SCHOOL — Christmas Break', tue: 'NO SCHOOL — Christmas Break', wed: 'NO SCHOOL — Christmas Break', thu: 'NO SCHOOL — Christmas Break', fri: 'NO SCHOOL — Christmas Break', notes: '' },
       { week: 'Dec 28', mon: 'NO SCHOOL — Christmas Break', tue: 'NO SCHOOL — Christmas Break', wed: 'NO SCHOOL — Christmas Break', thu: 'NO SCHOOL — Christmas Break', fri: 'NO SCHOOL — Christmas Break', notes: '' },
       { week: 'Jan 4', mon: 'NO SCHOOL — Christmas Break (last day)', tue: 'Third Quarter Begins', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
@@ -916,7 +912,7 @@
       { week: 'Jan 18', mon: 'NO SCHOOL — Martin Luther King, Jr. Day', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Jan 25', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Feb 1', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
-      { week: 'Feb 8', mon: 'Share the Love Spirit Week', tue: '', wed: '', thu: '', fri: 'NO SCHOOL — Faculty In-Service Day', notes: 'Confirm Spirit Week schedule — Feb 12 is a Faculty In-Service Day (No School) per the 26-27 calendar' },
+      { week: 'Feb 8', mon: 'Share the Love Spirit Week', tue: '', wed: '', thu: '', fri: 'NO SCHOOL — Faculty In-Service Day', notes: '' },
       { week: 'Feb 15', mon: 'NO SCHOOL — Winter Break', tue: 'NO SCHOOL — Winter Break', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Feb 22', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Mar 1', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
@@ -927,10 +923,10 @@
       { week: 'Apr 5', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Apr 12', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
       { week: 'Apr 19', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
-      { week: 'Apr 26', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: '' },
-      { week: 'May 3', mon: '', tue: '', wed: '', thu: '', fri: 'Grade 12: Last Day of School; Student Council Meeting', notes: 'AP Exams (HS) run May 3–14' },
-      { week: 'May 10', mon: '', tue: '', wed: '', thu: '', fri: 'Student Council Meeting', notes: 'AP Exams (HS) continue through Fri, May 14' },
-      { week: 'May 17', mon: 'Grade 8: Last Day of School', tue: '', wed: 'Grade 5: Last Day of School', thu: 'Last Day of School — Early Dismissal*', fri: 'NO SCHOOL — Faculty In-Service Day', notes: 'End of school year' }
+      { week: 'Apr 26', mon: '', tue: '', wed: '', thu: '', fri: 'Last Student Council Meeting', notes: '' },
+      { week: 'May 3', mon: '', tue: '', wed: '', thu: '', fri: '', notes: '' },
+      { week: 'May 10', mon: '', tue: '', wed: '', thu: '', fri: '', notes: '' },
+      { week: 'May 17', mon: '', tue: '', wed: 'Grade 5: Last Day of School', thu: 'Last Day of School — Early Dismissal*', fri: 'NO SCHOOL — Faculty In-Service Day', notes: 'End of school year' }
     ];
 
     var chartRows = loadJSON(CHART_KEY, null) || DEFAULT_CHART_ROWS.map(function (r) { return Object.assign({}, r); });
