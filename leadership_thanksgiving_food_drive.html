@@ -104,6 +104,108 @@
       font-size: 10.5px;
     }
 
+    /* ── Division panels ── */
+    .division-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+      margin-top: 24px;
+    }
+    .panel {
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    .panel-head {
+      background: #2C5234;
+      color: #fff;
+      padding: 14px 20px;
+    }
+    .panel-head h3 { font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .panel-head p { font-size: 12px; color: #c8dac2; margin-top: 2px; }
+    .panel-body { padding: 6px 20px 18px; }
+    .panel-row { padding: 12px 0; border-bottom: 1px solid #eee; }
+    .panel-row:last-child { border-bottom: none; }
+    .panel-row h4 {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #B9975B;
+      margin-bottom: 5px;
+    }
+    .panel-row p { font-size: 13px; line-height: 1.6; color: #333; }
+    .panel-row a { color: #2C5234; font-weight: 700; }
+    .panel-row a:hover { color: #B9975B; }
+    .tbd { color: #999; font-style: italic; }
+    .schedule { list-style: none; }
+    .schedule li { display: flex; gap: 12px; font-size: 13px; line-height: 1.5; padding: 3px 0; }
+    .schedule .time { flex: 0 0 92px; font-weight: 700; color: #2C5234; }
+
+    /* ── Team list ── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 18px;
+    }
+    .team-grid h4 {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #B9975B;
+      margin-bottom: 6px;
+    }
+    .team-grid p { font-size: 13px; line-height: 1.7; color: #333; }
+
+    /* ── To-do checklist ── */
+    .todo { margin-top: 32px; }
+    .todo-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      margin-top: 14px;
+      font-size: 13px;
+    }
+    .todo-table th {
+      background: #2C5234;
+      color: #fff;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+    }
+    .todo-table td { padding: 12px 14px; border-bottom: 1px solid #eee; vertical-align: middle; line-height: 1.5; }
+    .todo-table tr:last-child td { border-bottom: none; }
+    .todo-table .check { width: 40px; text-align: center; }
+    .todo-table input[type="checkbox"] { width: 18px; height: 18px; accent-color: #2C5234; cursor: pointer; }
+    .todo-table tr.done .task { text-decoration: line-through; color: #999; }
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 10px;
+      background: #f0ede8;
+      color: #2C5234;
+      white-space: nowrap;
+    }
+    .tag.all { background: #B9975B; color: #fff; }
+    @media (max-width: 600px) {
+      .todo-table th:nth-child(3), .todo-table td:nth-child(3) { display: none; }
+      .todo-table .cat-mobile { display: block; margin-top: 4px; }
+    }
+    .cat-mobile { display: none; }
+
     /* ── Tips box ── */
     .tips-box {
       margin-top: 24px;
@@ -151,7 +253,7 @@
       .download-btn, .hero .back-link { display: none; }
       body { font-size: 9.5pt; background: #fff; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .section { padding: 20px 16px; max-width: 100%; }
-      .role-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; border-top: 4px solid #2C5234; }
+      .role-card, .panel { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
     }
 
     /* ── Contact footer ── */
@@ -173,68 +275,167 @@
   </div>
   <div class="accent-bar"></div>
 
-  <!-- Event Details -->
+  <!-- At a Glance -->
   <div class="section">
-    <h2 class="section-title">Event Details</h2>
-    <div class="role-grid">
-      <div class="role-card">
-        <h3>Dates</h3>
-        <p>Mon, Nov 2 - Fri, Nov 20</p>
+    <h2 class="section-title">At a Glance</h2>
+    <p class="section-intro">The Thanksgiving Food Drive is a Student Council Community Connect event to serve those in need in our community, in partnership with Caring for Miami, Be the Light, and RCMA. The food drive runs from <strong>Mon, Nov 2 through Fri, Nov 20</strong>.</p>
+  </div>
+
+  <!-- By Division -->
+  <div class="section" style="padding-top: 0;">
+    <h2 class="section-title">By Division</h2>
+    <div class="division-grid">
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Elementary School</h3>
+          <p>Delivering to Caring for Miami &middot; Tue, Nov 17</p>
+        </div>
+        <div class="panel-body">
+          <div class="panel-row">
+            <h4>Bag Goal</h4>
+            <p><strong>170 bags</strong> for Caring for Miami</p>
+          </div>
+          <div class="panel-row">
+            <h4>Drop Off Location</h4>
+            <p>Elementary School Lobby</p>
+          </div>
+          <div class="panel-row">
+            <h4>Delivery Day (11/17)</h4>
+            <ul class="schedule">
+              <li><span class="time">8:10 &ndash; 9:00</span><span>Chapel connection</span></li>
+              <li><span class="time">9:00 &ndash; 9:30</span><span>Load bags and caravan to Caring for Miami</span></li>
+            </ul>
+            <p style="margin-top:6px;">ES Student Leadership field trip to the warehouse</p>
+          </div>
+          <div class="panel-row">
+            <h4>Community Partner</h4>
+            <p>Caring for Miami &ndash; Christ Fellowship</p>
+            <p>📍 <a href="https://maps.google.com/?q=8900+SW+168th+Street,+Palmetto+Bay,+FL+33157" target="_blank" rel="noopener">8900 SW 168th Street, Palmetto Bay, FL 33157</a></p>
+          </div>
+          <div class="panel-row">
+            <h4>Faculty Liaison</h4>
+            <p>Manya Glavach</p>
+          </div>
+        </div>
       </div>
-      <div class="role-card">
-        <h3>Donation Drop-Off</h3>
-        <p>Elementary School: School Lobby</p>
-        <p>Middle School: TBD</p>
-        <p>High School: TBD</p>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Middle &amp; High School</h3>
+          <p>Delivering to RCMA &middot; Nov 17 or 20 (TBD)</p>
+        </div>
+        <div class="panel-body">
+          <div class="panel-row">
+            <h4>Bag Goal</h4>
+            <p><strong>170 bags</strong> for RCMA</p>
+          </div>
+          <div class="panel-row">
+            <h4>Drop Off Location</h4>
+            <p class="tbd">Location coming soon</p>
+          </div>
+          <div class="panel-row">
+            <h4>Delivery Day (11/17 or 11/20)</h4>
+            <ul class="schedule">
+              <li><span class="time">8:00 am</span><span>Load bags and caravan to RCMA</span></li>
+            </ul>
+            <p style="margin-top:6px;">HS Student Leadership field trip to RCMA</p>
+          </div>
+          <div class="panel-row">
+            <h4>Community Partner</h4>
+            <p>Be the Light</p>
+          </div>
+          <div class="panel-row">
+            <h4>RCMA Everglades II Child Development Center</h4>
+            <p>📍 <a href="https://maps.google.com/?q=38010+SW+195th+Ave,+Florida+City,+FL+33034" target="_blank" rel="noopener">38010 SW 195th Ave, Florida City, FL 33034</a></p>
+            <p>📞 <a href="tel:+13052422595">(305) 242-2595</a></p>
+            <p>Site contact: Guadalupe &middot; WCS liaison: Aimee Artiles</p>
+          </div>
+          <div class="panel-row">
+            <h4>Faculty Liaisons</h4>
+            <p>Middle School: Daileny Browning</p>
+            <p>High School: Jenn Pino</p>
+          </div>
+        </div>
       </div>
-      <div class="role-card">
-        <h3>Donation Recipients</h3>
-        <p><a href="https://rcma.org/" target="_blank" rel="noopener">RCMA</a></p>
-        <p>Homestead Community, via KIX Youth for Christ Community Center</p>
+
+    </div>
+  </div>
+
+  <!-- Team -->
+  <div class="section" style="padding-top: 0;">
+    <h2 class="section-title">Parent Partner Volunteers</h2>
+    <div class="team-grid">
+      <div>
+        <h4>Coordinator</h4>
+        <p>Adriana Gravier</p>
       </div>
-      <div class="role-card">
-        <h3>Parent Partner Volunteers</h3>
-        <p>Adriana Gravier (Coordinator)</p>
-        <p>Jane White (ES)</p>
-        <p>Nicole Gonzalez (ES/MS)</p>
-        <p>Catalina Rodriguez (MS)</p>
-        <p>Shya Schettini-Lindstad (MS)</p>
+      <div>
+        <h4>Elementary</h4>
+        <p>Jane White</p>
+        <p>Nicole Gonzalez</p>
       </div>
-      <div class="role-card">
-        <h3>Faculty</h3>
-        <p>Elementary School Liaison: Manya Glavach</p>
-        <p>Middle School Liaison: Daileny Browning</p>
-        <p>High School Liaison: Jenn Pino</p>
-      </div>
-      <div class="role-card">
-        <h3>Community Partner</h3>
-        <p>Caring for Miami - Christ Fellowship (confirmed)</p>
+      <div>
+        <h4>Middle School</h4>
+        <p>Nicole Gonzalez</p>
+        <p>Catalina Rodriguez</p>
+        <p>Shya Schettini-Lindstad</p>
       </div>
     </div>
   </div>
 
-  <!-- Planning Update -->
-  <div class="section" style="padding-top: 0;">
-    <h2 class="section-title">Planning Update</h2>
-    <p class="section-intro">Caring for Miami has agreed to partner with us on this year's food drive! Here's where planning stands:</p>
-    <div class="role-grid">
-      <div class="role-card">
-        <h3>Items for the Bags</h3>
-        <p>The item list is being finalized. Caring for Miami runs a bag drive with Christ Fellowship, so we may use their list or keep our own.</p>
-      </div>
-      <div class="role-card">
-        <h3>Delivery</h3>
-        <p>We're aiming for the week before Thanksgiving. The exact date is still being set.</p>
-      </div>
-      <div class="role-card">
-        <h3>Logistics</h3>
-        <p>Caring for Miami may bring a truck to school so we can load the bags, then caravan together to unload at their site.</p>
-      </div>
-    </div>
-    <div class="tips-box">
-      <h4>More Details Coming Soon</h4>
-      <p>The final item list, Middle and High School drop-off locations, and delivery date will be posted here once confirmed.</p>
-    </div>
+  <!-- Still to Confirm -->
+  <div class="section todo" style="padding-top: 0;">
+    <h2 class="section-title">Still to Confirm</h2>
+    <table class="todo-table">
+      <thead>
+        <tr><th></th><th>Task</th><th>Category</th><th>Assigned To</th></tr>
+      </thead>
+      <tbody>
+        <tr data-id="cfm-bags">
+          <td class="check"><input type="checkbox" aria-label="Mark done: Hear back from Caring for Miami on how they want the bags" /></td>
+          <td class="task">Hear back from Caring for Miami on how they want the bags<span class="cat-mobile"><span class="tag">Elementary</span></span></td>
+          <td><span class="tag">Elementary</span></td>
+          <td>Glavach</td>
+        </tr>
+        <tr data-id="rcma-items">
+          <td class="check"><input type="checkbox" aria-label="Mark done: Confirm item list for MS/HS (RCMA)" /></td>
+          <td class="task">Confirm item list for MS/HS (RCMA)<span class="cat-mobile"><span class="tag">MS/HS</span></span></td>
+          <td><span class="tag">MS/HS</span></td>
+          <td>Artiles</td>
+        </tr>
+        <tr data-id="ms-dropoff">
+          <td class="check"><input type="checkbox" aria-label="Mark done: Confirm Middle School drop-off location" /></td>
+          <td class="task">Confirm Middle School drop-off location<span class="cat-mobile"><span class="tag">Middle School</span></span></td>
+          <td><span class="tag">Middle School</span></td>
+          <td>Browning</td>
+        </tr>
+        <tr data-id="hs-dropoff">
+          <td class="check"><input type="checkbox" aria-label="Mark done: Confirm High School drop-off location" /></td>
+          <td class="task">Confirm High School drop-off location<span class="cat-mobile"><span class="tag">High School</span></span></td>
+          <td><span class="tag">High School</span></td>
+          <td>Pino</td>
+        </tr>
+        <tr data-id="mshs-date">
+          <td class="check"><input type="checkbox" aria-label="Mark done: Confirm MS/HS delivery date (Nov 17 or 20)" /></td>
+          <td class="task">Confirm MS/HS delivery date (Nov 17 or 20)<span class="cat-mobile"><span class="tag">MS/HS</span></span></td>
+          <td><span class="tag">MS/HS</span></td>
+          <td>Artiles</td>
+        </tr>
+        <tr data-id="es-drivers">
+          <td class="check"><input type="checkbox" aria-label="Mark done: Find additional drivers for the caravan" /></td>
+          <td class="task">Find additional drivers for the caravan<span class="cat-mobile"><span class="tag">Elementary</span></span></td>
+          <td><span class="tag">Elementary</span></td>
+          <td>Gravier</td>
+        </tr>
+        <tr data-id="mshs-drivers">
+          <td class="check"><input type="checkbox" aria-label="Mark done: Find additional drivers for the caravan" /></td>
+          <td class="task">Find additional drivers for the caravan<span class="cat-mobile"><span class="tag">MS/HS</span></span></td>
+          <td><span class="tag">MS/HS</span></td>
+          <td>Browning</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <!-- Contact -->
@@ -244,6 +445,20 @@
       <a href="mailto:mglavach@wcsmiami.org">mglavach@wcsmiami.org</a>
     </p>
   </div>
+
+  <script>
+    // Remember checked items in this browser only
+    document.querySelectorAll('.todo-table tr[data-id]').forEach(function (row) {
+      var box = row.querySelector('input');
+      var key = 'tgfd-todo-' + row.dataset.id;
+      try { box.checked = localStorage.getItem(key) === '1'; } catch (e) {}
+      row.classList.toggle('done', box.checked);
+      box.addEventListener('change', function () {
+        row.classList.toggle('done', box.checked);
+        try { localStorage.setItem(key, box.checked ? '1' : '0'); } catch (e) {}
+      });
+    });
+  </script>
 
 </body>
 </html>
