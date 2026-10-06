@@ -142,6 +142,10 @@
     .schedule { list-style: none; }
     .schedule li { display: flex; gap: 12px; font-size: 13px; line-height: 1.5; padding: 3px 0; }
     .schedule .time { flex: 0 0 92px; font-weight: 700; color: #2C5234; }
+    .shopping-list { list-style: none; font-size: 13px; line-height: 1.5; color: #333; }
+    .shopping-list li { padding: 2px 0 2px 18px; position: relative; }
+    .shopping-list li::before { content: "\2713"; position: absolute; left: 0; color: #2C5234; font-weight: 700; }
+    .shopping-note { font-size: 12px !important; color: #666 !important; margin-bottom: 6px; }
 
     /* ── Team list ── */
     .team-grid {
@@ -329,6 +333,24 @@
           <div class="panel-row">
             <h4>Bag Goal</h4>
             <p><strong>170 bags</strong> for RCMA</p>
+          </div>
+          <div class="panel-row">
+            <h4>Shopping List</h4>
+            <p class="shopping-note">Each bag must include <strong>every</strong> item below. Please use reusable shopping bags.</p>
+            <ul class="shopping-list">
+              <li>1 box of instant mashed potatoes</li>
+              <li>2 cans of veggies (green beans, peas, corn, mixed veggies, etc.)</li>
+              <li>2 cans of pinto beans</li>
+              <li>1 bag of dry pinto beans</li>
+              <li>2 cans of fruit (peaches, oranges, mixed fruit, etc.)</li>
+              <li>All-purpose flour</li>
+              <li>2 boxes of Jiffy corn mix</li>
+              <li>5 lb bag of rice</li>
+              <li>5 lb bag of sugar</li>
+              <li>24 oz vegetable oil</li>
+              <li>Small laundry detergent</li>
+            </ul>
+            <p style="margin-top:6px;">📄 <a href="TDayFoodDrive.jpg" target="_blank" rel="noopener">View the Thanksgiving Drive flyer</a></p>
           </div>
           <div class="panel-row">
             <h4>Drop Off Location</h4>
