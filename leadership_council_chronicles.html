@@ -410,6 +410,10 @@
     }
     .page-title { color: #2C5234; font-size: 18px; letter-spacing: 0.03em; margin-bottom: 4px; }
     .page-subtitle { color: #777; font-size: 10.5px; font-style: italic; margin-bottom: 18px; }
+    .creed-text { margin-top: 8px; color: #444; font-size: 11.5px; line-height: 1.65; }
+    .creed-text p { margin-bottom: 12px; }
+    .creed-text p:last-child { margin-bottom: 0; color: #2C5234; font-weight: 700; }
+    .creed-divider { border: 0; border-top: 1px solid #d9d1bf; margin: 22px 0; }
     .page-meta {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -693,7 +697,7 @@
        and update data-label. Page numbers fill in automatically. -->
   <div class="section alt-bg" id="warrior-wrap-up">
     <h2 class="section-title">Warrior Wrap-Up</h2>
-    <p class="section-intro">Our meeting minutes: one page per weekly meeting. Flip through to see what we covered.</p>
+    <p class="section-intro">Flip through our leadership creed, meeting resources, and weekly minutes.</p>
 
     <div class="book" id="wrap-book" tabindex="0" aria-label="Warrior Wrap-Up book. Use the left and right arrow keys to turn pages.">
       <div class="book-pages" id="wrap-pages">
@@ -708,6 +712,30 @@
             <p class="cover-year">2026 – 2027</p>
             <p class="cover-hint">Turn the page ›</p>
           </div>
+        </article>
+
+        <article class="book-page" data-label="Oath of Office &amp; Leadership Creed">
+          <div class="page-running-head"><span>Warrior Wrap-Up</span><span>Oath &amp; Creed</span></div>
+          <h3 class="page-title">Student Council Oath of Office</h3>
+          <div class="creed-text">
+            <p>I promise to listen to my classmates and share their ideas.</p>
+            <p>I promise to be fair, honest, and kind.</p>
+            <p>I promise to work hard and set a good example, in and out of school.</p>
+            <p>I will serve my class and my school with a heart like Christ's.</p>
+            <p>I am proud to serve as a Warrior leader this year!</p>
+          </div>
+          <hr class="creed-divider">
+          <h3 class="page-title">Westminster Warrior Leadership Creed</h3>
+          <div class="creed-text">
+            <p>I am a Westminster Warrior. I lead with love and humility, following the example of Jesus, who served others first.</p>
+            <p>I will use my leadership to guide, influence, and inspire those around me.</p>
+            <p>Together, we will work as a team to achieve our common goals, with respect for one another and a commitment to doing what is right.</p>
+            <p>I believe that true leadership is not about power or authority, but about serving others with kindness and grace.</p>
+            <p>I will strive to show the Fruit of the Spirit—love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, and self-control—in all that I do.</p>
+            <p>As a Westminster Warrior, I will lead with responsibility, empathy, and integrity, helping to create a school community where everyone can grow, THRIVE, and feel valued.</p>
+            <p>This is my commitment, as a leader at Westminster Christian School.</p>
+          </div>
+          <p class="page-number"></p>
         </article>
 
         <article class="book-page" data-label="Warrior Rules of Order">
@@ -1066,10 +1094,18 @@
       { id: '13', category: 'Community Connect', title: 'Gardening Club', description: "Grow plants and vegetables and sell them to local kitchens, including the school's, with proceeds going toward giving back." },
       { id: '14', category: 'Community Connect', title: 'Movie Night Donation Drive', description: 'A movie night where admission is a donation item instead of money.' },
       { id: '15', category: 'School Spirit', title: 'Talent Show', description: 'A schoolwide event for students to showcase their talents.' },
-      { id: '16', category: 'School Spirit', title: 'Suggestion Box', description: 'A simple way for students to submit ideas year-round.' }
+      { id: '16', category: 'School Spirit', title: 'Suggestion Box', description: 'A simple way for students to submit ideas year-round.' },
+      { id: '17', category: 'Faith & Worship', title: 'Book Scavengers Hunt', description: "Inspired by the novel The Book Scavenger: students hide Bible verse cards (or books they've finished reading) around campus and post a clue on a website. Whoever finds one logs it for a point, reads it, and hides it again. Points can be spent on items to camouflage your hidden card or book. Encourages kids to read more. The student who proposed it has more details and offered to build the website." }
     ];
 
+    var IDEA_DELETED_KEY = 'councilChronicles_ideaBank_deleted_v1';
+    var deletedIdeaIds = (isLocalEdit && loadJSON(IDEA_DELETED_KEY, null)) || [];
     var ideas = (isLocalEdit && loadJSON(IDEA_KEY, null)) || DEFAULT_IDEAS.map(function (i) { return Object.assign({}, i); });
+    // Pull in any newly added default ideas that aren't in the saved copy (unless deliberately deleted)
+    DEFAULT_IDEAS.forEach(function (d) {
+      var known = ideas.some(function (i) { return i.id === d.id; });
+      if (!known && deletedIdeaIds.indexOf(d.id) === -1) ideas.push(Object.assign({}, d));
+    });
     var MERGED_CATEGORIES = { 'Community & Belonging': 'Community Connect', 'Service & Giving': 'Community Connect', 'Fun & Engagement': 'School Spirit' };
     ideas.forEach(function (i) { if (MERGED_CATEGORIES[i.category]) i.category = MERGED_CATEGORIES[i.category]; });
     var ideaFilter = 'All';
@@ -1153,6 +1189,8 @@
             tr.querySelector('[data-action="delete"]').addEventListener('click', function () {
               if (!confirm('Remove "' + idea.title + '" from the Idea Bank?')) return;
               ideas = ideas.filter(function (i) { return i.id !== idea.id; });
+              deletedIdeaIds.push(idea.id);
+              saveJSON(IDEA_DELETED_KEY, deletedIdeaIds);
               saveJSON(IDEA_KEY, ideas, 'idea-save-note');
               renderIdeas();
             });
