@@ -107,7 +107,7 @@
     /* ── Division panels ── */
     .division-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: 1fr;
       gap: 22px;
       margin-top: 24px;
     }
@@ -138,6 +138,11 @@
     .panel-row p { font-size: 13px; line-height: 1.6; color: #333; }
     .panel-row a { color: #2C5234; font-weight: 700; }
     .panel-row a:hover { color: #B9975B; }
+    @media (min-width: 640px) {
+      .panel-row { display: grid; grid-template-columns: 190px 1fr; column-gap: 20px; align-items: start; }
+      .panel-row h4 { margin-bottom: 0; padding-top: 3px; }
+      .panel-row > *:not(h4) { grid-column: 2; }
+    }
     .tbd { color: #999; font-style: italic; }
     .schedule { list-style: none; }
     .schedule li { display: flex; gap: 12px; font-size: 13px; line-height: 1.5; padding: 3px 0; }
@@ -299,6 +304,34 @@
           <div class="panel-row">
             <h4>Bag Goal</h4>
             <p><strong>170 bags</strong> for Caring for Miami</p>
+          </div>
+          <div class="panel-row">
+            <h4>Key Dates</h4>
+            <ul class="schedule">
+              <li><span class="time">Tue, 10/20</span><span>Ileana Siljee introduces Caring for Miami at chapel</span></li>
+              <li><span class="time">Mon, 11/2</span><span>Food collection starts</span></li>
+              <li><span class="time">Tue, 11/3</span><span>Caring for Miami bus visits WCS</span></li>
+            </ul>
+          </div>
+          <div class="panel-row">
+            <h4>Bus Visit (11/3)</h4>
+            <p>Students walk through the bus with a staggered dismissal from chapel, in this order: <strong>5, 2, 4, 3, 1, K, PK4, PK3</strong></p>
+            <p style="margin-top:6px;">Praying Dads pray over the students, and the Caring for Miami ministry team is blessed</p>
+            <p style="margin-top:6px;">Noisy offering container by the bus for students to give money</p>
+          </div>
+          <div class="panel-row">
+            <h4>Stack the Shelf</h4>
+            <p class="shopping-note">Every grade level is assigned an item. Please bring the <strong>exact size</strong> of the item requested. Bring as many items as you can carry. We want to fill those shelves! Keep your eyes open for BOGO deals.</p>
+            <ul class="schedule">
+              <li><span class="time">PK3</span><span>6 oz. box of stuffing</span></li>
+              <li><span class="time">PK4</span><span>12 oz. box of mac and cheese</span></li>
+              <li><span class="time">K</span><span>13.75 oz. box of mashed potatoes</span></li>
+              <li><span class="time">1st</span><span>Dessert boxes</span></li>
+              <li><span class="time">2nd</span><span>Turkey gravy</span></li>
+              <li><span class="time">3rd</span><span>Canned jellied cranberry sauce</span></li>
+              <li><span class="time">4th</span><span>Canned sliced carrots &amp; canned green beans</span></li>
+              <li><span class="time">5th</span><span>Canned corn &amp; canned sliced peaches</span></li>
+            </ul>
           </div>
           <div class="panel-row">
             <h4>Drop Off Location</h4>
