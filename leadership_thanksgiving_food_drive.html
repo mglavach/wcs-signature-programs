@@ -181,52 +181,6 @@
     }
     .team-grid p { font-size: 13px; line-height: 1.7; color: #333; }
 
-    /* ── To-do checklist ── */
-    .todo { margin-top: 32px; }
-    .todo-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      margin-top: 14px;
-      font-size: 13px;
-    }
-    .todo-table th {
-      background: #2C5234;
-      color: #fff;
-      text-align: left;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 10px 14px;
-    }
-    .todo-table td { padding: 12px 14px; border-bottom: 1px solid #eee; vertical-align: middle; line-height: 1.5; }
-    .todo-table tr:last-child td { border-bottom: none; }
-    .todo-table .check { width: 40px; text-align: center; }
-    .todo-table input[type="checkbox"] { width: 18px; height: 18px; accent-color: #2C5234; cursor: pointer; }
-    .todo-table tr.done .task { text-decoration: line-through; color: #999; }
-    .tag {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      padding: 3px 9px;
-      border-radius: 10px;
-      background: #f0ede8;
-      color: #2C5234;
-      white-space: nowrap;
-    }
-    .tag.all { background: #B9975B; color: #fff; }
-    @media (max-width: 600px) {
-      .todo-table th:nth-child(3), .todo-table td:nth-child(3) { display: none; }
-      .todo-table .cat-mobile { display: block; margin-top: 4px; }
-    }
-    .cat-mobile { display: none; }
-
     /* ── Tips box ── */
     .tips-box {
       margin-top: 24px;
@@ -473,60 +427,6 @@
     </div>
   </div>
 
-  <!-- Still to Confirm -->
-  <div class="section todo" style="padding-top: 0;">
-    <h2 class="section-title">Still to Confirm</h2>
-    <table class="todo-table">
-      <thead>
-        <tr><th></th><th>Task</th><th>Category</th><th>Assigned To</th></tr>
-      </thead>
-      <tbody>
-        <tr data-id="cfm-bags">
-          <td class="check"><input type="checkbox" aria-label="Mark done: Hear back from Caring for Miami on how they want the bags" /></td>
-          <td class="task">Hear back from Caring for Miami on how they want the bags<span class="cat-mobile"><span class="tag">Elementary</span></span></td>
-          <td><span class="tag">Elementary</span></td>
-          <td>Glavach</td>
-        </tr>
-        <tr data-id="rcma-items">
-          <td class="check"><input type="checkbox" aria-label="Mark done: Confirm item list for MS/HS (RCMA)" /></td>
-          <td class="task">Confirm item list for MS/HS (RCMA)<span class="cat-mobile"><span class="tag">MS/HS</span></span></td>
-          <td><span class="tag">MS/HS</span></td>
-          <td>Artiles</td>
-        </tr>
-        <tr data-id="ms-dropoff">
-          <td class="check"><input type="checkbox" aria-label="Mark done: Confirm Middle School drop-off location" /></td>
-          <td class="task">Confirm Middle School drop-off location<span class="cat-mobile"><span class="tag">Middle School</span></span></td>
-          <td><span class="tag">Middle School</span></td>
-          <td>Browning</td>
-        </tr>
-        <tr data-id="hs-dropoff">
-          <td class="check"><input type="checkbox" aria-label="Mark done: Confirm High School drop-off location" /></td>
-          <td class="task">Confirm High School drop-off location<span class="cat-mobile"><span class="tag">High School</span></span></td>
-          <td><span class="tag">High School</span></td>
-          <td>Pino</td>
-        </tr>
-        <tr data-id="mshs-date">
-          <td class="check"><input type="checkbox" aria-label="Mark done: Confirm MS/HS delivery date (Nov 17 or 20)" /></td>
-          <td class="task">Confirm MS/HS delivery date (Nov 17 or 20)<span class="cat-mobile"><span class="tag">MS/HS</span></span></td>
-          <td><span class="tag">MS/HS</span></td>
-          <td>Artiles</td>
-        </tr>
-        <tr data-id="es-drivers">
-          <td class="check"><input type="checkbox" aria-label="Mark done: Find additional drivers for the caravan" /></td>
-          <td class="task">Find additional drivers for the caravan<span class="cat-mobile"><span class="tag">Elementary</span></span></td>
-          <td><span class="tag">Elementary</span></td>
-          <td>Gravier</td>
-        </tr>
-        <tr data-id="mshs-drivers">
-          <td class="check"><input type="checkbox" aria-label="Mark done: Find additional drivers for the caravan" /></td>
-          <td class="task">Find additional drivers for the caravan<span class="cat-mobile"><span class="tag">MS/HS</span></span></td>
-          <td><span class="tag">MS/HS</span></td>
-          <td>Lindstad</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
   <!-- Contact -->
   <div class="contact">
     <p>
@@ -536,18 +436,6 @@
   </div>
 
   <script>
-    // Remember checked items in this browser only
-    document.querySelectorAll('.todo-table tr[data-id]').forEach(function (row) {
-      var box = row.querySelector('input');
-      var key = 'tgfd-todo-' + row.dataset.id;
-      try { box.checked = localStorage.getItem(key) === '1'; } catch (e) {}
-      row.classList.toggle('done', box.checked);
-      box.addEventListener('change', function () {
-        row.classList.toggle('done', box.checked);
-        try { localStorage.setItem(key, box.checked ? '1' : '0'); } catch (e) {}
-      });
-    });
-
     // Auto-resize when embedded in an iframe (e.g. on the Blackbaud site)
     (function () {
       function sendHeight() {
