@@ -292,7 +292,6 @@
   <div class="hero">
     <h1>Thanksgiving Food Drive</h1>
     <p>A Student Council Community Connect event </p>
-    <a class="back-link" href="leadership_student_council.html">&larr; Back to Student Council</a>
   </div>
   <div class="accent-bar"></div>
 
@@ -383,7 +382,7 @@
               <li><span class="time">8:10 &ndash; 9:00</span><span>Chapel connection</span></li>
               <li><span class="time">9:00 &ndash; 9:30</span><span>Load bags and caravan to Caring for Miami</span></li>
             </ul>
-            <p style="margin-top:6px;">ES Student Leadership field trip to the warehouse</p>
+            <p style="margin-top:6px;">ES Student Leadership field trip to the warehouse: <strong>TBD</strong></p>
           </div>
           <div class="panel-row">
             <h4>Community Partner</h4>
@@ -408,22 +407,17 @@
             <p><strong>170 bags</strong> for RCMA</p>
           </div>
           <div class="panel-row">
-            <h4>Shopping List</h4>
-            <p class="shopping-note">Each bag must include <strong>every</strong> item below. Please use reusable shopping bags.</p>
-            <ul class="shopping-list">
-              <li>1 box of instant mashed potatoes</li>
-              <li>2 cans of veggies (green beans, peas, corn, mixed veggies, etc.)</li>
-              <li>2 cans of pinto beans</li>
-              <li>1 bag of dry pinto beans</li>
-              <li>2 cans of fruit (peaches, oranges, mixed fruit, etc.)</li>
-              <li>All-purpose flour</li>
-              <li>2 boxes of Jiffy corn mix</li>
-              <li>5 lb bag of rice</li>
-              <li>5 lb bag of sugar</li>
-              <li>24 oz vegetable oil</li>
-              <li>Small laundry detergent</li>
+            <h4>Grade-Level Items</h4>
+            <p class="shopping-note">Every grade level is assigned items. Please bring the <strong>exact size</strong> of each item requested.</p>
+            <ul class="schedule">
+              <li><span class="time">6th</span><span>2 cans of vegetables, 15 oz each<br>2 cans of pinto beans, 15 oz each</span></li>
+              <li><span class="time">7th</span><span>2 cans of fruit, 15 oz each</span></li>
+              <li><span class="time">8th</span><span>1 box of instant mashed potatoes, 6&ndash;8 oz<br>2 boxes of Jiffy corn muffin mix, 8.5 oz each</span></li>
+              <li><span class="time">9th</span><span>1 bag of dry pinto beans, 1 lb<br>1 bag of all-purpose flour, 2 lbs</span></li>
+              <li><span class="time">10th</span><span>1 bag of rice, 5 lbs</span></li>
+              <li><span class="time">11th</span><span>1 bag of sugar, 5 lbs</span></li>
+              <li><span class="time">12th</span><span>1 bottle of vegetable oil, 24 oz<br>1 small laundry detergent, 10 oz</span></li>
             </ul>
-            <p style="margin-top:6px;">📄 <a href="TDayFoodDrive.jpg" target="_blank" rel="noopener">View the Thanksgiving Drive flyer</a></p>
           </div>
           <div class="panel-row">
             <h4>Drop Off Location</h4>
@@ -553,6 +547,21 @@
         try { localStorage.setItem(key, box.checked ? '1' : '0'); } catch (e) {}
       });
     });
+
+    // Auto-resize when embedded in an iframe (e.g. on the Blackbaud site)
+    (function () {
+      function sendHeight() {
+        if (window.parent === window) return; // not embedded
+        var height = document.documentElement.scrollHeight;
+        window.parent.postMessage({ source: 'thanksgiving-food-drive', height: height }, '*');
+      }
+      if (window.ResizeObserver) {
+        new ResizeObserver(sendHeight).observe(document.documentElement);
+      }
+      window.addEventListener('load', sendHeight);
+      window.addEventListener('resize', sendHeight);
+      setTimeout(sendHeight, 500);
+    })();
   </script>
 
 </body>
