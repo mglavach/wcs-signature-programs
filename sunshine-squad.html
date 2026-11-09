@@ -357,7 +357,17 @@
       .section { padding: 20px 16px; max-width: 100%; }
       .role-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; border-top: 4px solid #2C5234; }
       .calendar-wrap { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+      .print-title {
+        display: block !important;
+        text-align: center;
+        color: #2C5234;
+        font-size: 18pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
     }
+    .print-title { display: none; }
 
     /* ── Student popup ── */
     .popup-overlay {
@@ -473,6 +483,8 @@
     <h3 class="student-list-title">Students of the Month</h3>
     <div class="student-pills" id="student-pills"></div>
 
+    <h2 class="print-title">Sunshine Squad</h2>
+
     <div class="calendar-wrap">
       <div class="calendar-header">
         <div class="cal-nav">
@@ -538,10 +550,10 @@
     // Aguayo's 2 days/week) is already baked into which days she appears.
     const WEEKLY_TEMPLATE = {
       1: ['Adelaide C.','Charlie W.','Cillian K.','Gianny M.','Jack B.','Lexie B.','Sabrina B.','Shaylin S.','Sienna R.'],
-      2: ['Abigain V.','Adelaide C.','Blaire S.','Charles F.','Charlie W.','Cillian K.','Jose Elijah C.','Lexie B.'],
-      3: ['Abigain V.','Alaïa A.','Cillian K.','Jack B.','Lexie B.','Mary R.','Ramsey A.','Sabrina B.','Sabrina S.','Shaylin S.'],
+      2: ['Abigail V.','Adelaide C.','Blaire S.','Charles F.','Charlie W.','Cillian K.','Jose Elijah C.','Lexie B.'],
+      3: ['Abigail V.','Alaïa A.','Cillian K.','Jack B.','Lexie B.','Mary R.','Ramsey A.','Sabrina B.','Sabrina S.','Shaylin S.'],
       4: ['Adelaide C.','Blaire S.','Charles F.','Cillian K.','Gianny M.','Jack B.','Lexie B.','Ramsey A.'],
-      5: ['Abigain V.','Alaïa A.','Blaire S.','Cillian K.','Jose Elijah C.','Lexie B.','Mary R.','Sabrina B.','Shaylin S.','Sienna R.'],
+      5: ['Abigail V.','Alaïa A.','Blaire S.','Cillian K.','Jose Elijah C.','Lexie B.','Mary R.','Sabrina B.','Shaylin S.','Sienna R.'],
     };
 
     // Students removed from the recurring schedule as of a given date (inclusive).
@@ -558,7 +570,7 @@
 
     // Students who join partway through the year: not scheduled before this date.
     const STUDENT_STARTS = {
-      'Abigain V.': new Date(2026, 10, 1), // joins starting November 2026
+      'Abigail V.': new Date(2026, 10, 1), // joins starting November 2026
     };
 
     function isScheduled(name, dow, date) {
