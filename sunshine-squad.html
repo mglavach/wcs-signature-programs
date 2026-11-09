@@ -198,6 +198,7 @@
       transition: background 0.15s;
     }
     .cal-nav button:hover { background: #B9975B; }
+    .cal-nav button:disabled { background: #aaa; cursor: not-allowed; }
     .cal-nav button.today-btn {
       width: auto;
       padding: 0 12px;
@@ -537,16 +538,36 @@
     // Aguayo's 2 days/week) is already baked into which days she appears.
     const WEEKLY_TEMPLATE = {
       1: ['Adelaide C.','Charlie W.','Cillian K.','Gianny M.','Jack B.','Lexie B.','Sabrina B.','Shaylin S.','Sienna R.'],
-      2: ['Adelaide C.','Blaire S.','Charles F.','Charlie W.','Cillian K.','Jose Elijah C.','Lexie B.'],
-      3: ['Alaïa A.','Cillian K.','Jack B.','Lexie B.','Mary R.','Ramsey A.','Sabrina B.','Sabrina S.','Shaylin S.'],
+      2: ['Abigain V.','Adelaide C.','Blaire S.','Charles F.','Charlie W.','Cillian K.','Jose Elijah C.','Lexie B.'],
+      3: ['Abigain V.','Alaïa A.','Cillian K.','Jack B.','Lexie B.','Mary R.','Ramsey A.','Sabrina B.','Sabrina S.','Shaylin S.'],
       4: ['Adelaide C.','Blaire S.','Charles F.','Cillian K.','Gianny M.','Jack B.','Lexie B.','Ramsey A.'],
-      5: ['Alaïa A.','Blaire S.','Cillian K.','Jose Elijah C.','Lexie B.','Mary R.','Sabrina B.','Shaylin S.','Sienna R.'],
+      5: ['Abigain V.','Alaïa A.','Blaire S.','Cillian K.','Jose Elijah C.','Lexie B.','Mary R.','Sabrina B.','Shaylin S.','Sienna R.'],
     };
 
     // Students removed from the recurring schedule as of a given date (inclusive).
     const STUDENT_REMOVALS = {
       'Alaïa A.': new Date(2026, 8, 21), // removed starting the week of 9/21/2026
+      'Shaylin S.': new Date(2026, 10, 1), // removed starting November 2026
     };
+
+    // Students whose duty days change as of a given date (inclusive). From that
+    // date on, they appear only on the listed weekdays (1 = Monday ... 5 = Friday).
+    const DAY_CHANGES = {
+      'Blaire S.': { from: new Date(2026, 10, 1), days: [4] }, // Thursday only starting November 2026
+    };
+
+    // Students who join partway through the year: not scheduled before this date.
+    const STUDENT_STARTS = {
+      'Abigain V.': new Date(2026, 10, 1), // joins starting November 2026
+    };
+
+    function isScheduled(name, dow, date) {
+      if (STUDENT_STARTS[name] && date < STUDENT_STARTS[name]) return false;
+      if (STUDENT_REMOVALS[name] && date >= STUDENT_REMOVALS[name]) return false;
+      const change = DAY_CHANGES[name];
+      if (change && date >= change.from) return change.days.includes(dow);
+      return true;
+    }
 
     // Dates school is fully closed (from the official school calendar).
     const CLOSURES = {
@@ -591,6 +612,11 @@
 
     const PROGRAM_START = new Date(2026, 8, 1);
     const PROGRAM_END = new Date(2027, 4, 20);
+    const PROGRAM_START_MONTH = PROGRAM_START.getFullYear() * 12 + PROGRAM_START.getMonth();
+    const PROGRAM_END_MONTH = PROGRAM_END.getFullYear() * 12 + PROGRAM_END.getMonth();
+    const currentDate = new Date();
+    const CURRENT_MONTH = currentDate.getFullYear() * 12 + currentDate.getMonth();
+    const MIN_VIEW_MONTH = Math.max(PROGRAM_START_MONTH, Math.min(CURRENT_MONTH, PROGRAM_END_MONTH));
 
     const MONTH_NAMES = ['January','February','March','April','May','June',
       'July','August','September','October','November','December'];
@@ -604,10 +630,13 @@
         STUDENT_DAYS[name].push(Number(dow));
       });
     });
-    const STUDENT_NAMES = Object.keys(STUDENT_DAYS).sort((a, b) => a.localeCompare(b));
+    // Students already removed from the schedule as of today are left off the list.
+    const STUDENT_NAMES = Object.keys(STUDENT_DAYS)
+      .filter(name => !(STUDENT_REMOVALS[name] && currentDate >= STUDENT_REMOVALS[name]))
+      .sort((a, b) => a.localeCompare(b));
 
-    let viewYear = 2026;
-    let viewMonth = 8; // September 2026
+    let viewYear = Math.floor(MIN_VIEW_MONTH / 12);
+    let viewMonth = MIN_VIEW_MONTH % 12;
 
     function pad(n) { return String(n).padStart(2, '0'); }
     function keyFor(y, m, d) { return `${y}-${pad(m + 1)}-${pad(d)}`; }
@@ -616,6 +645,8 @@
       const grid = document.getElementById('cal-grid');
       const label = document.getElementById('cal-month-label');
       label.textContent = `${MONTH_NAMES[viewMonth]} ${viewYear}`;
+      document.getElementById('cal-prev').disabled = viewYear * 12 + viewMonth <= MIN_VIEW_MONTH;
+      document.getElementById('cal-next').disabled = viewYear * 12 + viewMonth >= PROGRAM_END_MONTH;
       grid.innerHTML = '';
 
       const firstDay = new Date(viewYear, viewMonth, 1).getDay();
@@ -641,7 +672,7 @@
         const closure = CLOSURES[key];
         const note = NOTES[key];
         const roster = (inRange && !closure && WEEKLY_TEMPLATE[dow])
-          ? WEEKLY_TEMPLATE[dow].filter(name => !(STUDENT_REMOVALS[name] && date >= STUDENT_REMOVALS[name]))
+          ? WEEKLY_TEMPLATE[dow].filter(name => isScheduled(name, dow, date))
           : null;
 
         const cell = document.createElement('div');
@@ -695,7 +726,9 @@
 
     function openStudentPopup(name) {
       const content = document.getElementById('student-popup-content');
-      const days = STUDENT_DAYS[name].slice().sort((a, b) => a - b).map(d => DOW_NAMES[d]);
+      const change = DAY_CHANGES[name];
+      const baseDays = (change && new Date() >= change.from) ? change.days : STUDENT_DAYS[name];
+      const days = baseDays.slice().sort((a, b) => a - b).map(d => DOW_NAMES[d]);
       const daysLabel = days.length > 1
         ? `${days.slice(0, -1).join(', ')} & ${days[days.length - 1]}`
         : days[0];
@@ -718,19 +751,28 @@
     });
 
     document.getElementById('cal-prev').addEventListener('click', () => {
-      viewMonth--;
-      if (viewMonth < 0) { viewMonth = 11; viewYear--; }
-      renderCalendar();
+      const monthIndex = viewYear * 12 + viewMonth;
+      if (monthIndex > MIN_VIEW_MONTH) {
+        viewYear = Math.floor((monthIndex - 1) / 12);
+        viewMonth = (monthIndex - 1) % 12;
+        renderCalendar();
+      }
     });
     document.getElementById('cal-next').addEventListener('click', () => {
-      viewMonth++;
-      if (viewMonth > 11) { viewMonth = 0; viewYear++; }
-      renderCalendar();
+      const monthIndex = viewYear * 12 + viewMonth;
+      if (monthIndex < PROGRAM_END_MONTH) {
+        viewYear = Math.floor((monthIndex + 1) / 12);
+        viewMonth = (monthIndex + 1) % 12;
+        renderCalendar();
+      }
     });
     document.getElementById('cal-today').addEventListener('click', () => {
       const today = new Date();
-      viewYear = today.getFullYear();
-      viewMonth = today.getMonth();
+      const monthIndex = Math.max(MIN_VIEW_MONTH, Math.min(
+        today.getFullYear() * 12 + today.getMonth(), PROGRAM_END_MONTH
+      ));
+      viewYear = Math.floor(monthIndex / 12);
+      viewMonth = monthIndex % 12;
       renderCalendar();
     });
 
