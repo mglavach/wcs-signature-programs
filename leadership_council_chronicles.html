@@ -166,6 +166,11 @@
     }
     .save-note.show { opacity: 1; }
 
+    /* Wrap-Up pages are editable only on a local copy (see isLocalEdit) */
+    .book-page[contenteditable="true"]:hover { outline: 1px dashed #d9d1bf; outline-offset: -6px; }
+    .book-page[contenteditable="true"]:focus { outline: 2px dashed #B9975B; outline-offset: -6px; }
+    @media print { .book-page[contenteditable="true"] { outline: none !important; } }
+
     /* ── Schedule of Events (read-only cards) ── */
     .role-grid {
       display: grid;
@@ -1133,6 +1138,8 @@
         <button class="chart-btn" id="wrap-next" aria-label="Next page">Next ›</button>
         <button class="chart-btn subtle" id="wrap-print">🖨 Print This Page</button>
         <button class="chart-btn subtle" id="wrap-print-all">🖨 Print Whole Book</button>
+        <button class="chart-btn subtle local-only" id="wrap-reset" title="Undo your local edits to this page">↺ Reset This Page</button>
+        <span class="save-note local-only" id="wrap-save-note">✓ Saved</span>
       </div>
     </div>
   </div>
@@ -1511,6 +1518,30 @@
       var current = 0;
       var turning = false;
 
+      // Local copy only: pages can be typed on directly. Edits are saved in this browser.
+      // If the page is later changed in the file itself, the file version wins.
+      var WRAP_KEY = 'councilChronicles_wrapEdits_v1';
+      var wrapEdits = isLocalEdit ? loadJSON(WRAP_KEY, {}) : {};
+      var originals = {};
+      if (isLocalEdit) {
+        pages.forEach(function (page) {
+          if (page.hasAttribute('data-cover')) return;
+          var key = page.getAttribute('data-label');
+          originals[key] = page.innerHTML;
+          var saved = wrapEdits[key];
+          if (saved && saved.base === page.innerHTML) page.innerHTML = saved.html;
+          else if (saved) delete wrapEdits[key];
+          page.contentEditable = 'true';
+          page.spellcheck = true;
+          page.addEventListener('input', function () {
+            wrapEdits[key] = { base: originals[key], html: page.innerHTML };
+            clearTimeout(page._saveT);
+            page._saveT = setTimeout(function () { saveJSON(WRAP_KEY, wrapEdits, 'wrap-save-note'); }, 400);
+          });
+        });
+        saveJSON(WRAP_KEY, wrapEdits);
+      }
+
       // The cover isn't numbered; page 1 is the first page after it.
       var numbered = pages.filter(function (p) { return !p.hasAttribute('data-cover'); });
       pages.forEach(function (page, i) {
@@ -1557,6 +1588,18 @@
       prevBtn.addEventListener('click', function () { goTo(current - 1); });
       nextBtn.addEventListener('click', function () { goTo(current + 1); });
       jump.addEventListener('change', function () { goTo(parseInt(jump.value, 10)); });
+      document.getElementById('wrap-reset').addEventListener('click', function () {
+        var page = pages[current];
+        var key = page.getAttribute('data-label');
+        if (!(key in originals) || !wrapEdits[key]) return;
+        if (!confirm('Undo all your local edits to this page?')) return;
+        delete wrapEdits[key];
+        saveJSON(WRAP_KEY, wrapEdits, 'wrap-save-note');
+        page.innerHTML = originals[key];
+        var numEl = page.querySelector('.page-number');
+        var n = numbered.indexOf(page) + 1;
+        if (numEl) numEl.textContent = 'Page ' + n + ' of ' + numbered.length;
+      });
       document.getElementById('wrap-print').addEventListener('click', function () {
         document.body.classList.add('print-wrap');
         window.print();
@@ -1567,7 +1610,7 @@
       });
       window.addEventListener('afterprint', function () { document.body.classList.remove('print-wrap', 'print-all'); });
       book.addEventListener('keydown', function (e) {
-        if (e.target === jump) return;
+        if (e.target === jump || e.target.isContentEditable) return;
         if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
         if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
       });
